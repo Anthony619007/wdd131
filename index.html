@@ -1,25 +1,23 @@
-Here is the corrected HTML/CSS document that creates a personal homepage layout matching your described structure and visual style.
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WDD 131 – Dynamic Web Fundamentals – Rubia "Ruby" van der Merwe</title>
-  <meta name="description" content="WDD 131 – Dynamic Web Fundamentals – Rubia 'Ruby' van der Merwe. Personal homepage about Madagascar, family, travel and web development learning resources.">
-  <meta name="author" content="Rubia van der Merwe">
-  
-  <!-- Google Fonts API: clean modern pairing -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <!-- External CSS -->
-  <link rel="stylesheet" href="base.css">
-  
-  <!-- JavaScript with defer for dynamic footer -->
-  <script src="getdates.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 131 | Anthony Anusiem Homepage</title>
+    <meta name="description"
+      content="Anthony Anusiem's BYU-Idaho WDD 131 course home page featuring web development projects and information about Accra, Ghana.">
+    <meta name="author" content="Anthony Anusiem">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
 </head>
+  
+
 <body>
-  <div class="wrapper">
+  <div class="page-container">
     <header>
       <span id="course-title">WDD 131 – Dynamic Web Fundamentals</span>
       <nav>
@@ -31,38 +29,35 @@ Here is the corrected HTML/CSS document that creates a personal homepage layout 
     </header>
 
     <main>
-      <h1>Rubia "Ruby" van der Merwe</h1>
+      <h1>Anthony Anusiem</h1>
       
-      <div class="cards-container">
-        <!-- CARD 1: About Me (with image and Madagascar details) -->
+      <div class="cards-grid">
+      
         <section class="card">
           <h2>About Me</h2>
-          <div class="card-inner">
-            <div class="bio-section">
-              <p class="intro-text">My name is Rubia and I go by Ruby. I was born in South Africa and live with my family in Madagascar. I am currently working as administrative legal assistant at a law firm. My children are my world and I love spending time with them. I love to travel and I love to learn new things.</p>
-              <div class="profile-image-wrapper">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23b87333'/%3E%3Ccircle cx='100' cy='80' r='45' fill='%23e3b87c'/%3E%3Cpath d='M60 150 L70 130 L130 130 L140 150 Z' fill='%234a2e1b'/%3E%3Ccircle cx='75' cy='70' r='6' fill='white'/%3E%3Ccircle cx='125' cy='70' r='6' fill='white'/%3E%3Cpath d='M90 95 Q100 108 110 95' stroke='%238b5a2b' stroke-width='3' fill='none'/%3E%3C/svg%3E"
-                     alt="Ruby's portrait illustration" class="portrait-img" loading="lazy">
-              </div>
+          <div class="card-content">
+            <div class="text-with-img">
+              <p>Hello! My name is Anthony Anusiem and I am from Nigeria, but currently living in
+                Accra,
+                Ghana. I am excited to learn more about web development and create amazing digital
+                experiences through my WDD 131 course at BYU-Idaho.</p>
+              <img src="images/profile.jpg" alt="Anthony portrait illustration" class="portrait-img" loading="lazy">
             </div>
-            <div class="location-section">
-              <h3>Toloria, Madagascar</h3>
-              <hr class="divider">
-              <div class="location-flex">
-                <div class="madagascar-img">
-                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'%3E%3Crect width='120' height='90' fill='%23226b3a'/%3E%3Cpath d='M0 0 L120 0 L120 30 L0 30 Z' fill='%23ff4d4d'/%3E%3Crect y='60' width='120' height='30' fill='%23ffffff'/%3E%3Ccircle cx='30' cy='45' r='6' fill='%23ffaa33'/%3E%3Ctext x='8' y='85' font-size='10' fill='white' font-weight='bold'%3EMadagascar%3C/text%3E%3C/svg%3E"
-                       alt="Madagascar island flag map" class="flag-img" loading="lazy">
-                </div>
-                <p class="madagascar-text">Madagascar is the 4th largest island in the world and is located in the Indian Ocean. It is home to 5% of the world's plant and animal species, of which more than 80% are endemic to Madagascar. The island is best known for its lemurs, baobab trees, and vanilla.</p>
+            <div class="location-block">
+              <h3>Imo, Nigeria</h3>
+              <hr>
+              <div class="location-details">
+                <img src="https://th.bing.com/th/id/R.ab24e5ab5bbfc66ba875d61b7306fb6e?rik=1oRAQKNH%2frHtKA&pid=ImgRaw&r=0"
+                     alt="Nigeria flag map illustration" class="flag-img" loading="hard">
+                <p>Nigeria,officially the Federal Republic of Nigeria, is a country in West Africa between the Sahel to the north and the Gulf of Guinea in the Atlantic Ocean to the south. It covers an area of 923,769 square kilometres (356,669 mi2). With a population of more than 242 million, it is the most populous country in Africa, and the world's sixth-most populous country.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- CARD 2: Web Dev Resources (listed with clean links) -->
         <section class="card">
           <h2>Web Dev Resources</h2>
-          <div class="card-inner resources-wrapper">
+          <div class="card-content">
             <ul class="resources-list">
               <li><a href="https://dev.to/" target="_blank" rel="noopener noreferrer">Dev.to Community</a></li>
               <li><a href="https://www.smashingmagazine.com/" target="_blank" rel="noopener noreferrer">Smashing Magazine</a></li>
@@ -77,7 +72,7 @@ Here is the corrected HTML/CSS document that creates a personal homepage layout 
     </main>
 
     <footer>
-      <p>© <span id="currentyear"></span> 🌸 Rubia "Ruby" van der Merwe 🌸 Madagascar</p>
+      <p>© <span id="2026"></span> ✨ Anthony Anusiem ✨ Nigeria</p>
       <p id="lastModified"></p>
     </footer>
   </div>

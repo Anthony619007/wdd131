@@ -1,3 +1,13 @@
-// getdates.js
-document.getElementById('currentyear').textContent = new Date().getFullYear();
-document.getElementById('lastModified').textContent = 'Last Modified: ' + document.lastModified;
+
+(function() {
+  const yearSpan = document.getElementById('currentyear');
+  if (yearSpan) {
+    const currentYear = new Date().getFullYear();
+    yearSpan.textContent = currentYear;
+  }
+  
+  const lastModifiedPara = document.getElementById('lastModified');
+  if (lastModifiedPara) {
+    lastModifiedPara.textContent = 'Last Modified: ' + document.lastModified;
+  }
+})();
