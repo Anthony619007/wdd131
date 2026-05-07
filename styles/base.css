@@ -3,8 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: #f4f7fc;
   color: #1e2f3e;
   line-height: 1.5;
@@ -19,7 +20,6 @@ body {
   border-radius: 24px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  transition: all 0.2s;
 }
 
 /* HEADER styles */
@@ -49,7 +49,6 @@ nav {
   background: rgba(255,255,255,0.1);
   border-radius: 60px;
   padding: 0.5rem 1rem;
-  backdrop-filter: blur(2px);
 }
 
 nav a {
@@ -64,6 +63,7 @@ nav a {
   letter-spacing: 0.3px;
 }
 
+/* :hover pseudoclass */
 nav a:hover {
   background-color: #ffb347;
   color: #1e2f3e;
@@ -101,13 +101,7 @@ h1 {
   border-radius: 24px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
   border: 1px solid #e9edf2;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card h2 {
@@ -285,16 +279,4 @@ footer p:first-child {
   .card h2 {
     font-size: 1.4rem;
   }
-}
-
-/* Additional fine details for proximity and alignment */
-.bio-section {
-  margin-bottom: 0.25rem;
-}
-.intro-text {
-  margin-bottom: 0.2rem;
-}
-.card-content, .card-inner {
-  display: flex;
-  flex-direction: column;
 }

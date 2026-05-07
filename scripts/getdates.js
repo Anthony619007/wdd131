@@ -1,4 +1,3 @@
-
 (function() {
   const yearSpan = document.getElementById('currentyear');
   if (yearSpan) {
