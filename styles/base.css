@@ -5,89 +5,86 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f4f7fc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f4f8;
   color: #1e2f3e;
-  line-height: 1.5;
-  padding: 2rem 1rem;
+  line-height: 1.6;
+  padding: 2rem;
+  min-height: 100vh;
 }
 
-/* Centered container with max-width */
 .page-container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   background: white;
-  border-radius: 24px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
-/* HEADER styles */
 header {
-  background: linear-gradient(135deg, #1f4e6e 0%, #123a52 100%);
-  padding: 1.8rem 2rem 1rem 2rem;
+  background: linear-gradient(135deg, #2c5f8a 0%, #1a3a4f 100%);
+  padding: 2rem 2rem 1.2rem 2rem;
   text-align: center;
-  color: white;
 }
 
 #course-title {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
   font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  color: white;
   margin-bottom: 1.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-/* Navigation Flex styling with hover effect */
 nav {
   display: flex;
   justify-content: center;
+  gap: 2rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  background: rgba(255,255,255,0.1);
-  border-radius: 60px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
   padding: 0.5rem 1rem;
+  backdrop-filter: blur(4px);
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.95rem;
   padding: 0.6rem 1.4rem;
   border-radius: 40px;
   transition: all 0.25s ease;
-  font-size: 1rem;
-  background: transparent;
   letter-spacing: 0.3px;
 }
 
-/* :hover pseudoclass */
 nav a:hover {
   background-color: #ffb347;
   color: #1e2f3e;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* MAIN content */
 main {
-  padding: 2rem 2rem 2.5rem 2rem;
+  padding: 2rem;
 }
 
 h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.3rem;
-  font-weight: 700;
-  color: #1f4e6e;
-  border-left: 6px solid #ffb347;
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: #2c5f8a;
+  border-left: 5px solid #ffb347;
   padding-left: 1.2rem;
   margin-bottom: 2rem;
-  letter-spacing: -0.3px;
+  text-align: center;
 }
 
-/* CSS Grid for the two cards */
 .cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -95,22 +92,27 @@ h1 {
   align-items: start;
 }
 
-/* Card styling */
 .card {
   background: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   border: 1px solid #e9edf2;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card h2 {
-  background: #f0f5f9;
-  padding: 1.2rem 1.5rem;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: #1f4e6e;
+  background: #f7f9fc;
+  padding: 1.1rem 1.5rem;
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #2c5f8a;
   border-bottom: 3px solid #ffb347;
   margin: 0;
 }
@@ -119,34 +121,34 @@ h1 {
   padding: 1.5rem;
 }
 
-/* About Me specific layout (text + image) */
 .text-with-img {
   display: flex;
   gap: 1.2rem;
   margin-bottom: 1.5rem;
   align-items: flex-start;
+  text-align: justify;
 }
 
 .text-with-img p {
   flex: 2;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: #2c3e44;
+  line-height: 1.6;
 }
 
 .portrait-img {
   width: 130px;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  border-radius: 16px;
   object-fit: cover;
-  border: 3px solid white;
-  background: #e0c8a8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e9ecef;
 }
 
 .location-block h3 {
-  font-size: 1.4rem;
-  font-family: 'Playfair Display', serif;
-  color: #123a52;
+  font-size: 1.35rem;
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
+  color: #1e4a6e;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -162,67 +164,68 @@ hr {
   display: flex;
   gap: 1.2rem;
   align-items: flex-start;
+  text-align: justify;
 }
 
 .flag-img {
   width: 140px;
   height: auto;
   border-radius: 12px;
-  background: #eef2f5;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .location-details p {
   flex: 1;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #2c3e44;
 }
 
-/* Web Dev Resources list styling */
 .resources-list {
   list-style: none;
   padding: 0;
 }
 
 .resources-list li {
-  margin-bottom: 1rem;
-  border-bottom: 1px dashed #e2e8f0;
+  margin-bottom: 0.9rem;
   padding-bottom: 0.7rem;
+  border-bottom: 1px dashed #e9edf2;
 }
 
 .resources-list li:last-child {
   border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .resources-list a {
   text-decoration: none;
-  font-weight: 600;
-  color: #1f4e6e;
-  font-size: 1.05rem;
-  transition: all 0.2s;
+  font-weight: 500;
+  color: #2c5f8a;
+  font-size: 1rem;
+  transition: all 0.2s ease;
   display: inline-block;
-  padding: 0.2rem 0;
 }
 
 .resources-list a:hover {
   color: #ff8c42;
-  transform: translateX(8px);
+  transform: translateX(6px);
   text-decoration: underline;
 }
 
-/* FOOTER styling */
 footer {
   background: #1e2f3e;
-  color: #f0f3f5;
+  color: #e8edf2;
   text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
-  border-top: 5px solid #ffb347;
+  padding: 1.2rem;
+  font-size: 0.85rem;
+  border-top: 4px solid #ffb347;
 }
 
 footer p {
-  margin: 0.4rem 0;
+  margin: 0.3rem 0;
 }
 
 footer p:first-child {
@@ -231,52 +234,177 @@ footer p:first-child {
 }
 
 #lastModified {
-  font-family: monospace;
-  font-size: 0.85rem;
-  opacity: 0.9;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  opacity: 0.8;
 }
-
-/* Responsive behavior */
 @media (max-width: 850px) {
+  body {
+    padding: 1rem;
+  }
+  
   .cards-grid {
     grid-template-columns: 1fr;
-    gap: 1.8rem;
+    gap: 1.5rem;
   }
+  
   main {
     padding: 1.5rem;
   }
+  
   .text-with-img {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
+  
   .portrait-img {
     width: 150px;
   }
+  
   .location-details {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
+  
   .flag-img {
     width: 100%;
     max-width: 200px;
   }
+  
+  nav {
+    gap: 0.3rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
   nav a {
     padding: 0.4rem 1rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
+  
   #course-title {
     font-size: 1.5rem;
   }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 1rem 0.75rem;
-  }
+  
   h1 {
     font-size: 1.8rem;
+    text-align: center;
+    border-left: none;
+    border-bottom: 3px solid #ffb347;
+    padding-left: 0;
+    padding-bottom: 0.5rem;
   }
+  
   .card h2 {
     font-size: 1.4rem;
+    text-align: center;
   }
+}
+
+@media (max-width: 550px) {
+  header {
+    padding: 1.2rem 1rem 0.8rem 1rem;
+  }
+  
+  #course-title {
+    font-size: 1.2rem;
+  }
+  
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: 30px;
+  }
+  
+  nav a {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  h1 {
+    font-size: 1.4rem;
+  }
+  
+  .card h2 {
+    font-size: 1.25rem;
+    padding: 0.8rem 1rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  .text-with-img p,
+  .location-details p {
+    font-size: 0.85rem;
+  }
+  
+  .location-block h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  footer {
+    padding: 0.8rem;
+  }
+  
+  footer p {
+    font-size: 0.75rem;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+    font-size: 12pt;
+  }
+  
+  .page-container {
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  nav a {
+    color: black;
+    border: 1px solid #ccc;
+    background: none;
+  }
+  
+  nav a:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+  
+  footer {
+    background: none;
+    color: black;
+    border-top: 1px solid #ccc;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
 }
