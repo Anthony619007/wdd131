@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Temple Album showcasing beautiful temples with responsive design and interactive navigation.">
+  <title>Temple Album | Sacred Sites Gallery</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="temples.css">
+  <link rel="stylesheet" href="temples-large.css">
+
+  <script src="temples.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-title">
+        <span class="brand-icon">⛩️</span>
+        <span class="brand-text">Temple Album</span>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-x">✕</span>
+      </button>
+      <nav id="primaryNav">
+        <ul class="nav-list">
+          <li><a href="#" class="active-nav">Home</a></li>
+          <li><a href="#">Old</a></li>
+          <li><a href="#">New</a></li>
+          <li><a href="#">Large</a></li>
+          <li><a href="#">Small</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Sacred Architecture Gallery</h1>
+    <div class="gallery-grid">
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg"Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+      <figure class="temple-card">
+        <img src="images/aba-temple.jpg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
+        <figcaption>Aba Temple, Nigeria</figcaption>
+      </figure>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-copyright">
+        &copy; <span id="currentYear"></span> Temple Album • Aba Nigeria Temple Project
+      </p>
+      <p class="footer-last-modified">
+        Last Modification: <span id="lastModified"></span>
+      </p>
+      <p class="footer-credit">Inspiring sacred architecture around the world</p>
+    </div>
+  </footer>
+</body>
+</html>

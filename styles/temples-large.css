@@ -1,0 +1,42 @@
+
+@media screen and (min-width: 900px) {
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .site-header,
+  .site-footer {
+    padding: 2rem 4rem;
+  }
+
+  .main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 300px) 1fr;
+    gap: 2rem;
+  }
+
+  .temple-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .temple-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero,
+  .feature {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
