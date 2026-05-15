@@ -2,16 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Temple Album showcasing beautiful temples with responsive design and interactive navigation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Temple Album - A curated gallery of sacred architecture from around the world. Discover beautiful temples with responsive design.">
+  <meta name="author" content="Alex Rivera">
+  
   <title>Temple Album | Sacred Sites Gallery</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="temples.css">
-  <link rel="stylesheet" href="temples-large.css">
 
-  <script src="temples.js" defer></script>
+  <link rel="stylesheet" href="styles/temples.css">
+  <link rel="stylesheet" href="styles/temples-large.css">
+
+  <!-- ✅ DEFERRED JAVASCRIPT - correct path: scripts/temples.js -->
+  <script src="scripts/temples.js" defer></script>
 </head>
 <body>
 
@@ -27,6 +32,7 @@
         <span class="hamburger-line"></span>
         <span class="hamburger-x">✕</span>
       </button>
+      
       <nav id="primaryNav">
         <ul class="nav-list">
           <li><a href="#" class="active-nav">Home</a></li>
@@ -84,7 +90,7 @@
   <footer>
     <div class="footer-content">
       <p class="footer-copyright">
-        &copy; <span id="currentYear"></span> Temple Album • Aba Nigeria Temple Project
+        &copy; <span id="currentYear"></span> Temple Album • San Diego, California
       </p>
       <p class="footer-last-modified">
         Last Modification: <span id="lastModified"></span>
