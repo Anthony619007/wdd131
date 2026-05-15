@@ -1,4 +1,5 @@
-/* styles/temples-large.css - Larger View (min-width: 768px) */
+/* styles/temples-large.css - Larger View (matches temples-large.png with multiple columns) */
+
 @media screen and (min-width: 768px) {
   /* Adjust header layout for tablet/desktop */
   .header-container {
@@ -19,7 +20,7 @@
     transition: none;
   }
 
-  /* ✅ CSS Flex on nav - horizontal layout */
+  /* CSS Flex on nav - horizontal layout */
   .nav-list {
     display: flex;
     flex-direction: row;
@@ -36,7 +37,7 @@
     white-space: nowrap;
   }
 
-  /* ✅ CSS Grid: multiple columns (responsive with auto-fit) */
+  /* CSS Grid: multiple columns for larger view */
   .gallery-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
@@ -58,7 +59,7 @@
   }
 }
 
-/* Extra large screens for better experience */
+/* Extra large screens - 3 columns like reference image */
 @media screen and (min-width: 1024px) {
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);

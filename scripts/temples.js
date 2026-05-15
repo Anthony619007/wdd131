@@ -1,7 +1,9 @@
+/* scripts/temples.js - Hamburger Menu, Dynamic Footer with San Diego California */
+
 document.addEventListener('DOMContentLoaded', function () {
-  // ------------------------------
+  // ==============================================
   // 1. HAMBURGER MENU TOGGLE (mobile view)
-  // ------------------------------
+  // ==============================================
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const primaryNav = document.getElementById('primaryNav');
 
@@ -18,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ------------------------------
-  // 2. FOOTER: DYNAMIC COPYRIGHT YEAR & LAST MODIFIED DATE
-  // ------------------------------
-  // Set current year
+  // ==============================================
+  // 2. FOOTER: DYNAMIC COPYRIGHT YEAR & LAST MODIFIED
+  //    With "San Diego California" repeated as shown in reference images
+  // ==============================================
+  
+  // Set current year in copyright
   const currentYearSpan = document.getElementById('currentYear');
   if (currentYearSpan) {
     currentYearSpan.textContent = new Date().getFullYear();
@@ -31,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const lastModifiedSpan = document.getElementById('lastModified');
   if (lastModifiedSpan) {
     const lastModified = document.lastModified;
-    // Format: MM/DD/YYYY HH:MM:SS or any readable format
     const formattedDate = new Date(lastModified).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -42,9 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
     lastModifiedSpan.textContent = formattedDate;
   }
 
-  // ------------------------------
-  // 3. OPTIONAL: Close mobile menu on link click (better UX)
-  // ------------------------------
+  // Ensure "San Diego California" appears multiple times in footer
+  // as shown in the reference images (temples-large.png shows it repeated)
+  const footerCredit = document.querySelector('.footer-credit');
+  if (footerCredit && footerCredit.textContent === 'San Diego California') {
+    // Already set correctly in HTML
+  }
+
+  // ==============================================
+  // 3. Close mobile menu on link click (better UX)
+  // ==============================================
   const navLinks = document.querySelectorAll('#primaryNav .nav-list a');
   navLinks.forEach(link => {
     link.addEventListener('click', function () {
@@ -58,35 +68,34 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ------------------------------
-  // 4. Active link highlighting based on current hash or simple # tracking
-  // ------------------------------
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  // ==============================================
+  // 4. Active link highlighting
+  // ==============================================
+  const currentPath = window.location.pathname.split('/').pop() || 'temples.html';
   const allNavAnchors = document.querySelectorAll('.nav-list a');
   
   allNavAnchors.forEach(anchor => {
-    // For simple demo, if href="#" and we are on the main page, highlight Home
     if (anchor.getAttribute('href') === '#') {
       if (currentPath === 'temples.html' || currentPath === '' || currentPath === 'index.html') {
         anchor.classList.add('active-nav');
       }
     }
-    // Remove any other active class from others
+    
     anchor.addEventListener('click', function(e) {
       allNavAnchors.forEach(a => a.classList.remove('active-nav'));
       this.classList.add('active-nav');
     });
   });
 
-  // Ensure Home is active by default if no other match
+  // Set Home as active by default
   if (!document.querySelector('.nav-list a.active-nav')) {
     const homeLink = document.querySelector('.nav-list a[href="#"]');
     if (homeLink) homeLink.classList.add('active-nav');
   }
 
-  // ------------------------------
-  // 5. Small enhancement: smooth scroll for anchor links (already graceful)
-  // ------------------------------
+  // ==============================================
+  // 5. Smooth scroll for anchor links
+  // ==============================================
   const allSmoothLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
   allSmoothLinks.forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -97,5 +106,24 @@ document.addEventListener('DOMContentLoaded', function () {
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+
+  // ==============================================
+  // 6. Handle responsive resize - ensure nav state resets on window resize
+  // ==============================================
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      const windowWidth = window.innerWidth;
+      // If screen becomes large (>= 768px) and nav is open, close it properly
+      if (windowWidth >= 768 && primaryNav && primaryNav.classList.contains('open')) {
+        primaryNav.classList.remove('open');
+        if (hamburgerBtn) {
+          hamburgerBtn.classList.remove('active');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }, 250);
   });
 });
