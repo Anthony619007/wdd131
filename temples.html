@@ -8,12 +8,11 @@
   
   <title>Temple Album | Sacred Temple Gallery</title>
 
-  <!-- Google Fonts (allowed external CSS) -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <!-- External CSS files (required for audit) -->
   <link rel="stylesheet" href="styles/temples.css">
   <link rel="stylesheet" href="styles/temples-large.css">
 </head>
@@ -99,9 +98,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // ==============================================
-      // 1. HAMBURGER MENU TOGGLE (mobile view)
-      // ==============================================
       const hamburgerBtn = document.getElementById('hamburgerBtn');
       const primaryNav = document.getElementById('primaryNav');
 
@@ -114,9 +110,6 @@
         });
       }
 
-      // ==============================================
-      // 2. FOOTER: DYNAMIC COPYRIGHT YEAR & LAST MODIFIED
-      // ==============================================
       const currentYearSpan = document.getElementById('currentYear');
       if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
@@ -135,7 +128,6 @@
         lastModifiedSpan.textContent = formattedDate;
       }
 
-      // Close mobile menu when clicking a nav link
       const navLinks = document.querySelectorAll('#primaryNav .nav-list a');
       navLinks.forEach(link => {
         link.addEventListener('click', function () {
@@ -149,7 +141,6 @@
         });
       });
 
-      // Active nav link highlighting
       const allNavAnchors = document.querySelectorAll('.nav-list a');
       allNavAnchors.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -158,13 +149,11 @@
         });
       });
 
-      // Set default active state if none
       const homeLink = document.querySelector('.nav-list a[href="#"]');
       if (homeLink && !document.querySelector('.nav-list a.active-nav')) {
         homeLink.classList.add('active-nav');
       }
 
-      // Close mobile menu on window resize above tablet breakpoint
       let resizeTimer;
       window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
