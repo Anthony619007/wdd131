@@ -1,77 +1,76 @@
-/* styles/temples-large.css - Larger View (matches temples-large.png with multiple columns) */
+/* ========== styles/temples-large.css - Larger View ========== */
+    @media screen and (min-width: 768px) {
+      .header-container {
+        flex-wrap: nowrap;
+      }
 
-@media screen and (min-width: 768px) {
-  /* Adjust header layout for tablet/desktop */
-  .header-container {
-    flex-wrap: nowrap;
-  }
+      /* Hide hamburger button on larger screens */
+      .hamburger {
+        display: none;
+      }
 
-  /* Hide hamburger button on larger screens */
-  .hamburger {
-    display: none;
-  }
+      /* Navigation becomes visible and flex row */
+      #primaryNav {
+        max-height: none !important;
+        overflow: visible !important;
+        width: auto;
+        background-color: transparent;
+        transition: none;
+      }
 
-  /* Navigation becomes visible and flex row */
-  #primaryNav {
-    max-height: none !important;
-    overflow: visible !important;
-    width: auto;
-    background-color: transparent;
-    transition: none;
-  }
+      /* ✅ CSS Flex on nav - horizontal layout */
+      .nav-list {
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+        padding: 0;
+      }
 
-  /* CSS Flex on nav - horizontal layout */
-  .nav-list {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-    padding: 0;
-  }
+      .nav-list li {
+        margin: 0;
+      }
 
-  .nav-list li {
-    margin: 0;
-  }
+      .nav-list a {
+        padding: 0.6rem 1.2rem;
+        white-space: nowrap;
+      }
 
-  .nav-list a {
-    padding: 0.6rem 1.2rem;
-    white-space: nowrap;
-  }
+      /* ✅ CSS Grid: multiple columns for larger view */
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
 
-  /* CSS Grid: multiple columns for larger view */
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
+      h1 {
+        font-size: 2.5rem;
+        display: block;
+        text-align: center;
+      }
 
-  h1 {
-    font-size: 2.5rem;
-    display: block;
-    text-align: center;
-  }
+      main {
+        padding: 0 2rem;
+      }
 
-  main {
-    padding: 0 2rem;
-  }
+      .temple-card figcaption {
+        font-size: 1.2rem;
+        padding: 1rem;
+      }
+    }
 
-  .temple-card figcaption {
-    font-size: 1.2rem;
-    padding: 1rem;
-  }
-}
+    /* Extra large screens - 3 columns */
+    @media screen and (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
 
-/* Extra large screens - 3 columns like reference image */
-@media screen and (min-width: 1024px) {
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
+      main {
+        max-width: 1400px;
+      }
 
-  main {
-    max-width: 1400px;
-  }
-
-  .nav-list a {
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
-  }
-}
+      .nav-list a {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>

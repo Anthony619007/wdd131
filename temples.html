@@ -4,17 +4,404 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Temple Album - A curated gallery of sacred architecture from around the world. Discover beautiful temples with responsive design.">
-  <meta name="author" content="Alex Rivera">
+  <meta name="author" content="Anthony Anusiem  - WDD 131 Student">
   
   <title>Temple Album | Sacred Sites Gallery</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="temple.css">
-  <link rel="stylesheet" href="temples-large.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <script src="temples.js" defer></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f0e8;
+      color: #2c2b28;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, .brand-text, .temple-card figcaption {
+      font-family: 'Playfair Display', serif;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2d4a3e 0%, #1e3a2f 100%);
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      font-size: 1.8rem;
+    }
+
+    .brand-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 200;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-x {
+      display: none;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      position: absolute;
+    }
+
+    .hamburger.active .hamburger-line {
+      display: none;
+    }
+
+    .hamburger.active .hamburger-x {
+      display: inline-block;
+    }
+
+    #primaryNav {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      background-color: #2d4a3e;
+      border-radius: 0 0 12px 12px;
+    }
+
+    #primaryNav.open {
+      max-height: 300px;
+      transition: max-height 0.5s ease-in;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0;
+    }
+
+    .nav-list li {
+      text-align: center;
+      margin: 0.25rem 0;
+    }
+
+     {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #f0ede8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      border-radius: 30px;
+      margin: 0 0.5rem;
+    }
+
+    .nav-list a:hover {
+      background-color: #e8b85f;
+      color: #1e3a2f;
+      transform: scale(1.02);
+    }
+
+    .nav-list a.active-nav {
+      background-color: #e8b85f;
+      color: #1e3a2f;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #2d4a3e;
+      border-bottom: 3px solid #e8b85f;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      width: auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      margin-top: 1rem;
+    }
+
+    .temple-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .temple-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .temple-card img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .temple-card:hover img {
+      transform: scale(1.02);
+    }
+
+    .temple-card figcaption {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      background: #ffffff;
+      color: #2d4a3e;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      border-top: 1px solid #eee8e0;
+    }
+
+    footer {
+      background-color: #1e2a2e;
+      color: #e0e0e0;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      border-top: 5px solid #e8b85f;
+    }
+
+    .footer-content p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .footer-copyright, .footer-last-modified {
+      font-family: 'Inter', monospace;
+    }
+
+    .footer-credit {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+ ?@media screen and (min-width: 768px) {
+      .header-container {
+        flex-wrap: nowrap;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      #primaryNav {
+        max-height: none !important;
+        overflow: visible !important;
+        width: auto;
+        background-color: transparent;
+        transition: none;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+        padding: 0;
+      }
+
+      .nav-list li {
+        margin: 0;
+      }
+
+      .nav-list a {
+        padding: 0.6rem 1.2rem;
+        white-space: nowrap;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        display: block;
+        text-align: center;
+      }
+
+      main {
+        padding: 0 2rem;
+      }
+
+      .temple-card figcaption {
+        font-size: 1.2rem;
+        padding: 1rem;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      main {
+        max-width: 1400px;
+      }
+
+      .nav-list a {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // ==============================================
+      // 1. HAMBURGER MENU TOGGLE (mobile view)
+      // ==============================================
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const primaryNav = document.getElementById('primaryNav');
+
+      if (hamburgerBtn && primaryNav) {
+        hamburgerBtn.addEventListener('click', function () {
+          primaryNav.classList.toggle('open');
+          hamburgerBtn.classList.toggle('active');
+          const isExpanded = primaryNav.classList.contains('open');
+          hamburgerBtn.setAttribute('aria-expanded', isExpanded);
+        });
+      }
+
+      // ==============================================
+      // 2. FOOTER: DYNAMIC COPYRIGHT YEAR & LAST MODIFIED
+      // ==============================================
+      const currentYearSpan = document.getElementById('currentYear');
+      if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+      }
+
+      const lastModifiedSpan = document.getElementById('lastModified');
+      if (lastModifiedSpan) {
+        const lastModified = document.lastModified;
+        const formattedDate = new Date(lastModified).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        lastModifiedSpan.textContent = formattedDate;
+      }
+
+      const navLinks = document.querySelectorAll('#primaryNav .nav-list a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          if (primaryNav && primaryNav.classList.contains('open')) {
+            primaryNav.classList.remove('open');
+            if (hamburgerBtn) {
+              hamburgerBtn.classList.remove('active');
+              hamburgerBtn.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      });
+
+      const allNavAnchors = document.querySelectorAll('.nav-list a');
+      allNavAnchors.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          allNavAnchors.forEach(a => a.classList.remove('active-nav'));
+          this.classList.add('active-nav');
+        });
+      });
+
+      const homeLink = document.querySelector('.nav-list a[href="#"]');
+      if (homeLink && !document.querySelector('.nav-list a.active-nav')) {
+        homeLink.classList.add('active-nav');
+      }
+
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          const windowWidth = window.innerWidth;
+          if (windowWidth >= 768 && primaryNav && primaryNav.classList.contains('open')) {
+            primaryNav.classList.remove('open');
+            if (hamburgerBtn) {
+              hamburgerBtn.classList.remove('active');
+              hamburgerBtn.setAttribute('aria-expanded', 'false');
+            }
+          }
+        }, 250);
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -46,39 +433,39 @@
     <h1>Sacred Architecture Gallery</h1>
     <div class="gallery-grid">
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
       <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy">
+        <img src="images\aba-temple.jpeg" alt="Aba Temple, Nigeria" loading="lazy" width="400" height="300">
         <figcaption>Aba Temple, Nigeria</figcaption>
       </figure>
     </div>
@@ -87,10 +474,14 @@
   <footer>
     <div class="footer-content">
       <p class="footer-copyright">
-        &copy; <span id="currentYear"></span> Temple Album • San Diego, California
+        &copy; <span id="currentYear"></span> Temple Album • Aba, Temple City, Nigeria.
       </p>
       <p class="footer-last-modified">
         Last Modification: <span id="lastModified"></span>
       </p>
-      <p class="footer-credit">Aba Nigeria</p>
+      <p class="footer-credit">Aba, Temple City, Nigeria</p>
+    </div>
+  </footer>
+
+</body>
 </html>
