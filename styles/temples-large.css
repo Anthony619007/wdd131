@@ -18,7 +18,6 @@
     transition: none;
   }
 
-  /* Consolidated .nav-list styles - no repeats */
   .nav-list {
     display: flex;
     flex-direction: row;
