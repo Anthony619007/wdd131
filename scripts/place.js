@@ -11,11 +11,11 @@ function calculateWindChill(tempCelsius, windKmh) {
 function updateWindChillDisplay() {
     const chillSpan = document.getElementById('windchillVal');
     const chillRowSpan = document.getElementById('chillRowValue');
-    let displayText = 'N/A';
+    let displayText = 'N/A (warm climate)';
 
     if (TEMP_C <= 10 && WIND_KMH > 4.8) {
         const calculated = calculateWindChill(TEMP_C, WIND_KMH);
-        displayText = `${calculated}`;
+        displayText = calculated + ' °C';
     }
 
     if (chillSpan) chillSpan.textContent = displayText;
@@ -25,7 +25,6 @@ function updateWindChillDisplay() {
 function setFooterDynamic() {
     const yearSpan = document.getElementById('currentYear');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
     const modSpan = document.getElementById('lastModify');
     if (modSpan) {
         const lastMod = new Date(document.lastModified);
@@ -33,7 +32,7 @@ function setFooterDynamic() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     updateWindChillDisplay();
     setFooterDynamic();
 });
