@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ghana · Gold Coast & Cocoa Kingdom</title>
+    <meta name="description" content="Discover Ghana — the heart of West Africa. Known as the Gold Coast, world-famous for premium cocoa, vibrant culture and rich history.">
+    
+    <style>
+        /* ---------- GLOBAL CSS VARIABLES (Ghana Flag Colors: Red, Gold, Green, Black) ---------- */
+        :root {
+            --gh-red: #CE1126;      /* independence, strength */
+            --gh-gold: #F5B81B;     /* mineral wealth, cocoa gold */
+            --gh-green: #006B3F;    /* lush cocoa farms, rainforests */
+            --gh-black: #1E1E1E;    /* contrast, african heritage */
+            --cream-bg: #FFF9EF;
+            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            --radius-lg: 32px;
+            --radius-md: 24px;
+            --transition: all 0.2s ease;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(145deg, #FDF6E3 0%, #F9EFDA 100%);
+            color: var(--gh-black);
+            padding: 2rem 1rem;
+        }
+
+        /* main container matching wireframe max-width */
+        .country-card {
+            max-width: 1260px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 56px 56px 48px 48px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        /* Hero image with srcset responsive (picture element, WebP format) - Ghana Gold/Cocoa image */
+        .hero-image {
+            width: 100%;
+            line-height: 0;
+            background: #2c4a2e;
+        }
+        .hero-image picture img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            max-height: 500px;
+        }
+
+        /* 2-column layout exactly as wireframe (Data | Weather) */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2.5rem;
+        }
+
+        /* card styling */
+        .info-card {
+            background: var(--cream-bg);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 107, 63, 0.15);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-card h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            border-left: 7px solid var(--gh-gold);
+            padding-left: 1rem;
+            margin-bottom: 1.8rem;
+            color: var(--gh-red);
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* data grid */
+        .data-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .data-row {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding-bottom: 0.65rem;
+            font-size: 1.05rem;
+        }
+        .data-label {
+            font-weight: 700;
+            width: 130px;
+            flex-shrink: 0;
+            color: var(--gh-green);
+        }
+        .data-value {
+            color: #2d2f36;
+            font-weight: 500;
+        }
+
+        /* weather specifics */
+        .weather-stats {
+            margin-top: 0.5rem;
+        }
+        .weather-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+        }
+        .weather-line strong {
+            color: var(--gh-red);
+            font-weight: 700;
+        }
+        .windchill-badge {
+            background: rgba(245, 184, 27, 0.2);
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* pseudo-element for large view weather icon next to heading */
+        .weather-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .weather-head h2 {
+            margin-bottom: 0;
+        }
+        .large-icon-weather::after {
+            content: "⛅";
+            font-size: 2.2rem;
+            margin-left: 0.8rem;
+            background: rgba(0,107,63,0.1);
+            padding: 0.2rem 0.9rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* Mobile SVG weather icon (hidden by default, shown on media query) */
+        .mobile-weather-svg {
+            display: none;
+            text-align: center;
+            margin: 1rem 0 0.25rem;
+        }
+        .mobile-weather-svg svg {
+            width: 52px;
+            height: 52px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+        }
+
+        /* Gold Coast / Cocoa highlight banner */
+        .heritage-banner {
+            margin: 0 2rem 2rem 2rem;
+            background: linear-gradient(115deg, #FEF0D8 0%, #FFF5E6 100%);
+            border-radius: 28px;
+            padding: 0.9rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-left: 8px solid var(--gh-gold);
+            font-weight: 500;
+        }
+
+        .footer-area {
+            background: var(--gh-black);
+            color: #ddd;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            font-size: 0.85rem;
+            border-top: 4px solid var(--gh-gold);
+        }
+        .footer-area a {
+            color: var(--gh-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-area a:hover {
+            text-decoration: underline;
+        }
+
+        /* responsive media queries (wireframe mobile / desktop) */
+        @media (max-width: 780px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            .info-card {
+                padding: 1.4rem;
+            }
+            .data-label {
+                width: 110px;
+            }
+            body {
+                padding: 0.8rem;
+            }
+            /* hide pseudo large icon, show SVG */
+            .large-icon-weather::after {
+                display: none;
+            }
+            .mobile-weather-svg {
+                display: block;
+            }
+            .weather-head {
+                justify-content: flex-start;
+            }
+            .heritage-banner {
+                margin: 0 1.5rem 1.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .data-row {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .data-label {
+                width: auto;
+            }
+            .info-card h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+
+    <!-- JavaScript with defer -->
+    <script defer>
+        // Ghana static weather values: warm tropical (cocoa growing climate)
+        // Temperature: 28°C (typical in cocoa regions), Wind speed: 10 km/h
+        const TEMP_C = 28;      // above 10°C, so wind chill not applicable (but logic ready)
+        const WIND_KMH = 10;    // > 4.8 km/h condition only if temp <=10
+        
+        // calculateWindChill function for metric system (°C, km/h)
+        // Standard formula: 13.12 + 0.6215*T - 11.37*(V^0.16) + 0.3965*T*(V^0.16)
+        function calculateWindChill(tempCelsius, windKmh) {
+            const windPow = Math.pow(windKmh, 0.16);
+            const chill = 13.12 + 0.6215 * tempCelsius - 11.37 * windPow + 0.3965 * tempCelsius * windPow;
+            return Math.round(chill * 10) / 10;  // one decimal
+        }
+        
+        // display wind chill based on conditions: temp <= 10°C AND wind > 4.8 km/h
+        function updateWindChillDisplay() {
+            const chillSpan = document.getElementById('windchillVal');
+            const chillRowSpan = document.getElementById('chillRowValue');
+            if (!chillSpan) return;
+            
+            let displayText = 'N/A';
+            if (TEMP_C <= 10 && WIND_KMH > 4.8) {
+                const calculated = calculateWindChill(TEMP_C, WIND_KMH);
+                displayText = `${calculated} °C`;
+            } else {
+                displayText = 'N/A (warm climate)';
+            }
+            chillSpan.textContent = displayText;
+            if (chillRowSpan) chillRowSpan.textContent = displayText;
+        }
+        
+        // footer dynamic year + last modification date
+        function setFooterDynamic() {
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+            const modSpan = document.getElementById('lastModify');
+            if (modSpan) {
+                const lastMod = new Date(document.lastModified);
+                const formatted = lastMod.toLocaleString('en-US', {
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit'
+                });
+                modSpan.textContent = formatted;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateWindChillDisplay();
+            setFooterDynamic();
+        });
+    </script>
+</head>
+<body>
+<div class="country-card">
+    <!-- Hero with responsive picture element (showcasing Ghana Gold Coast Cocoa Farm)
+         Using high-quality images representing Ghana Gold/Cocoa (Pexels free to use) -->
+    <div class="hero-image">
+        <picture>
+            <!-- large desktop (min-width 1200px) - Ghana cocoa pods and gold essence -->
+            <source media="(min-width: 1200px)" srcset="https://images.pexels.com/photos/3745234/ripe-cocoa-pods-on-tree.jpg?auto=compress&cs=tinysrgb&w=1600&h=600&fit=crop" type="image/jpeg">
+            <!-- tablet / medium (780px - 1199px) -->
+            <source media="(min-width: 780px)" srcset="https://images.pexels.com/photos/6489650/cocoa-farm-ghana.jpg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" type="image/jpeg">
+            <!-- mobile: smaller but authentic Ghana cocoa harvest -->
+            <source media="(max-width: 779px)" srcset="https://images.pexels.com/photos/162796/cocoa-pods-cocoa-tree-plant-162796.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" type="image/jpeg">
+            <!-- fallback image - golden cocoa beans representing Gold Coast -->
+            <img src="https://images.pexels.com/photos/7884947/ghana-cocoa-farm.jpg?auto=compress&cs=tinysrgb&w=1200" alt="Ghana Cocoa Harvest & Gold Coast — ripe cocoa pods and golden beans, symbol of Ghana's cocoa kingdom and gold heritage">
+        </picture>
+    </div>
+
+    <!-- 2 column layout (Data | Weather) consistent with wireframe -->
+    <div class="two-columns">
+        <!-- Data section: Ghana country info (matches reference format) -->
+        <div class="info-card">
+            <h2>📊 Data</h2>
+            <div class="data-grid">
+                <div class="data-row"><span class="data-label">Area:</span><span class="data-value">238,535 sq km</span></div>
+                <div class="data-row"><span class="data-label">Population:</span><span class="data-value">34,121,985</span></div>
+                <div class="data-row"><span class="data-label">Capital:</span><span class="data-value">Accra</span></div>
+                <div class="data-row"><span class="data-label">Languages:</span><span class="data-value">English, Akan, Ewe, Dagbani, Hausa, Ga</span></div>
+                <div class="data-row"><span class="data-label">Currency:</span><span class="data-value">Ghanaian Cedi (GHS)</span></div>
+                <div class="data-row"><span class="data-label">Time Zone:</span><span class="data-value">UTC+0 (GMT)</span></div>
+                <div class="data-row"><span class="data-label">Calling Code:</span><span class="data-value">+233</span></div>
+                <div class="data-row"><span class="data-label">Internet TLD:</span><span class="data-value">.gh</span></div>
+            </div>
+        </div>
+
+        <!-- Weather section with static values & wind chill (matches reference style) -->
+        <div class="info-card">
+            <div class="weather-head large-icon-weather">
+                <h2>🌤️ Weather</h2>
+                <!-- pseudo-element injects large view weather icon (⛅) after h2 -->
+            </div>
+            <!-- SVG weather icon visible only on mobile (as requirement) -->
+            <div class="mobile-weather-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="52" height="52">
+                    <circle cx="32" cy="28" r="12" fill="#F9A825" stroke="#E65100" stroke-width="1.5"/>
+                    <g stroke="#FBC02D" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="32" y1="6" x2="32" y2="14"/>
+                        <line x1="56" y1="28" x2="48" y2="28"/>
+                        <line x1="32" y1="50" x2="32" y2="42"/>
+                        <line x1="8" y1="28" x2="16" y2="28"/>
+                        <line x1="49.2" y1="11.8" x2="43.8" y2="17.2"/>
+                        <line x1="49.2" y1="44.2" x2="43.8" y2="38.8"/>
+                        <line x1="14.8" y1="44.2" x2="20.2" y2="38.8"/>
+                        <line x1="14.8" y1="11.8" x2="20.2" y2="17.2"/>
+                    </g>
+                    <path d="M22,46 L42,46 C46,46 48,43 48,40 C48,37 45.5,35 42,35 C41,31 37,29 33,29 C28.5,29 25.5,32 24,35.5 C21.5,36 19,38 19,41 C19,44 20.5,46 22,46Z" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1.2"/>
+                </svg>
+            </div>
+            <div class="weather-stats">
+                <div class="weather-line"><strong>Temperature:</strong> 28°C</div>
+                <div class="weather-line"><strong>Conditions:</strong> Partly Cloudy</div>
+                <div class="weather-line"><strong>Wind:</strong> 10 km/h</div>
+                <div class="weather-line"><strong>Wind Chill:</strong> <span id="windchillVal">—</span></div>
+            </div>
+            <div class="windchill-badge">
+                <span>🌬️ Wind Chill Factor:</span>
+                <span id="chillRowValue" style="font-weight:800;">—</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gold Coast & Cocoa heritage banner (known for gold and cocoa) -->
+    <div class="heritage-banner">
+        <span style="font-size: 2rem;">🏅</span>
+        <div><strong style="color: #B45309;">✦ The Gold Coast Legacy ✦</strong> — Ghana, former Gold Coast, is the world's 2nd largest cocoa producer. From golden nuggets to premium cocoa beans, this land symbolizes wealth, resilience, and vibrant culture.</div>
+        <span style="font-size: 1.8rem;">🍫</span>
+    </div>
+
+    <!-- footer with copyright, dynamic year and last modified (matches reference format) -->
+    <div class="footer-area">
+        <p>© <span id="currentYear">2024</span> 🐾 <a href="https://www.linkedin.com/in/rubiamagdelena-francesco/" target="_blank" rel="noopener">Rubia Magdelena Francesco</a> 🐾 Ghana · Gold Coast · Cocoa Kingdom</p>
+        <p>Last Modification: <span id="lastModify">02/08/2024 22:47:47</span></p>
+        <p style="font-size:0.7rem; opacity:0.8;">🌍 "Land of gold, cocoa, and warm hospitality" — Akwaaba!</p>
+    </div>
+</div>
+
+<!-- additional inline to ensure javascript fully complies -->
+<script>
+    (function secondaryEnhance() {
+        // ensure wind chill matches static values exactly as per conditions
+        const staticTemp = 28;
+        const staticWind = 10;
+        function getWindChillValue(tempC, windKmph) {
+            if (tempC <= 10 && windKmph > 4.8) {
+                const powWind = Math.pow(windKmph, 0.16);
+                const chillCalc = 13.12 + 0.6215 * tempC - 11.37 * powWind + 0.3965 * tempC * powWind;
+                return Math.round(chillCalc * 10) / 10 + " °C";
+            }
+            return "N/A";
+        }
+        const finalChill = getWindChillValue(staticTemp, staticWind);
+        const chillSpan = document.getElementById('windchillVal');
+        if (chillSpan && chillSpan.textContent === "—") chillSpan.textContent = finalChill;
+        const chillRowSpan = document.getElementById('chillRowValue');
+        if (chillRowSpan && chillRowSpan.textContent === "—") chillRowSpan.textContent = finalChill;
+        
+        // double-check footer dynamic year edge
+        const yearSpan = document.getElementById('currentYear');
+        if (yearSpan && yearSpan.innerText === "2024") yearSpan.innerText = new Date().getFullYear();
+        const modElem = document.getElementById('lastModify');
+        if (modElem && (modElem.innerText === "02/08/2024 22:47:47" || modElem.innerText === "")) {
+            modElem.innerText = new Date(document.lastModified).toLocaleString();
+        }
+    })();
+</script>
+</body>
+</html>
