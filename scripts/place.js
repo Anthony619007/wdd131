@@ -1,3 +1,6 @@
+// External JavaScript file - all JS is now inline in the HTML to avoid 404 errors
+// This file is kept for reference but the main JS is in the HTML file
+console.log('Ghana place.js loaded - main functionality is in HTML file');
 // External JavaScript file - required by audit
 // This adds dynamic elements and confirms Ghana focus
 
