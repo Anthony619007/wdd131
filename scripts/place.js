@@ -1,38 +1,58 @@
-// Ghana static weather values
-const TEMP_C = 28;
-const WIND_KMH = 10;
+// Static weather values for Ghana (warm tropical climate)
+const temperature = 28;  // °C
+const windSpeed = 10;    // km/h
 
-function calculateWindChill(tempCelsius, windKmh) {
-    const windPow = Math.pow(windKmh, 0.16);
-    const chill = 13.12 + 0.6215 * tempCelsius - 11.37 * windPow + 0.3965 * tempCelsius * windPow;
-    return Math.round(chill * 10) / 10;
+// Wind Chill calculation function (Metric: °C, km/h)
+// Formula: 13.12 + 0.6215*T - 11.37*(V^0.16) + 0.3965*T*(V^0.16)
+function calculateWindChill(tempC, windKmh) {
+    const windPower = Math.pow(windKmh, 0.16);
+    const windChill = 13.12 + 0.6215 * tempC - 11.37 * windPower + 0.3965 * tempC * windPower;
+    return Math.round(windChill * 10) / 10;
 }
 
-function updateWindChillDisplay() {
-    const chillSpan = document.getElementById('windchillVal');
-    const chillRowSpan = document.getElementById('chillRowValue');
-    let displayText = 'N/A (warm climate)';
+// Update wind chill display based on conditions
+function updateWindChill() {
+    const chillSpan = document.getElementById('windchillValue');
+    const chillDisplaySpan = document.getElementById('windchillDisplay');
 
-    if (TEMP_C <= 10 && WIND_KMH > 4.8) {
-        const calculated = calculateWindChill(TEMP_C, WIND_KMH);
-        displayText = calculated + ' °C';
+    let result = 'N/A';
+    // Conditions for valid wind chill calculation (Metric)
+    // Temperature <= 10°C AND Wind speed > 4.8 km/h
+    if (temperature <= 10 && windSpeed > 4.8) {
+        const calculated = calculateWindChill(temperature, windSpeed);
+        result = calculated + ' °C';
+    } else {
+        result = 'N/A';
     }
 
-    if (chillSpan) chillSpan.textContent = displayText;
-    if (chillRowSpan) chillRowSpan.textContent = displayText;
+    if (chillSpan) chillSpan.textContent = result;
+    if (chillDisplaySpan) chillDisplaySpan.textContent = result;
 }
 
-function setFooterDynamic() {
+// Update footer with current year and last modified date
+function updateFooter() {
     const yearSpan = document.getElementById('currentYear');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-    const modSpan = document.getElementById('lastModify');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    const modSpan = document.getElementById('lastModified');
     if (modSpan) {
         const lastMod = new Date(document.lastModified);
-        modSpan.textContent = lastMod.toLocaleString();
+        const formatted = lastMod.toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        modSpan.textContent = formatted;
     }
 }
 
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    updateWindChillDisplay();
-    setFooterDynamic();
+    updateWindChill();
+    updateFooter();
 });

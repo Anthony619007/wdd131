@@ -1,3 +1,4 @@
+/* ---------- GHANA COLORS (Flag: Red, Gold, Green) ---------- */
 :root {
     --gh-red: #CE1126;
     --gh-gold: #F5B81B;
@@ -6,7 +7,7 @@
     --cream-bg: #FFF9EF;
     --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
     --radius-lg: 32px;
-    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, 'Helvetica Neue', sans-serif;
 }
 
 * {
@@ -23,32 +24,30 @@ body {
 }
 
 .country-card {
-    max-width: 1260px;
+    max-width: 1160px;
     margin: 0 auto;
     background: white;
-    border-radius: 56px 56px 48px 48px;
+    border-radius: 48px 48px 40px 40px;
     box-shadow: var(--card-shadow);
     overflow: hidden;
 }
 
+/* Hero Image */
 .hero-image {
     width: 100%;
     line-height: 0;
     background: #2c4a2e;
 }
 
-.hero-image picture img {
+.hero-image img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
-    max-height: 500px;
+    max-height: 480px;
 }
 
-main {
-    display: block;
-}
-
+/* Two Column Layout - exactly like reference */
 .two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -56,82 +55,67 @@ main {
     padding: 2.5rem;
 }
 
+/* Info Cards */
 .info-card {
     background: var(--cream-bg);
-    border-radius: var(--radius-lg);
+    border-radius: 28px;
     padding: 1.8rem 2rem;
-    border: 1px solid rgba(0, 107, 63, 0.15);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 107, 63, 0.12);
 }
 
 .info-card h2 {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    border-left: 7px solid var(--gh-gold);
+    border-left: 6px solid var(--gh-gold);
     padding-left: 1rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
     color: var(--gh-red);
 }
 
-.data-grid {
+/* Data List - matches reference format */
+.data-list {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 0.85rem;
 }
 
-.data-row {
+.data-item {
     display: flex;
-    flex-wrap: wrap;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    padding-bottom: 0.65rem;
-    font-size: 1.05rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-bottom: 0.6rem;
+    font-size: 1rem;
 }
 
 .data-label {
     font-weight: 700;
-    width: 130px;
+    width: 125px;
     flex-shrink: 0;
     color: var(--gh-green);
 }
 
 .data-value {
     color: #2d2f36;
-    font-weight: 500;
 }
 
+/* Weather Section */
 .weather-stats {
     margin-top: 0.5rem;
 }
 
-.weather-line {
+.weather-item {
     display: flex;
     justify-content: space-between;
     padding: 0.7rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 1.05rem;
 }
 
-.weather-line strong {
+.weather-item strong {
     color: var(--gh-red);
     font-weight: 700;
 }
 
-.windchill-badge {
-    background: rgba(245, 184, 27, 0.2);
-    border-radius: 60px;
-    padding: 0.6rem 1.2rem;
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-}
-
+/* Pseudo-element for weather icon after heading (large view) */
 .weather-head {
     display: flex;
     align-items: center;
@@ -143,57 +127,61 @@ main {
     margin-bottom: 0;
 }
 
-.large-icon-weather::after {
+.weather-head-with-icon::after {
     content: "⛅";
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-left: 0.8rem;
     background: rgba(0, 107, 63, 0.1);
-    padding: 0.2rem 0.9rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 60px;
     display: inline-flex;
     align-items: center;
 }
 
+/* SVG icon for mobile (hidden on desktop) */
 .mobile-weather-svg {
     display: none;
     text-align: center;
-    margin: 1rem 0 0.25rem;
+    margin: 1rem 0 0.5rem;
 }
 
-.heritage-banner {
-    margin: 0 2rem 2rem 2rem;
-    background: linear-gradient(115deg, #FEF0D8 0%, #FFF5E6 100%);
-    border-radius: 28px;
-    padding: 0.9rem 1.6rem;
+.mobile-weather-svg svg {
+    width: 48px;
+    height: 48px;
+}
+
+/* Wind Chill Display */
+.windchill-row {
+    background: rgba(245, 184, 27, 0.15);
+    border-radius: 60px;
+    padding: 0.7rem 1.2rem;
+    margin-top: 1rem;
     display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    border-left: 8px solid var(--gh-gold);
-    font-weight: 500;
+    justify-content: space-between;
+    font-weight: 600;
 }
 
-footer {
+/* Footer */
+.footer {
     background: var(--gh-black);
-    color: #ddd;
+    color: #e0e0e0;
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
     font-size: 0.85rem;
     border-top: 4px solid var(--gh-gold);
 }
 
-footer a {
+.footer a {
     color: var(--gh-gold);
     text-decoration: none;
     font-weight: 500;
 }
 
-footer a:hover {
+.footer a:hover {
     text-decoration: underline;
-    color: #FFD966;
 }
 
-/* Media Query for responsive design */
+/* Responsive Media Query - matches wireframe */
 @media (max-width: 780px) {
     .two-columns {
         grid-template-columns: 1fr;
@@ -209,7 +197,8 @@ footer a:hover {
     body {
         padding: 0.8rem;
     }
-    .large-icon-weather::after {
+    /* Hide pseudo-element on mobile, show SVG */
+    .weather-head-with-icon::after {
         display: none;
     }
     .mobile-weather-svg {
@@ -218,13 +207,10 @@ footer a:hover {
     .weather-head {
         justify-content: flex-start;
     }
-    .heritage-banner {
-        margin: 0 1.5rem 1.8rem 1.5rem;
-    }
 }
 
 @media (max-width: 480px) {
-    .data-row {
+    .data-item {
         flex-direction: column;
         gap: 0.2rem;
     }
@@ -232,9 +218,6 @@ footer a:hover {
         width: auto;
     }
     .info-card h2 {
-        font-size: 1.6rem;
-    }
-    .two-columns {
-        padding: 1rem;
+        font-size: 1.5rem;
     }
 }
