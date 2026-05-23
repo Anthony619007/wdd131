@@ -3,7 +3,7 @@
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Ghana - Gold & Cocoa Heritage Site Loaded');
+    console.log('Ghana - Gold & Cocoa Heritage Site Loaded | Created by Anthony Anusiem');
     
     // Add gold and cocoa facts dynamically
     addDynamicContent();
@@ -28,13 +28,16 @@ function addDynamicContent() {
         margin-bottom: 30px;
         text-align: center;
         font-weight: bold;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     `;
     
     const factsList = [
         "🇬🇭 Ghana means 'Warrior King'",
         "🏅 The Golden Stool is a sacred symbol of the Ashanti Kingdom",
         "🍫 Ghanaian cocoa is used in 1 out of 5 chocolate bars worldwide",
-        "⭐ Ghana was the first African country to gain independence"
+        "⭐ Ghana was the first African country to gain independence",
+        "💰 Gold Coast was the former name of Ghana before independence",
+        "🌱 Ghana produces some of the world's most premium cocoa beans"
     ];
     
     let factIndex = 0;
@@ -68,6 +71,10 @@ function setupSmoothScrolling() {
                 targetSection = document.querySelector('.cocoa-section');
             } else if (targetId === 'home') {
                 targetSection = document.querySelector('header');
+            } else if (targetId === 'culture') {
+                targetSection = document.querySelector('.facts-grid');
+            } else if (targetId === 'history') {
+                targetSection = document.querySelector('.gold-section');
             }
             
             if (targetSection) {
@@ -84,6 +91,7 @@ function displayGreeting() {
         margin-top: 20px;
         font-size: 1rem;
         opacity: 0.9;
+        font-weight: 500;
     `;
     
     const hour = new Date().getHours();

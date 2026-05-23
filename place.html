@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghana - Land of Gold & Cocoa</title>
+    <meta name="description" content="Discover Ghana - Africa's golden heart and world's finest cocoa producer. Learn about gold mining traditions and cocoa farming in the Land of Gold &amp; Cocoa.">
+    <meta name="author" content="Anthony Anusiem">
+    <title>Ghana - Land of Gold &amp; Cocoa | Anthony Anusiem</title>
     <link rel="stylesheet" href="place.css">
     <script src="place.js" defer></script>
 </head>
@@ -11,6 +13,21 @@
     <header>
         <h1>Ghana: Land of Gold and Cocoa</h1>
         <p>The Golden Heart of Africa & World's Finest Cocoa</p>
+        <!-- SVG weather/decorative element -->
+        <div class="weather-icon-svg">
+            <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="20" fill="#FFD700" stroke="#8B4513" stroke-width="2"/>
+                <line x1="50" y1="20" x2="50" y2="10" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="50" y1="80" x2="50" y2="90" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="20" y1="50" x2="10" y2="50" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="80" y1="50" x2="90" y2="50" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="30" y1="30" x2="22" y2="22" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="70" y1="70" x2="78" y2="78" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="70" y1="30" x2="78" y2="22" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <line x1="30" y1="70" x2="22" y2="78" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                <text x="50" y="55" text-anchor="middle" fill="#8B4513" font-size="12" font-weight="bold">⛅</text>
+            </svg>
+        </div>
     </header>
 
     <nav>
@@ -24,11 +41,22 @@
     </nav>
 
     <main>
-        <!-- Gold Section -->
+        <!-- Gold Section with responsive WebP images using srcset -->
         <section class="gold-section">
             <h2>Ghana's Golden Legacy</h2>
             <div class="gold-content">
-                <img src="https://media.cnn.com/api/v1/images/stellar/prod/141217145513-ghana-cocoa-tree-issouf-sanogo-afp-getty-images.jpg?q=w_2052,h_1568,x_0,y_0,c_fill/h_618" alt="Ghana Gold">
+                <picture>
+                    <source srcset="https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop&webp=1" type="image/webp" media="(max-width: 480px)">
+                    <source srcset="https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&webp=1" type="image/webp" media="(max-width: 768px)">
+                    <source srcset="https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop&webp=1" type="image/webp">
+                    <img src="https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" 
+                         alt="Gold nuggets representing Ghana's golden legacy"
+                         width="400" height="300"
+                         srcset="https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop 400w,
+                                 https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop 600w,
+                                 https://images.pexels.com/photos/266658/pexels-photo-266658.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop 800w"
+                         sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px">
+                </picture>
                 <div>
                     <p>Ghana, formerly known as the Gold Coast, is Africa's largest gold producer. The country produces over 4.8 million ounces of gold annually, making it one of the world's top gold producers.</p>
                     <ul>
@@ -40,11 +68,20 @@
             </div>
         </section>
 
-        <!-- Cocoa Section -->
+        <!-- Cocoa Section with responsive WebP images using srcset -->
         <section class="cocoa-section">
             <h2>Ghana's Cocoa Excellence</h2>
             <div class="cocoa-content">
-                <img src="https://thfvnext.bing.com/th/id/OIP.PT56IyDAl9KU_pq1y1V5pwHaEK?r=0&o=7&cb=thfvnextfalconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ghana Cocoa">
+                <picture>
+                    <source srcset="https://media.cnn.com/api/v1/images/stellar/prod/141217145513-ghana-cocoa-tree-issouf-sanogo-afp-getty-images.jpg?q=w_2052,h_1568,x_0,y_0,c_fill/h_618" type="image/webp" media="(max-width: 480px)">
+                    <source srcset="https://tse4.mm.bing.net/th/id/OIP.PT56IyDAl9KU_pq1y1V5pwHaEK?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" type="image/webp" media="(max-width: 768px)">
+                    <source srcset="https://www.reuters.com/resizer/v2/4SU4SEMHNBNX3BGLEQVANRN27Q.jpg?auth=ccec4b79de5b8b2a14c41b96349092ebe18803a5ae49770cd49fe219025bf43c&width=1200&quality=80" type="image/webp">
+                    <img src="images/ghana-cocoa.jpg" alt="Fresh cocoa beans from Ghana" width="400" height="300"
+                         srcset="https://media.cnn.com/api/v1/images/stellar/prod/141217145513-ghana-cocoa-tree-issouf-sanogo-afp-getty-images.jpg?q=w_2052,h_1568,x_0,y_0,c_fill/h_618" type="image/webp" media="(max-width: 480px)">
+                    <source srcset="https://tse4.mm.bing.net/th/id/OIP.PT56IyDAl9KU_pq1y1V5pwHaEK?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" type="image/webp" media="(max-width: 768px)">
+                    <source srcset="https://www.reuters.com/resizer/v2/4SU4SEMHNBNX3BGLEQVANRN27Q.jpg?auth=ccec4b79de5b8b2a14c41b96349092ebe18803a5ae49770cd49fe219025bf43c&width=1200&quality=80" type="image/webp">
+                    sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px">
+                </picture>
                 <div>
                     <p>Ghana is the world's second-largest cocoa producer, known for producing the highest quality cocoa beans used in premium chocolates worldwide.</p>
                     <ul>
@@ -61,18 +98,38 @@
             <h2>Golden & Cocoa Facts</h2>
             <div class="grid-container">
                 <div class="fact-card">
+                    <!-- SVG icon for gold -->
+                    <svg width="40" height="40" viewBox="0 0 50 50" class="fact-svg-icon">
+                        <circle cx="25" cy="25" r="18" fill="#FFD700" stroke="#8B4513" stroke-width="1.5"/>
+                        <text x="25" y="31" text-anchor="middle" fill="#8B4513" font-size="16" font-weight="bold">⛏️</text>
+                    </svg>
                     <h3>Gold Production</h3>
                     <p>Over 4.8 million ounces annually</p>
                 </div>
                 <div class="fact-card">
+                    <!-- SVG icon for cocoa -->
+                    <svg width="40" height="40" viewBox="0 0 50 50" class="fact-svg-icon">
+                        <circle cx="25" cy="25" r="18" fill="#8B4513" stroke="#FFD700" stroke-width="1.5"/>
+                        <text x="25" y="31" text-anchor="middle" fill="#FFD700" font-size="16" font-weight="bold">🍫</text>
+                    </svg>
                     <h3>Cocoa Exports</h3>
                     <p>800,000+ tons per year</p>
                 </div>
                 <div class="fact-card">
+                    <!-- SVG icon for employment -->
+                    <svg width="40" height="40" viewBox="0 0 50 50" class="fact-svg-icon">
+                        <circle cx="25" cy="25" r="18" fill="#006B3F" stroke="#FFD700" stroke-width="1.5"/>
+                        <text x="25" y="31" text-anchor="middle" fill="#FFD700" font-size="16" font-weight="bold">👥</text>
+                    </svg>
                     <h3>Employment</h3>
                     <p>1M+ jobs in both sectors</p>
                 </div>
                 <div class="fact-card">
+                    <!-- SVG icon for global rank -->
+                    <svg width="40" height="40" viewBox="0 0 50 50" class="fact-svg-icon">
+                        <circle cx="25" cy="25" r="18" fill="#CE1126" stroke="#FFD700" stroke-width="1.5"/>
+                        <text x="25" y="31" text-anchor="middle" fill="#FFD700" font-size="16" font-weight="bold">🌍</text>
+                    </svg>
                     <h3>Global Rank</h3>
                     <p>#1 Gold in Africa | #2 Cocoa globally</p>
                 </div>
@@ -81,7 +138,8 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Ghana - Land of Gold & Cocoa | Celebrating Ghanaian Heritage</p>
+        <p>© 2025 Ghana - Land of Gold & Cocoa | Celebrating Ghanaian Heritage</p>
+        <p class="author-credit">Created by Anthony Anusiem</p>
     </footer>
 </body>
 </html>
