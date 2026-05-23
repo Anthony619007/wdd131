@@ -136,12 +136,9 @@ h2 {
     flex-wrap: wrap;
 }
 
-.gold-content picture, .cocoa-content picture {
+.hero-image {
     flex: 1;
     min-width: 250px;
-}
-
-.gold-content img, .cocoa-content img {
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     width: 100%;
@@ -195,12 +192,11 @@ li {
 }
 
 footer {
-    background-color: var(--dark-brown);
+    background: linear-gradient(135deg, var(--dark-brown), #2a1808);
     color: white;
     text-align: center;
     padding: 30px;
     margin-top: 50px;
-    background: linear-gradient(135deg, var(--dark-brown), #2a1808);
 }
 
 .author-credit {
@@ -223,7 +219,7 @@ footer {
         flex-direction: column;
     }
     
-    .gold-content img, .cocoa-content img {
+    .hero-image {
         width: 100%;
         height: auto;
     }
@@ -255,4 +251,16 @@ footer {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* Dynamic facts bar styling - added by JS */
+.dynamic-facts {
+    background: linear-gradient(90deg, #FFD700, #8B4513);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }

@@ -1,14 +1,12 @@
-// External JavaScript file - all JS is now inline in the HTML to avoid 404 errors
-// This file is kept for reference but the main JS is in the HTML file
-console.log('Ghana place.js loaded - main functionality is in HTML file');
 // External JavaScript file - required by audit
-// This adds dynamic elements and confirms Ghana focus
+// Ghana - Land of Gold and Cocoa
+// Created by Anthony Anusiem
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Ghana - Gold & Cocoa Heritage Site Loaded | Created by Anthony Anusiem');
     
-    // Add gold and cocoa facts dynamically
+    // Add dynamic facts bar
     addDynamicContent();
     
     // Add smooth scrolling for navigation
@@ -16,23 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Display greeting related to Ghana
     displayGreeting();
+    
+    // Add scroll shadow effect
+    setupScrollEffect();
 });
 
 function addDynamicContent() {
-    // Create a small dynamic facts bar
     const mainElement = document.querySelector('main');
     const factsBar = document.createElement('div');
     factsBar.className = 'dynamic-facts';
-    factsBar.style.cssText = `
-        background: linear-gradient(90deg, #FFD700, #8B4513);
-        color: white;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-        text-align: center;
-        font-weight: bold;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    `;
     
     const factsList = [
         "🇬🇭 Ghana means 'Warrior King'",
@@ -44,29 +34,27 @@ function addDynamicContent() {
     ];
     
     let factIndex = 0;
-    factsBar.innerHTML = `✨ Did you know? ${factsList[0]} ✨`;
+    factsBar.innerHTML = '✨ Did you know? ' + factsList[0] + ' ✨';
     
-    // Insert at the beginning of main
     if (mainElement.firstChild) {
         mainElement.insertBefore(factsBar, mainElement.firstChild);
     } else {
         mainElement.appendChild(factsBar);
     }
     
-    // Rotate facts every 5 seconds
-    setInterval(() => {
+    setInterval(function() {
         factIndex = (factIndex + 1) % factsList.length;
-        factsBar.innerHTML = `✨ Did you know? ${factsList[factIndex]} ✨`;
+        factsBar.innerHTML = '✨ Did you know? ' + factsList[factIndex] + ' ✨';
     }, 5000);
 }
 
 function setupSmoothScrolling() {
     const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
+    navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.textContent.toLowerCase();
-            let targetSection = null;
+            var targetId = this.textContent.toLowerCase();
+            var targetSection = null;
             
             if (targetId === 'gold') {
                 targetSection = document.querySelector('.gold-section');
@@ -88,32 +76,31 @@ function setupSmoothScrolling() {
 }
 
 function displayGreeting() {
-    const header = document.querySelector('header');
-    const greeting = document.createElement('div');
-    greeting.style.cssText = `
-        margin-top: 20px;
-        font-size: 1rem;
-        opacity: 0.9;
-        font-weight: 500;
-    `;
+    var header = document.querySelector('header');
+    var greeting = document.createElement('div');
+    greeting.style.cssText = 'margin-top: 20px; font-size: 1rem; opacity: 0.9; font-weight: 500;';
     
-    const hour = new Date().getHours();
-    let timeGreeting = '';
-    if (hour < 12) timeGreeting = 'Good morning';
-    else if (hour < 18) timeGreeting = 'Good afternoon';
-    else timeGreeting = 'Good evening';
+    var hour = new Date().getHours();
+    var timeGreeting = '';
+    if (hour < 12) {
+        timeGreeting = 'Good morning';
+    } else if (hour < 18) {
+        timeGreeting = 'Good afternoon';
+    } else {
+        timeGreeting = 'Good evening';
+    }
     
-    greeting.innerHTML = `${timeGreeting} to Ghana 🇬🇭 - Home of Gold and Cocoa!`;
+    greeting.innerHTML = timeGreeting + ' to Ghana 🇬🇭 - Home of Gold and Cocoa!';
     header.appendChild(greeting);
 }
 
-// Add a gold and cocoa counter effect on scroll
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
-    const nav = document.querySelector('nav');
-    if (scrollPosition > 100) {
-        nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-    } else {
-        nav.style.boxShadow = 'none';
-    }
-});
+function setupScrollEffect() {
+    window.addEventListener('scroll', function() {
+        var nav = document.querySelector('nav');
+        if (window.scrollY > 100) {
+            nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+        } else {
+            nav.style.boxShadow = 'none';
+        }
+    });
+}
