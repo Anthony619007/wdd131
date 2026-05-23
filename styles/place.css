@@ -1,4 +1,4 @@
-/* :root selector required by audit */
+/* :root selector */
 :root {
     --gold-color: #FFD700;
     --cocoa-brown: #8B4513;
@@ -21,7 +21,7 @@ body {
     color: #333;
 }
 
-/* Limited main width - required by audit */
+/* Limited main width 
 main {
     max-width: 1200px;
     margin: 0 auto;
@@ -36,7 +36,7 @@ header {
     position: relative;
 }
 
-/* ::after pseudo-element required by audit */
+/* ::after pseudo-element
 header::after {
     content: "⚜️ 🍫 ⚜️";
     position: absolute;
@@ -70,7 +70,7 @@ header p {
     50% { transform: scale(1.05); }
 }
 
-/* Flex navigation - required by audit */
+/* Flex navigation 
 nav {
     background-color: var(--dark-brown);
     padding: 15px 0;
@@ -98,7 +98,7 @@ nav a {
     display: inline-block;
 }
 
-/* Hover effect - required by audit */
+/* Hover effect 
 nav a:hover {
     background-color: var(--gold-color);
     color: var(--dark-brown);
@@ -159,7 +159,7 @@ li {
     font-size: 1.1rem;
 }
 
-/* Grid layout - required by audit */
+/* Grid layout 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -205,7 +205,7 @@ footer {
     opacity: 0.8;
 }
 
-/* Media query - required by audit */
+/* Media query */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
