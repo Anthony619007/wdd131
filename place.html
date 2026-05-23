@@ -3,311 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Anthony Anusiem">
-    <meta name="description" content="Discover Ghana — the heart of West Africa. Known as the Gold Coast, world-famous for premium cocoa, vibrant culture and rich history.">
-    <title>Ghana · Gold Coast & Cocoa Kingdom</title>
-    
-    <style>
-        /* ---------- GHANA COLORS (Flag: Red, Gold, Green) ---------- */
-        :root {
-            --gh-red: #CE1126;
-            --gh-gold: #F5B81B;
-            --gh-green: #006B3F;
-            --gh-black: #1E1E1E;
-            --cream-bg: #FFF9EF;
-            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-            --radius-lg: 32px;
-            --font-sans: 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, 'Helvetica Neue', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: linear-gradient(145deg, #FDF6E3 0%, #F9EFDA 100%);
-            color: var(--gh-black);
-            padding: 2rem 1rem;
-        }
-
-        .country-card {
-            max-width: 1160px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 48px 48px 40px 40px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-        }
-
-        /* Hero Image */
-        .hero-image {
-            width: 100%;
-            line-height: 0;
-            background: #2c4a2e;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-            max-height: 480px;
-        }
-
-        /* Two Column Layout - exactly like reference */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2.5rem;
-        }
-
-        /* Info Cards */
-        .info-card {
-            background: var(--cream-bg);
-            border-radius: 28px;
-            padding: 1.8rem 2rem;
-            border: 1px solid rgba(0, 107, 63, 0.12);
-        }
-
-        .info-card h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            border-left: 6px solid var(--gh-gold);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            color: var(--gh-red);
-        }
-
-        /* Data List - matches reference format */
-        .data-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .data-item {
-            display: flex;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
-            padding-bottom: 0.6rem;
-            font-size: 1rem;
-        }
-
-        .data-label {
-            font-weight: 700;
-            width: 125px;
-            flex-shrink: 0;
-            color: var(--gh-green);
-        }
-
-        .data-value {
-            color: #2d2f36;
-        }
-
-        /* Weather Section */
-        .weather-stats {
-            margin-top: 0.5rem;
-        }
-
-        .weather-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            font-size: 1.05rem;
-        }
-
-        .weather-item strong {
-            color: var(--gh-red);
-            font-weight: 700;
-        }
-
-        /* Pseudo-element for weather icon after heading (large view) */
-        .weather-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .weather-head h2 {
-            margin-bottom: 0;
-        }
-
-        .weather-head-with-icon::after {
-            content: "⛅";
-            font-size: 2rem;
-            margin-left: 0.8rem;
-            background: rgba(0, 107, 63, 0.1);
-            padding: 0.2rem 0.8rem;
-            border-radius: 60px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        /* SVG icon for mobile (hidden on desktop) */
-        .mobile-weather-svg {
-            display: none;
-            text-align: center;
-            margin: 1rem 0 0.5rem;
-        }
-
-        .mobile-weather-svg svg {
-            width: 48px;
-            height: 48px;
-        }
-
-        /* Wind Chill Display */
-        .windchill-row {
-            background: rgba(245, 184, 27, 0.15);
-            border-radius: 60px;
-            padding: 0.7rem 1.2rem;
-            margin-top: 1rem;
-            display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--gh-black);
-            color: #e0e0e0;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.85rem;
-            border-top: 4px solid var(--gh-gold);
-        }
-
-        .footer a {
-            color: var(--gh-gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Media Query - matches wireframe */
-        @media (max-width: 780px) {
-            .two-columns {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-            .info-card {
-                padding: 1.4rem;
-            }
-            .data-label {
-                width: 110px;
-            }
-            body {
-                padding: 0.8rem;
-            }
-            /* Hide pseudo-element on mobile, show SVG */
-            .weather-head-with-icon::after {
-                display: none;
-            }
-            .mobile-weather-svg {
-                display: block;
-            }
-            .weather-head {
-                justify-content: flex-start;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .data-item {
-                flex-direction: column;
-                gap: 0.2rem;
-            }
-            .data-label {
-                width: auto;
-            }
-            .info-card h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <title>Ghana - Land of Gold & Cocoa</title>
+    <link rel="stylesheet" href="place.css">
+    <script src="place.js" defer></script>
 </head>
 <body>
-    <div class="country-card">
-        <!-- Header with Hero Image (Ghana Gold/Cocoa) -->
-        <header>
-            <div class="hero-image">
-                <picture>
-                    <!-- WebP format for optimal performance -->
-                    <source srcset="https://images.pexels.com/photos/3745234/ripe-cocoa-pods-on-tree.jpg?auto=compress&cs=tinysrgb&w=1160&h=500&fit=crop&webp=1" media="(min-width: 1160px)" type="image/webp">
-                    <source srcset="https://images.pexels.com/photos/6489650/cocoa-farm-ghana.jpg?auto=compress&cs=tinysrgb&w=800&h=450&fit=crop&webp=1" media="(min-width: 780px)" type="image/webp">
-                    <source srcset="https://images.pexels.com/photos/7884947/ghana-cocoa-farm.jpg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&webp=1" media="(max-width: 779px)" type="image/webp">
-                    <img src="images/cocoa-gold.webp" alt="Ghana Cocoa Harvest — ripe cocoa pods and golden beans, symbol of Ghana's Gold Coast and cocoa kingdom">
-                </picture>
+    <header>
+        <h1>Ghana: Land of Gold and Cocoa</h1>
+        <p>The Golden Heart of Africa & World's Finest Cocoa</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Gold</a></li>
+            <li><a href="#">Cocoa</a></li>
+            <li><a href="#">Culture</a></li>
+            <li><a href="#">History</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Gold Section -->
+        <section class="gold-section">
+            <h2>Ghana's Golden Legacy</h2>
+            <div class="gold-content">
+                <img src="https://media.cnn.com/api/v1/images/stellar/prod/141217145513-ghana-cocoa-tree-issouf-sanogo-afp-getty-images.jpg?q=w_2052,h_1568,x_0,y_0,c_fill/h_618" alt="Ghana Gold">
+                <div>
+                    <p>Ghana, formerly known as the Gold Coast, is Africa's largest gold producer. The country produces over 4.8 million ounces of gold annually, making it one of the world's top gold producers.</p>
+                    <ul>
+                        <li>🏆 Largest gold producer in Africa</li>
+                        <li>💰 Gold accounts for 30% of exports</li>
+                        <li>⛏️ Historic Ashanti gold tradition</li>
+                    </ul>
+                </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Main Content -->
-        <main>
-            <div class="two-columns">
-                <!-- Data Section (matches reference format exactly) -->
-                <section class="info-card">
-                    <h2>📊 Data</h2>
-                    <div class="data-list">
-                        <div class="data-item"><span class="data-label">Area:</span><span class="data-value">238,535 sq km</span></div>
-                        <div class="data-item"><span class="data-label">Population:</span><span class="data-value">34,121,985</span></div>
-                        <div class="data-item"><span class="data-label">Capital:</span><span class="data-value">Accra</span></div>
-                        <div class="data-item"><span class="data-label">Languages:</span><span class="data-value">English, Akan, Ewe, Dagbani, Ga</span></div>
-                        <div class="data-item"><span class="data-label">Currency:</span><span class="data-value">Ghanaian Cedi (GHS)</span></div>
-                        <div class="data-item"><span class="data-label">Time Zone:</span><span class="data-value">UTC+0 (GMT)</span></div>
-                        <div class="data-item"><span class="data-label">Calling Code:</span><span class="data-value">+233</span></div>
-                        <div class="data-item"><span class="data-label">Internet TLD:</span><span class="data-value">.gh</span></div>
-                    </div>
-                </section>
-
-                <!-- Weather Section (matches reference format with pseudo-element for icon) -->
-                <section class="info-card">
-                    <div class="weather-head weather-head-with-icon">
-                        <h2>🌤️ Weather</h2>
-                    </div>
-                    <!-- SVG icon for mobile view (shown only on media query) -->
-                    <div class="mobile-weather-svg">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="48" height="48">
-                            <circle cx="32" cy="28" r="12" fill="#F9A825" stroke="#E65100" stroke-width="1.5"/>
-                            <g stroke="#FBC02D" stroke-width="2.5" stroke-linecap="round">
-                                <line x1="32" y1="6" x2="32" y2="14"/>
-                                <line x1="56" y1="28" x2="48" y2="28"/>
-                                <line x1="32" y1="50" x2="32" y2="42"/>
-                                <line x1="8" y1="28" x2="16" y2="28"/>
-                                <line x1="49.2" y1="11.8" x2="43.8" y2="17.2"/>
-                                <line x1="49.2" y1="44.2" x2="43.8" y2="38.8"/>
-                                <line x1="14.8" y1="44.2" x2="20.2" y2="38.8"/>
-                                <line x1="14.8" y1="11.8" x2="20.2" y2="17.2"/>
-                            </g>
-                            <path d="M22,46 L42,46 C46,46 48,43 48,40 C48,37 45.5,35 42,35 C41,31 37,29 33,29 C28.5,29 25.5,32 24,35.5 C21.5,36 19,38 19,41 C19,44 20.5,46 22,46Z" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1.2"/>
-                        </svg>
-                    </div>
-                    <div class="weather-stats">
-                        <div class="weather-item"><strong>Temperature:</strong> 28°C</div>
-                        <div class="weather-item"><strong>Conditions:</strong> Partly Cloudy</div>
-                        <div class="weather-item"><strong>Wind:</strong> 10 km/h</div>
-                        <div class="weather-item"><strong>Wind Chill:</strong> <span id="windchillValue">—</span></div>
-                    </div>
-                    <div class="windchill-row">
-                        <span>🌬️ Calculated Wind Chill:</span>
-                        <span id="windchillDisplay">—</span>
-                    </div>
-                </section>
+        <!-- Cocoa Section -->
+        <section class="cocoa-section">
+            <h2>Ghana's Cocoa Excellence</h2>
+            <div class="cocoa-content">
+                <img src="https://thfvnext.bing.com/th/id/OIP.PT56IyDAl9KU_pq1y1V5pwHaEK?r=0&o=7&cb=thfvnextfalconrm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ghana Cocoa">
+                <div>
+                    <p>Ghana is the world's second-largest cocoa producer, known for producing the highest quality cocoa beans used in premium chocolates worldwide.</p>
+                    <ul>
+                        <li>🍫 World's 2nd largest cocoa producer</li>
+                        <li>🌱 800,000+ farming families</li>
+                        <li>⭐ Premium quality beans</li>
+                    </ul>
+                </div>
             </div>
-        </main>
+        </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>© <span id="currentYear">2024</span> 🐾 <a href="https://www.linkedin.com/in/anthonyanusiem-nzenwa007/" target="_blank" rel="noopener">Anthony Anusiem</a> 🐾 Ghana · Gold Coast · Cocoa Kingdom</p>
-            <p>Last Modification: <span id="lastModified">02/08/2024 22:47:47</span></p>
-            <p>🌍 "Land of Gold, Cocoa, and Warm Hospitality" — Akwaaba!</p>
-        </footer>
-    </div>
+        <!-- Facts Grid -->
+        <section class="facts-grid">
+            <h2>Golden & Cocoa Facts</h2>
+            <div class="grid-container">
+                <div class="fact-card">
+                    <h3>Gold Production</h3>
+                    <p>Over 4.8 million ounces annually</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Cocoa Exports</h3>
+                    <p>800,000+ tons per year</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Employment</h3>
+                    <p>1M+ jobs in both sectors</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Global Rank</h3>
+                    <p>#1 Gold in Africa | #2 Cocoa globally</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    
+    <footer>
+        <p>&copy; 2025 Ghana - Land of Gold & Cocoa | Celebrating Ghanaian Heritage</p>
+    </footer>
+</body>
+</html>

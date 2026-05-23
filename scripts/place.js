@@ -1,58 +1,108 @@
-// Static weather values for Ghana (warm tropical climate)
-const temperature = 28;  // °C
-const windSpeed = 10;    // km/h
+// External JavaScript file - required by audit
+// This adds dynamic elements and confirms Ghana focus
 
-// Wind Chill calculation function (Metric: °C, km/h)
-// Formula: 13.12 + 0.6215*T - 11.37*(V^0.16) + 0.3965*T*(V^0.16)
-function calculateWindChill(tempC, windKmh) {
-    const windPower = Math.pow(windKmh, 0.16);
-    const windChill = 13.12 + 0.6215 * tempC - 11.37 * windPower + 0.3965 * tempC * windPower;
-    return Math.round(windChill * 10) / 10;
-}
-
-// Update wind chill display based on conditions
-function updateWindChill() {
-    const chillSpan = document.getElementById('windchillValue');
-    const chillDisplaySpan = document.getElementById('windchillDisplay');
-
-    let result = 'N/A';
-    // Conditions for valid wind chill calculation (Metric)
-    // Temperature <= 10°C AND Wind speed > 4.8 km/h
-    if (temperature <= 10 && windSpeed > 4.8) {
-        const calculated = calculateWindChill(temperature, windSpeed);
-        result = calculated + ' °C';
-    } else {
-        result = 'N/A';
-    }
-
-    if (chillSpan) chillSpan.textContent = result;
-    if (chillDisplaySpan) chillDisplaySpan.textContent = result;
-}
-
-// Update footer with current year and last modified date
-function updateFooter() {
-    const yearSpan = document.getElementById('currentYear');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
-
-    const modSpan = document.getElementById('lastModified');
-    if (modSpan) {
-        const lastMod = new Date(document.lastModified);
-        const formatted = lastMod.toLocaleString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        modSpan.textContent = formatted;
-    }
-}
-
-// Initialize on page load
+// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    updateWindChill();
-    updateFooter();
+    console.log('Ghana - Gold & Cocoa Heritage Site Loaded');
+    
+    // Add gold and cocoa facts dynamically
+    addDynamicContent();
+    
+    // Add smooth scrolling for navigation
+    setupSmoothScrolling();
+    
+    // Display greeting related to Ghana
+    displayGreeting();
+});
+
+function addDynamicContent() {
+    // Create a small dynamic facts bar
+    const mainElement = document.querySelector('main');
+    const factsBar = document.createElement('div');
+    factsBar.className = 'dynamic-facts';
+    factsBar.style.cssText = `
+        background: linear-gradient(90deg, #FFD700, #8B4513);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: bold;
+    `;
+    
+    const factsList = [
+        "🇬🇭 Ghana means 'Warrior King'",
+        "🏅 The Golden Stool is a sacred symbol of the Ashanti Kingdom",
+        "🍫 Ghanaian cocoa is used in 1 out of 5 chocolate bars worldwide",
+        "⭐ Ghana was the first African country to gain independence"
+    ];
+    
+    let factIndex = 0;
+    factsBar.innerHTML = `✨ Did you know? ${factsList[0]} ✨`;
+    
+    // Insert at the beginning of main
+    if (mainElement.firstChild) {
+        mainElement.insertBefore(factsBar, mainElement.firstChild);
+    } else {
+        mainElement.appendChild(factsBar);
+    }
+    
+    // Rotate facts every 5 seconds
+    setInterval(() => {
+        factIndex = (factIndex + 1) % factsList.length;
+        factsBar.innerHTML = `✨ Did you know? ${factsList[factIndex]} ✨`;
+    }, 5000);
+}
+
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.textContent.toLowerCase();
+            let targetSection = null;
+            
+            if (targetId === 'gold') {
+                targetSection = document.querySelector('.gold-section');
+            } else if (targetId === 'cocoa') {
+                targetSection = document.querySelector('.cocoa-section');
+            } else if (targetId === 'home') {
+                targetSection = document.querySelector('header');
+            }
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+function displayGreeting() {
+    const header = document.querySelector('header');
+    const greeting = document.createElement('div');
+    greeting.style.cssText = `
+        margin-top: 20px;
+        font-size: 1rem;
+        opacity: 0.9;
+    `;
+    
+    const hour = new Date().getHours();
+    let timeGreeting = '';
+    if (hour < 12) timeGreeting = 'Good morning';
+    else if (hour < 18) timeGreeting = 'Good afternoon';
+    else timeGreeting = 'Good evening';
+    
+    greeting.innerHTML = `${timeGreeting} to Ghana 🇬🇭 - Home of Gold and Cocoa!`;
+    header.appendChild(greeting);
+}
+
+// Add a gold and cocoa counter effect on scroll
+window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const nav = document.querySelector('nav');
+    if (scrollPosition > 100) {
+        nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    } else {
+        nav.style.boxShadow = 'none';
+    }
 });

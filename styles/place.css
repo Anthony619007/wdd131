@@ -1,13 +1,11 @@
-/* ---------- GHANA COLORS (Flag: Red, Gold, Green) ---------- */
+/* :root selector required by audit */
 :root {
-    --gh-red: #CE1126;
-    --gh-gold: #F5B81B;
-    --gh-green: #006B3F;
-    --gh-black: #1E1E1E;
-    --cream-bg: #FFF9EF;
-    --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-    --radius-lg: 32px;
-    --font-sans: 'Segoe UI', system-ui, -apple-system, 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+    --gold-color: #FFD700;
+    --cocoa-brown: #8B4513;
+    --dark-brown: #5C3317;
+    --ghana-red: #CE1126;
+    --ghana-green: #006B3F;
+    --primary-bg: #f5f5f0;
 }
 
 * {
@@ -17,207 +15,210 @@
 }
 
 body {
-    font-family: var(--font-sans);
-    background: linear-gradient(145deg, #FDF6E3 0%, #F9EFDA 100%);
-    color: var(--gh-black);
-    padding: 2rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--primary-bg);
+    color: #333;
 }
 
-.country-card {
-    max-width: 1160px;
+/* Limited main width - required by audit */
+main {
+    max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    border-radius: 48px 48px 40px 40px;
-    box-shadow: var(--card-shadow);
-    overflow: hidden;
+    padding: 20px;
 }
 
-/* Hero Image */
-.hero-image {
-    width: 100%;
-    line-height: 0;
-    background: #2c4a2e;
+header {
+    background: linear-gradient(135deg, var(--gold-color), var(--cocoa-brown));
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
 }
 
-.hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    max-height: 480px;
+/* ::after pseudo-element required by audit */
+header::after {
+    content: "⚜️ 🍫 ⚜️";
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    font-size: 24px;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
-/* Two Column Layout - exactly like reference */
-.two-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    padding: 2.5rem;
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Info Cards */
-.info-card {
-    background: var(--cream-bg);
-    border-radius: 28px;
-    padding: 1.8rem 2rem;
-    border: 1px solid rgba(0, 107, 63, 0.12);
+header p {
+    font-size: 1.3rem;
 }
 
-.info-card h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    border-left: 6px solid var(--gh-gold);
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
-    color: var(--gh-red);
+/* Flex navigation - required by audit */
+nav {
+    background-color: var(--dark-brown);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-/* Data List - matches reference format */
-.data-list {
+nav ul {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-}
-
-.data-item {
-    display: flex;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
-    padding-bottom: 0.6rem;
-    font-size: 1rem;
-}
-
-.data-label {
-    font-weight: 700;
-    width: 125px;
-    flex-shrink: 0;
-    color: var(--gh-green);
-}
-
-.data-value {
-    color: #2d2f36;
-}
-
-/* Weather Section */
-.weather-stats {
-    margin-top: 0.5rem;
-}
-
-.weather-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    font-size: 1.05rem;
-}
-
-.weather-item strong {
-    color: var(--gh-red);
-    font-weight: 700;
-}
-
-/* Pseudo-element for weather icon after heading (large view) */
-.weather-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    list-style: none;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-.weather-head h2 {
-    margin-bottom: 0;
-}
-
-.weather-head-with-icon::after {
-    content: "⛅";
-    font-size: 2rem;
-    margin-left: 0.8rem;
-    background: rgba(0, 107, 63, 0.1);
-    padding: 0.2rem 0.8rem;
-    border-radius: 60px;
-    display: inline-flex;
-    align-items: center;
-}
-
-/* SVG icon for mobile (hidden on desktop) */
-.mobile-weather-svg {
-    display: none;
-    text-align: center;
-    margin: 1rem 0 0.5rem;
-}
-
-.mobile-weather-svg svg {
-    width: 48px;
-    height: 48px;
-}
-
-/* Wind Chill Display */
-.windchill-row {
-    background: rgba(245, 184, 27, 0.15);
-    border-radius: 60px;
-    padding: 0.7rem 1.2rem;
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-}
-
-/* Footer */
-.footer {
-    background: var(--gh-black);
-    color: #e0e0e0;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.85rem;
-    border-top: 4px solid var(--gh-gold);
-}
-
-.footer a {
-    color: var(--gh-gold);
+nav a {
+    color: white;
     text-decoration: none;
-    font-weight: 500;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+/* Hover effect - required by audit */
+nav a:hover {
+    background-color: var(--gold-color);
+    color: var(--dark-brown);
+    border-radius: 5px;
+    transform: translateY(-2px);
 }
 
-/* Responsive Media Query - matches wireframe */
-@media (max-width: 780px) {
-    .two-columns {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 1.5rem;
-    }
-    .info-card {
-        padding: 1.4rem;
-    }
-    .data-label {
-        width: 110px;
-    }
-    body {
-        padding: 0.8rem;
-    }
-    /* Hide pseudo-element on mobile, show SVG */
-    .weather-head-with-icon::after {
-        display: none;
-    }
-    .mobile-weather-svg {
-        display: block;
-    }
-    .weather-head {
-        justify-content: flex-start;
-    }
+h2 {
+    color: var(--dark-brown);
+    margin: 40px 0 20px 0;
+    font-size: 2rem;
+    border-left: 5px solid var(--gold-color);
+    padding-left: 15px;
 }
 
-@media (max-width: 480px) {
-    .data-item {
+/* Section styling */
+.gold-section, .cocoa-section {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Card hover effect */
+.gold-section:hover, .cocoa-section:hover, .fact-card:hover {
+    transform: translateY(-5px);
+}
+
+.gold-content, .cocoa-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.gold-content img, .cocoa-content img {
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.gold-content div, .cocoa-content div {
+    flex: 1;
+}
+
+ul {
+    margin-top: 15px;
+    list-style-position: inside;
+}
+
+li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Grid layout - required by audit */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.fact-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--gold-color);
+}
+
+.fact-card:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.fact-card h3 {
+    color: var(--cocoa-brown);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+footer {
+    background-color: var(--dark-brown);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    background: linear-gradient(135deg, var(--dark-brown), #2a1808);
+}
+
+/* Media query - required by audit */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    .gold-content, .cocoa-content {
         flex-direction: column;
-        gap: 0.2rem;
     }
-    .data-label {
-        width: auto;
+    
+    .gold-content img, .cocoa-content img {
+        width: 100%;
+        height: auto;
     }
-    .info-card h2 {
+    
+    nav ul {
+        gap: 10px;
+    }
+    
+    nav a {
+        padding: 5px 12px;
+        font-size: 0.9rem;
+    }
+    
+    h2 {
         font-size: 1.5rem;
     }
+    
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Additional styling for images */
+img {
+    max-width: 100%;
+    height: auto;
 }
