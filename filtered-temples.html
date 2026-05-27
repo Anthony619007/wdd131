@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore sacred temples worldwide with interactive filtering. View temple details including location, dedication date, size, and images.">
+    <meta name="author" content="Anthony Anusiem">
     <title>WDD 131 – Temple Album | Filtered Temples Gallery</title>
     <style>
         * {
@@ -47,20 +49,19 @@
             }
         }
 
+        /* Navigation Flexbox */
         nav {
-            background: rgba(52, 73, 94, 0.95);
-            padding: 1rem;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 0.5rem;
             padding: 0.6rem 1.2rem;
             border-radius: 25px;
             transition: all 0.3s ease;
@@ -70,6 +71,7 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        /* Hover effect on navigation elements */
         nav a:hover {
             background: #3498db;
             transform: translateY(-2px);
@@ -94,6 +96,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
+        /* CSS Grid for gallery */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -194,9 +197,22 @@
             margin-top: 3rem;
         }
 
+        .stats {
+            text-align: center;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Media Query for responsive design */
         @media (max-width: 768px) {
             .gallery {
                 grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
             
             nav a {
@@ -214,11 +230,16 @@
             }
         }
 
-        .stats {
-            text-align: center;
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                width: 80%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -226,15 +247,14 @@
     <header>
         <h1>🏛️ Temple Album</h1>
         <p>Discover sacred temples around the world</p>
+        <nav>
+            <a href="#" data-filter="all" class="filter-active">🏠 Home</a>
+            <a href="#" data-filter="old">⏪ Old (before 1900)</a>
+            <a href="#" data-filter="new">✨ New (after 2000)</a>
+            <a href="#" data-filter="large">📐 Large (over 90k sq ft)</a>
+            <a href="#" data-filter="small">🔍 Small (under 10k sq ft)</a>
+        </nav>
     </header>
-    
-    <nav>
-        <a href="#" data-filter="all" class="filter-active">🏠 Home</a>
-        <a href="#" data-filter="old">⏪ Old (< 1900)</a>
-        <a href="#" data-filter="new">✨ New (> 2000)</a>
-        <a href="#" data-filter="large">📐 Large (> 90k sq ft)</a>
-        <a href="#" data-filter="small">🔍 Small (< 10k sq ft)</a>
-    </nav>
     
     <main>
         <h2 id="filter-title">All Temples</h2>
@@ -245,106 +265,131 @@
     <footer>
         <p>&copy; <span id="current-year"></span> Temple Album | WDD 131 Dynamic Web Fundamentals</p>
         <p>Last Updated: <span id="last-modified"></span></p>
+        <p>Created by Anthony Anusiem</p>
     </footer>
 
     <script>
-        // Complete temple data with images from your specifications + Accra Temple
+        // Temple data in ALPHABETICAL ORDER by name
         const temples = [
             {
-                name: "Aba Nigeria",
+                name: "Aba Nigeria Temple",
                 location: "Aba, Nigeria",
-                dedicated: "2005, August, 7",
+                dedicated: "2005, August 7",
                 area: 11500,
                 year: 2005,
                 image: "https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-lds-1024x768.jpg"
             },
             {
-                name: "Manti Utah",
+                name: "Barcelona Spain Temple",
+                location: "Barcelona, Spain",
+                dedicated: "2023, March 19",
+                area: 54300,
+                year: 2023,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/barcelona-spain-temple/barcelona-spain-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Cape Town South Africa Temple",
+                location: "Cape Town, South Africa",
+                dedicated: "2023, July 9",
+                area: 21900,
+                year: 2023,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/cape-town-south-africa-temple/cape-town-south-africa-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Dallas Texas Temple",
+                location: "Dallas, Texas, United States",
+                dedicated: "1984, October 28",
+                area: 44934,
+                year: 1984,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/dallas-texas-temple/dallas-texas-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Edmonton Alberta Temple",
+                location: "Edmonton, Alberta, Canada",
+                dedicated: "1999, December 11",
+                area: 10700,
+                year: 1999,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/edmonton-alberta-temple/edmonton-alberta-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Farmington New Mexico Temple",
+                location: "Farmington, New Mexico, United States",
+                dedicated: "2021, October 10",
+                area: 9300,
+                year: 2021,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/farmington-new-mexico-temple/farmington-new-mexico-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Gilbert Arizona Temple",
+                location: "Gilbert, Arizona, United States",
+                dedicated: "2014, March 2",
+                area: 85219,
+                year: 2014,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/gilbert-arizona-temple/gilbert-arizona-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Idaho Falls Idaho Temple",
+                location: "Idaho Falls, Idaho, United States",
+                dedicated: "1945, September 23",
+                area: 102953,
+                year: 1945,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/idaho-falls-idaho-temple/idaho-falls-idaho-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Kansas City Missouri Temple",
+                location: "Kansas City, Missouri, United States",
+                dedicated: "2012, May 6",
+                area: 32100,
+                year: 2012,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/kansas-city-missouri-temple/kansas-city-missouri-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Logan Utah Temple",
+                location: "Logan, Utah, United States",
+                dedicated: "1884, May 17",
+                area: 119619,
+                year: 1884,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/logan-utah-temple/logan-utah-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "London England Temple",
+                location: "Newchapel, Surrey, England",
+                dedicated: "1958, September 7",
+                area: 42990,
+                year: 1958,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/london-england-temple/london-england-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Manti Utah Temple",
                 location: "Manti, Utah, United States",
-                dedicated: "1888, May, 21",
-                area: 74792,
+                dedicated: "1888, May 21",
+                area: 100000,
                 year: 1888,
                 image: "https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-lds-1024x768.jpg"
             },
             {
-                name: "Payson Utah",
-                location: "Payson, Utah, United States",
-                dedicated: "2015, June, 7",
-                area: 96630,
-                year: 2015,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/payson-utah-temple/payson-utah-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Yigo Guam",
-                location: "Yigo, Guam",
-                dedicated: "2020, May, 2",
-                area: 6861,
-                year: 2020,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/yigo-guam-temple/yigo-guam-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Accra Ghana",
-                location: "Accra, Ghana",
-                dedicated: "2004, January, 11",
-                area: 17500,
-                year: 2004,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/accra-ghana-temple/accra-ghana-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Salt Lake Temple",
-                location: "Salt Lake City, Utah, United States",
-                dedicated: "1893, April, 6",
-                area: 253015,
-                year: 1893,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Rome Italy",
+                name: "Rome Italy Temple",
                 location: "Rome, Italy",
-                dedicated: "2019, March, 10",
+                dedicated: "2019, March 10",
                 area: 41010,
                 year: 2019,
                 image: "https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-lds-1024x768.jpg"
             },
             {
-                name: "Washington D.C.",
-                location: "Kensington, Maryland, United States",
-                dedicated: "1974, November, 19",
-                area: 156558,
-                year: 1974,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/washington-dc-temple/washington-dc-temple-lds-1024x768.jpg"
+                name: "Salt Lake Temple",
+                location: "Salt Lake City, Utah, United States",
+                dedicated: "1893, April 6",
+                area: 253015,
+                year: 1893,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg"
             },
             {
-                name: "Mexico City Mexico",
-                location: "Mexico City, Mexico",
-                dedicated: "1983, December, 2",
-                area: 116642,
-                year: 1983,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/mexico-city-mexico-temple/mexico-city-mexico-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "São Paulo Brazil",
-                location: "São Paulo, Brazil",
-                dedicated: "1978, October, 30",
-                area: 59246,
-                year: 1978,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/sao-paulo-brazil-temple/sao-paulo-brazil-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Hong Kong China",
-                location: "Hong Kong, China",
-                dedicated: "1996, May, 26",
-                area: 21966,
-                year: 1996,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/hong-kong-china-temple/hong-kong-china-temple-lds-1024x768.jpg"
-            },
-            {
-                name: "Paris France",
-                location: "Le Chesnay, France",
-                dedicated: "2017, May, 21",
-                area: 44175,
-                year: 2017,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/paris-france-temple/paris-france-temple-lds-1024x768.jpg"
+                name: "St. George Utah Temple",
+                location: "St. George, Utah, United States",
+                dedicated: "1877, April 6",
+                area: 110000,
+                year: 1877,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/st-george-utah-temple/st-george-utah-temple-lds-1024x768.jpg"
             }
         ];
 
@@ -356,7 +401,9 @@
         // Update stats display
         function updateStats(filteredCount, totalCount) {
             const statsDiv = document.getElementById('temple-stats');
-            statsDiv.innerHTML = `Showing ${filteredCount} of ${totalCount} temples`;
+            if (statsDiv) {
+                statsDiv.innerHTML = `Showing ${filteredCount} of ${totalCount} temples`;
+            }
         }
 
         // Display temples based on filter
@@ -365,7 +412,7 @@
             const filterTitle = document.getElementById('filter-title');
             let filteredTemples = [];
             
-            // Apply filter based on new criteria
+            // Apply filter based on criteria
             switch(filter) {
                 case 'old':
                     filteredTemples = temples.filter(temple => temple.year < 1900);
@@ -394,7 +441,7 @@
             // Clear gallery
             gallery.innerHTML = '';
             
-            // Display filtered temples with loading animation
+            // Display filtered temples
             if (filteredTemples.length === 0) {
                 gallery.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: white; font-size: 1.2rem;">No temples found matching this filter. 🙏</p>';
                 return;
@@ -416,7 +463,7 @@
                     <div class="image-container">
                         <img class="temple-image" 
                              src="${temple.image}" 
-                             alt="${temple.name} Temple" 
+                             alt="${temple.name}" 
                              loading="lazy"
                              onerror="this.src='https://via.placeholder.com/400x250?text=Image+Coming+Soon'">
                     </div>
@@ -439,7 +486,7 @@
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    // Update active class with animation
+                    // Update active class
                     filterLinks.forEach(l => l.classList.remove('filter-active'));
                     link.classList.add('filter-active');
                     
@@ -465,8 +512,12 @@
             const yearSpan = document.getElementById('current-year');
             const modifiedSpan = document.getElementById('last-modified');
             
-            yearSpan.textContent = new Date().getFullYear();
-            modifiedSpan.textContent = new Date().toLocaleDateString();
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+            if (modifiedSpan) {
+                modifiedSpan.textContent = new Date().toLocaleDateString();
+            }
         }
         
         // Initialize the page
@@ -477,7 +528,7 @@
         }
         
         // Run when page loads
-        init();
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>

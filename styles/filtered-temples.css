@@ -40,20 +40,19 @@ header p {
     }
 }
 
+/* Navigation Flexbox */
 nav {
-    background: rgba(52, 73, 94, 0.95);
-    padding: 1rem;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 0.5rem;
     padding: 0.6rem 1.2rem;
     border-radius: 25px;
     transition: all 0.3s ease;
@@ -63,6 +62,7 @@ nav a {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Hover effect on navigation elements */
 nav a:hover {
     background: #3498db;
     transform: translateY(-2px);
@@ -73,6 +73,7 @@ nav a:hover {
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
+/* Main content max-width */
 main {
     max-width: 1400px;
     margin: 2rem auto;
@@ -87,6 +88,7 @@ main {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
+/* CSS Grid for gallery */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -187,9 +189,22 @@ footer {
     margin-top: 3rem;
 }
 
+.stats {
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Media Query for responsive design */
 @media (max-width: 768px) {
     .gallery {
         grid-template-columns: 1fr;
+    }
+    
+    nav {
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     
     nav a {
@@ -207,9 +222,14 @@ footer {
     }
 }
 
-.stats {
-    text-align: center;
-    color: white;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav a {
+        width: 80%;
+        text-align: center;
+    }
 }

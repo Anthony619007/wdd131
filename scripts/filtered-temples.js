@@ -106,7 +106,9 @@ function formatArea(area) {
 // Update stats display
 function updateStats(filteredCount, totalCount) {
     const statsDiv = document.getElementById('temple-stats');
-    statsDiv.innerHTML = `Showing ${filteredCount} of ${totalCount} temples`;
+    if (statsDiv) {
+        statsDiv.innerHTML = `Showing ${filteredCount} of ${totalCount} temples`;
+    }
 }
 
 // Display temples based on filter
@@ -144,7 +146,7 @@ function displayTemples(filter) {
     // Clear gallery
     gallery.innerHTML = '';
     
-    // Display filtered temples
+    // Display filtered temples with loading animation
     if (filteredTemples.length === 0) {
         gallery.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: white; font-size: 1.2rem;">No temples found matching this filter. 🙏</p>';
         return;
@@ -189,7 +191,7 @@ function setupFilters() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Update active class
+            // Update active class with animation
             filterLinks.forEach(l => l.classList.remove('filter-active'));
             link.classList.add('filter-active');
             
@@ -215,8 +217,12 @@ function updateFooter() {
     const yearSpan = document.getElementById('current-year');
     const modifiedSpan = document.getElementById('last-modified');
     
-    yearSpan.textContent = new Date().getFullYear();
-    modifiedSpan.textContent = new Date().toLocaleDateString();
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+    if (modifiedSpan) {
+        modifiedSpan.textContent = new Date().toLocaleDateString();
+    }
 }
 
 // Initialize the page
@@ -227,4 +233,4 @@ function init() {
 }
 
 // Run when page loads
-init();
+document.addEventListener('DOMContentLoaded', init);
