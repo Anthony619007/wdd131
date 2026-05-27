@@ -3,31 +3,502 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Temple Album - A gallery of beautiful temples from around the world">
+  <meta name="description" content="Temple Album - A stunning interactive gallery of sacred temples from around the world with dynamic filtering">
   <meta name="author" content="Anthony Anusiem - WDD 131 Student">
   
-  <title>Temple Album | Sacred Temple Gallery</title>
+  <title>Temple Album | Sacred Temple Gallery | Interactive Filtering</title>
 
-  <!-- Google Fonts preconnect links (required for audit) -->
+  <!-- Google Fonts preconnect links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- External CSS files -->
-  <link rel="stylesheet" href="styles/temples.css">
-  <link rel="stylesheet" href="styles/temples-large.css">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
-  <!-- External JavaScript -->
-  <script src="scripts/temples.js" defer></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #0a0f1c 0%, #0f172a 100%);
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 215, 150, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(15, 25, 45, 0.98) 0%, rgba(10, 18, 28, 0.98) 100%);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 215, 150, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 10px rgba(230, 180, 34, 0.3);
+    }
+
+    .brand-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.6));
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 215, 150, 0.15);
+    }
+
+    .hamburger-line {
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: #FFD966;
+      margin: 6px auto;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .hamburger-x {
+      display: none;
+      font-size: 1.8rem;
+      color: #FFD966;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hamburger.active .hamburger-line {
+      display: none;
+    }
+
+    .hamburger.active .hamburger-x {
+      display: block;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-list li a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 40px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-list li a i {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-list li a:hover {
+      background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(230, 180, 34, 0.2));
+      color: #FFD966;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(230, 180, 34, 0.2);
+    }
+
+    .nav-list li a:hover i {
+      transform: scale(1.1);
+    }
+
+    .nav-list li a.active-nav {
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      color: #0a0f1c;
+      box-shadow: 0 6px 20px rgba(230, 180, 34, 0.4);
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #FFFFFF, #FFD966, #E6B422);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .filter-stats {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: #a0aec0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stats-badge {
+      background: rgba(255, 217, 102, 0.12);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 217, 102, 0.25);
+    }
+
+    .stats-badge i {
+      margin-right: 8px;
+      color: #FFD966;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .temple-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 25, 45, 0.95));
+      border-radius: 28px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 217, 102, 0.25);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      margin: 0;
+      display: block;
+    }
+
+    .temple-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: rgba(255, 217, 102, 0.6);
+      box-shadow: 0 30px 45px -12px rgba(230, 180, 34, 0.25);
+    }
+
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+      width: 100%;
+      background: #1a1f2e;
+    }
+
+    .temple-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      filter: brightness(0.9) contrast(1.05);
+      display: block;
+    }
+
+    .temple-card:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.05) contrast(1.1);
+    }
+
+    .temple-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .temple-card:hover .temple-overlay {
+      transform: translateY(0);
+    }
+
+    .temple-card figcaption {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      padding: 1.2rem 1rem 0.8rem;
+      text-align: center;
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.2px;
+    }
+
+    .temple-details {
+      padding: 0 1rem 1.2rem;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .temple-details p {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e6;
+    }
+
+    .temple-details i {
+      width: 24px;
+      color: #FFD966;
+      font-size: 0.9rem;
+    }
+
+    .detail-badge {
+      background: rgba(255, 217, 102, 0.1);
+      border-radius: 20px;
+      padding: 4px 10px;
+      display: inline-block;
+      font-size: 0.75rem;
+    }
+
+    /* Image upload section */
+    .image-upload-panel {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 25, 45, 0.9));
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 217, 102, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .upload-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #FFD966;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .upload-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .file-input-label {
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      color: #0a0f1c;
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .file-input-label:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 180, 34, 0.4);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .image-preview-area {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .preview-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #FFD966;
+    }
+
+    footer {
+      background: linear-gradient(180deg, rgba(10, 15, 28, 0.98), rgba(5, 8, 15, 0.98));
+      border-top: 1px solid rgba(255, 217, 102, 0.2);
+      padding: 2rem;
+      margin-top: 4rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-content p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-content i {
+      color: #FFD966;
+      margin-right: 6px;
+    }
+
+    .empty-state {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 4rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 48px;
+      backdrop-filter: blur(8px);
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: #FFD966;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem;
+      }
+      .hamburger {
+        display: block;
+      }
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 18, 28, 0.98);
+        backdrop-filter: blur(20px);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        border-bottom: 1px solid rgba(255, 217, 102, 0.2);
+      }
+      nav.open {
+        max-height: 400px;
+      }
+      .nav-list {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+      .nav-list li a {
+        justify-content: center;
+        width: 100%;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .upload-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <header>
     <div class="header-container">
       <div class="logo-title">
-        <span class="brand-icon">⛩️</span>
+        <span class="brand-icon">🕍</span>
         <span class="brand-text">Temple Album</span>
       </div>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
@@ -38,69 +509,244 @@
       </button>
       <nav id="primaryNav">
         <ul class="nav-list">
-          <li><a href="#" class="active-nav">Home</a></li>
-          <li><a href="#">Old</a></li>
-          <li><a href="#">New</a></li>
-          <li><a href="#">Large</a></li>
-          <li><a href="#">Small</a></li>
+          <li><a href="#" data-filter="all" class="active-nav"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#" data-filter="old"><i class="fas fa-hourglass-half"></i> Old (before 1900)</a></li>
+          <li><a href="#" data-filter="new"><i class="fas fa-star-of-life"></i> New (after 2000)</a></li>
+          <li><a href="#" data-filter="large"><i class="fas fa-expand-alt"></i> Large (>90k sq ft)</a></li>
+          <li><a href="#" data-filter="small"><i class="fas fa-compress-alt"></i> Small (<10k sq ft)</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <h1>Aba Temple Album</h1>
-    <div class="gallery-grid">
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
-      <figure class="temple-card">
-        <img src="images/aba-temple.jpeg" alt="Aba Nigeria Temple" loading="lazy" width="400" height="300">
-        <figcaption>Aba Nigeria Temple</figcaption>
-      </figure>
+    <h1 id="dynamicTitle">✨ Sacred Temple Gallery ✨</h1>
+    
+    <div class="filter-stats" id="filterStats">
+      <div class="stats-badge"><i class="fas fa-church"></i> <span id="templeCount">0</span> Temples</div>
+      <div class="stats-badge"><i class="fas fa-filter"></i> <span id="activeFilterName">All Temples</span></div>
     </div>
+    <div class="gallery-grid" id="templeGallery"></div>
   </main>
 
   <footer>
     <div class="footer-content">
       <p class="footer-copyright">
-        &copy; <span id="currentYear"></span> Temple Album • Aba, Temple City, Nigeria.
+        <i class="far fa-copyright"></i> <span id="currentYear"></span> Temple Album • Aba, Temple City, Nigeria.
       </p>
       <p class="footer-last-modified">
-        Last Modification: <span id="lastModified"></span>
+        <i class="fas fa-sync-alt"></i> Last Modification: <span id="lastModified"></span>
       </p>
-      <p class="footer-credit">Aba, Temple City, Nigeria</p>
+      <p class="footer-credit"><i class="fas fa-map-marker-alt"></i> Aba, Temple City, Nigeria</p>
     </div>
   </footer>
 
+  <script>
+    // Temple data - YEAR BUILT field is removed from display (only kept for filtering logic)
+    const templesData = [
+      { id: 0, name: "Aba Nigeria", location: "Aba, Nigeria", dedicated: "2005, August 7", area: 11500, year: 2005, imageUrl: "images/aba-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-lds-1024x768.jpg" },
+      { id: 1, name: "Salt Lake Temple", location: "Salt Lake City, Utah", dedicated: "1893, April 6", area: 253015, year: 1893, imageUrl: "images/saltlake-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg" },
+      { id: 2, name: "Manti Utah", location: "Manti, Utah", dedicated: "1888, May 21", area: 100000, year: 1888, imageUrl: "images/manti-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-lds-1024x768.jpg" },
+      { id: 3, name: "St. George Utah", location: "St. George, Utah", dedicated: "1877, April 6", area: 110000, year: 1877, imageUrl: "images/stgeorge-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/st-george-utah-temple/st-george-utah-temple-lds-1024x768.jpg" },
+      { id: 4, name: "Logan Utah", location: "Logan, Utah", dedicated: "1884, May 17", area: 119619, year: 1884, imageUrl: "images/logan-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/logan-utah-temple/logan-utah-temple-lds-1024x768.jpg" },
+      { id: 5, name: "Rome Italy", location: "Rome, Italy", dedicated: "2019, March 10", area: 41010, year: 2019, imageUrl: "images/rome-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-lds-1024x768.jpg" },
+      { id: 6, name: "Gilbert Arizona", location: "Gilbert, Arizona", dedicated: "2014, March 2", area: 85219, year: 2014, imageUrl: "images/gilbert-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/gilbert-arizona-temple/gilbert-arizona-temple-lds-1024x768.jpg" },
+      { id: 7, name: "Payson Utah", location: "Payson, Utah", dedicated: "2015, June 7", area: 96630, year: 2015, imageUrl: "images/payson-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/payson-utah-temple/payson-utah-temple-lds-1024x768.jpg" },
+      { id: 8, name: "Yigo Guam", location: "Yigo, Guam", dedicated: "2020, May 2", area: 6861, year: 2020, imageUrl: "images/yigo-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/yigo-guam-temple/yigo-guam-temple-lds-1024x768.jpg" },
+      { id: 9, name: "Barcelona Spain", location: "Barcelona, Spain", dedicated: "2023, March 19", area: 54300, year: 2023, imageUrl: "images/barcelona-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/barcelona-spain-temple/barcelona-spain-temple-lds-1024x768.jpg" },
+      { id: 10, name: "Cape Town South Africa", location: "Cape Town, South Africa", dedicated: "2023, July 9", area: 21900, year: 2023, imageUrl: "images/capetown-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/cape-town-south-africa-temple/cape-town-south-africa-temple-lds-1024x768.jpg" },
+      { id: 11, name: "Dallas Texas", location: "Dallas, Texas", dedicated: "1984, October 28", area: 44934, year: 1984, imageUrl: "images/dallas-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/dallas-texas-temple/dallas-texas-temple-lds-1024x768.jpg" },
+      { id: 12, name: "London England", location: "Surrey, England", dedicated: "1958, September 7", area: 42990, year: 1958, imageUrl: "images/london-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/london-england-temple/london-england-temple-lds-1024x768.jpg" },
+      { id: 13, name: "Kansas City Missouri", location: "Kansas City, Missouri", dedicated: "2012, May 6", area: 32100, year: 2012, imageUrl: "images/kansascity-temple.jpeg", fallbackUrl: "https://churchofjesuschristtemples.org/assets/img/temples/kansas-city-missouri-temple/kansas-city-missouri-temple-lds-1024x768.jpg" }
+    ];
+
+    let currentlySelectedImage = null;
+    let currentFilter = 'all';
+
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function filterTemples(filterType) {
+      if (filterType === 'old') return templesData.filter(t => t.year < 1900);
+      if (filterType === 'new') return templesData.filter(t => t.year > 2000);
+      if (filterType === 'large') return templesData.filter(t => t.area > 90000);
+      if (filterType === 'small') return templesData.filter(t => t.area < 10000);
+      return templesData;
+    }
+
+    function getImageSource(temple) {
+      if (temple.customLocalImage) {
+        return temple.customLocalImage;
+      }
+      return temple.imageUrl;
+    }
+
+    function renderGallery(filterType = 'all') {
+      currentFilter = filterType;
+      const filtered = filterTemples(filterType);
+      const gallery = document.getElementById('templeGallery');
+      const templeCountSpan = document.getElementById('templeCount');
+      const activeFilterSpan = document.getElementById('activeFilterName');
+      const dynamicTitle = document.getElementById('dynamicTitle');
+      
+      templeCountSpan.innerText = filtered.length;
+      let filterDisplayName = '';
+      let titleEmoji = '🏛️';
+      switch(filterType) {
+        case 'old': filterDisplayName = 'Ancient Temples (Before 1900)'; titleEmoji = '⏳'; break;
+        case 'new': filterDisplayName = 'Modern Temples (After 2000)'; titleEmoji = '✨'; break;
+        case 'large': filterDisplayName = 'Majestic Large Temples'; titleEmoji = '📐'; break;
+        case 'small': filterDisplayName = 'Intimate Small Temples'; titleEmoji = '🔍'; break;
+        default: filterDisplayName = 'All Sacred Temples'; titleEmoji = '🕊️';
+      }
+      activeFilterSpan.innerText = filterDisplayName;
+      dynamicTitle.innerHTML = `${titleEmoji} ${filterDisplayName} ${titleEmoji}`;
+      
+      if (filtered.length === 0) {
+        gallery.innerHTML = `<div class="empty-state"><i class="fas fa-temple"></i><h3>No temples match this filter</h3><p>Try another beautiful category ✨</p></div>`;
+        return;
+      }
+      
+      gallery.innerHTML = '';
+      filtered.forEach((temple, idx) => {
+        const figure = document.createElement('figure');
+        figure.className = 'temple-card';
+        figure.style.animation = `fadeInUp 0.5s ease-out ${idx * 0.03}s forwards`;
+        figure.style.opacity = '0';
+        figure.setAttribute('data-temple-id', temple.id);
+        
+        const dedicatedDisplay = temple.dedicated;
+        const imageSrc = getImageSource(temple);
+        
+        // YEAR BUILT field has been REMOVED from display as requested
+        // Only showing: LOCATION, DEDICATED, and TEMPLE SIZE
+        figure.innerHTML = `
+          <div class="image-wrapper">
+            <img src="${imageSrc}" 
+                 alt="${temple.name} Temple" 
+                 loading="lazy" 
+                 width="400" 
+                 height="300"
+                 onerror="this.onerror=null; this.src='${temple.fallbackUrl}'; this.style.opacity='0.9';">
+            <div class="temple-overlay">
+              <span class="detail-badge"><i class="fas fa-ruler-combined"></i> ${formatNumber(temple.area)} sq ft</span>
+            </div>
+          </div>
+          <figcaption><i class="fas fa-landmark"></i> ${temple.name}</figcaption>
+          <div class="temple-details">
+            <p><i class="fas fa-map-pin"></i> <strong>LOCATION:</strong> ${temple.location}</p>
+            <p><i class="fas fa-calendar-alt"></i> <strong>DEDICATED:</strong> ${dedicatedDisplay}</p>
+            <p><i class="fas fa-expand-alt"></i> <strong>TEMPLE SIZE:</strong> ${formatNumber(temple.area)} sq ft</p>
+          </div>
+        `;
+        
+        figure.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (currentlySelectedImage) {
+            temple.customLocalImage = currentlySelectedImage;
+            const imgElement = figure.querySelector('img');
+            if (imgElement) {
+              imgElement.src = currentlySelectedImage;
+            }
+            const figcaptionElem = figure.querySelector('figcaption');
+            const originalText = figcaptionElem.innerHTML;
+            figcaptionElem.innerHTML = '<i class="fas fa-check-circle"></i> Image Updated!';
+            setTimeout(() => {
+              figcaptionElem.innerHTML = originalText;
+            }, 1500);
+          } else {
+            const figcaptionElem = figure.querySelector('figcaption');
+            const originalText = figcaptionElem.innerHTML;
+            figcaptionElem.innerHTML = '<i class="fas fa-info-circle"></i> Select an image first!';
+            setTimeout(() => {
+              figcaptionElem.innerHTML = originalText;
+            }, 1500);
+          }
+        });
+        
+        gallery.appendChild(figure);
+      });
+    }
+
+    function initImageUpload() {
+      const fileInput = document.getElementById('localImageInput');
+      const previewArea = document.getElementById('imagePreviewArea');
+      
+      fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            currentlySelectedImage = e.target.result;
+            previewArea.innerHTML = `
+              <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,217,102,0.1); padding: 8px 15px; border-radius: 40px;">
+                <img src="${currentlySelectedImage}" class="preview-img" alt="preview">
+                <span style="color: #FFD966;"><i class="fas fa-check-circle"></i> Image ready!</span>
+                <span style="font-size: 0.8rem; color: #94a3b8;">${file.name}</span>
+                <button id="clearImageBtn" style="background: none; border: none; color: #FFD966; cursor: pointer;"><i class="fas fa-times"></i></button>
+              </div>
+            `;
+            const clearBtn = document.getElementById('clearImageBtn');
+            if (clearBtn) {
+              clearBtn.addEventListener('click', () => {
+                currentlySelectedImage = null;
+                fileInput.value = '';
+                previewArea.innerHTML = '<span style="color: #94a3b8; font-size: 0.85rem;"><i class="fas fa-image"></i> No image selected</span>';
+              });
+            }
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert('Please select a valid image file (JPEG, PNG, WEBP)');
+        }
+      });
+    }
+
+    function initNavigation() {
+      const filterLinks = document.querySelectorAll('.nav-list li a');
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const primaryNav = document.getElementById('primaryNav');
+      
+      filterLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const filterValue = link.getAttribute('data-filter') || 'all';
+          filterLinks.forEach(l => l.classList.remove('active-nav'));
+          link.classList.add('active-nav');
+          renderGallery(filterValue);
+          
+          if (window.innerWidth <= 768) {
+            primaryNav.classList.remove('open');
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+      
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => {
+          const isOpen = primaryNav.classList.toggle('open');
+          hamburgerBtn.classList.toggle('active');
+          hamburgerBtn.setAttribute('aria-expanded', isOpen);
+        });
+      }
+    }
+    
+    function setFooterDates() {
+      document.getElementById('currentYear').innerText = new Date().getFullYear();
+      const lastMod = document.lastModified;
+      document.getElementById('lastModified').innerText = lastMod || new Date().toLocaleString();
+    }
+    
+    function init() {
+      renderGallery('all');
+      initNavigation();
+      setFooterDates();
+      initImageUpload();
+    }
+    
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
 </html>
