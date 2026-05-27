@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 131 – Temple Album | Filtered Temples Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        header {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            background: rgba(52, 73, 94, 0.95);
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav a:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .filter-active {
+            background: #3498db;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        #filter-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .temple-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .temple-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .temple-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .temple-card:hover .temple-image {
+            transform: scale(1.05);
+        }
+
+        .image-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to top, white, transparent);
+            pointer-events: none;
+        }
+
+        .temple-card h3 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .temple-info {
+            padding: 1.2rem;
+        }
+
+        .temple-info p {
+            margin: 0.6rem 0;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        .temple-info strong {
+            color: #2c3e50;
+            display: inline-block;
+            min-width: 85px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        footer {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            nav a {
+                margin: 0.25rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            #filter-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .stats {
+            text-align: center;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏛️ Temple Album</h1>
+        <p>Discover sacred temples around the world</p>
+    </header>
+    
+    <nav>
+        <a href="#" data-filter="all" class="filter-active">🏠 Home</a>
+        <a href="#" data-filter="old">⏪ Old (< 1900)</a>
+        <a href="#" data-filter="new">✨ New (> 2000)</a>
+        <a href="#" data-filter="large">📐 Large (> 90k sq ft)</a>
+        <a href="#" data-filter="small">🔍 Small (< 10k sq ft)</a>
+    </nav>
+    
+    <main>
+        <h2 id="filter-title">All Temples</h2>
+        <div class="stats" id="temple-stats"></div>
+        <div class="gallery" id="temple-gallery"></div>
+    </main>
+    
+    <footer>
+        <p>&copy; <span id="current-year"></span> Temple Album | WDD 131 Dynamic Web Fundamentals</p>
+        <p>Last Updated: <span id="last-modified"></span></p>
+    </footer>
+
+    <script>
+        // Complete temple data with images from your specifications + Accra Temple
+        const temples = [
+            {
+                name: "Aba Nigeria",
+                location: "Aba, Nigeria",
+                dedicated: "2005, August, 7",
+                area: 11500,
+                year: 2005,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Manti Utah",
+                location: "Manti, Utah, United States",
+                dedicated: "1888, May, 21",
+                area: 74792,
+                year: 1888,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Payson Utah",
+                location: "Payson, Utah, United States",
+                dedicated: "2015, June, 7",
+                area: 96630,
+                year: 2015,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/payson-utah-temple/payson-utah-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Yigo Guam",
+                location: "Yigo, Guam",
+                dedicated: "2020, May, 2",
+                area: 6861,
+                year: 2020,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/yigo-guam-temple/yigo-guam-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Accra Ghana",
+                location: "Accra, Ghana",
+                dedicated: "2004, January, 11",
+                area: 17500,
+                year: 2004,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/accra-ghana-temple/accra-ghana-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Salt Lake Temple",
+                location: "Salt Lake City, Utah, United States",
+                dedicated: "1893, April, 6",
+                area: 253015,
+                year: 1893,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Rome Italy",
+                location: "Rome, Italy",
+                dedicated: "2019, March, 10",
+                area: 41010,
+                year: 2019,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Washington D.C.",
+                location: "Kensington, Maryland, United States",
+                dedicated: "1974, November, 19",
+                area: 156558,
+                year: 1974,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/washington-dc-temple/washington-dc-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Mexico City Mexico",
+                location: "Mexico City, Mexico",
+                dedicated: "1983, December, 2",
+                area: 116642,
+                year: 1983,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/mexico-city-mexico-temple/mexico-city-mexico-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "São Paulo Brazil",
+                location: "São Paulo, Brazil",
+                dedicated: "1978, October, 30",
+                area: 59246,
+                year: 1978,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/sao-paulo-brazil-temple/sao-paulo-brazil-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Hong Kong China",
+                location: "Hong Kong, China",
+                dedicated: "1996, May, 26",
+                area: 21966,
+                year: 1996,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/hong-kong-china-temple/hong-kong-china-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Paris France",
+                location: "Le Chesnay, France",
+                dedicated: "2017, May, 21",
+                area: 44175,
+                year: 2017,
+                image: "https://churchofjesuschristtemples.org/assets/img/temples/paris-france-temple/paris-france-temple-lds-1024x768.jpg"
+            }
+        ];
+
+        // Format area with commas
+        function formatArea(area) {
+            return area.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Update stats display
+        function updateStats(filteredCount, totalCount) {
+            const statsDiv = document.getElementById('temple-stats');
+            statsDiv.innerHTML = `Showing ${filteredCount} of ${totalCount} temples`;
+        }
+
+        // Display temples based on filter
+        function displayTemples(filter) {
+            const gallery = document.getElementById('temple-gallery');
+            const filterTitle = document.getElementById('filter-title');
+            let filteredTemples = [];
+            
+            // Apply filter based on new criteria
+            switch(filter) {
+                case 'old':
+                    filteredTemples = temples.filter(temple => temple.year < 1900);
+                    filterTitle.textContent = '🏛️ Old Temples (Built before 1900)';
+                    break;
+                case 'new':
+                    filteredTemples = temples.filter(temple => temple.year > 2000);
+                    filterTitle.textContent = '✨ New Temples (Built after 2000)';
+                    break;
+                case 'large':
+                    filteredTemples = temples.filter(temple => temple.area > 90000);
+                    filterTitle.textContent = '📐 Large Temples (Larger than 90,000 sq ft)';
+                    break;
+                case 'small':
+                    filteredTemples = temples.filter(temple => temple.area < 10000);
+                    filterTitle.textContent = '🔍 Small Temples (Smaller than 10,000 sq ft)';
+                    break;
+                default:
+                    filteredTemples = temples;
+                    filterTitle.textContent = '🏠 All Temples';
+            }
+            
+            // Update stats
+            updateStats(filteredTemples.length, temples.length);
+            
+            // Clear gallery
+            gallery.innerHTML = '';
+            
+            // Display filtered temples with loading animation
+            if (filteredTemples.length === 0) {
+                gallery.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: white; font-size: 1.2rem;">No temples found matching this filter. 🙏</p>';
+                return;
+            }
+            
+            filteredTemples.forEach((temple, index) => {
+                const card = document.createElement('div');
+                card.className = 'temple-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.style.opacity = '0';
+                card.style.animation = 'fadeInUp 0.5s ease forwards';
+                
+                // Determine size badge
+                let sizeBadge = '';
+                if (temple.area > 90000) sizeBadge = '<span class="badge">Large</span>';
+                else if (temple.area < 10000) sizeBadge = '<span class="badge">Small</span>';
+                
+                card.innerHTML = `
+                    <div class="image-container">
+                        <img class="temple-image" 
+                             src="${temple.image}" 
+                             alt="${temple.name} Temple" 
+                             loading="lazy"
+                             onerror="this.src='https://via.placeholder.com/400x250?text=Image+Coming+Soon'">
+                    </div>
+                    <h3>${temple.name} ${sizeBadge}</h3>
+                    <div class="temple-info">
+                        <p><strong>📍 Location:</strong> ${temple.location}</p>
+                        <p><strong>📅 Dedicated:</strong> ${temple.dedicated}</p>
+                        <p><strong>📏 Size:</strong> ${formatArea(temple.area)} sq ft</p>
+                    </div>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+        
+        // Set up filter navigation
+        function setupFilters() {
+            const filterLinks = document.querySelectorAll('nav a');
+            
+            filterLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Update active class with animation
+                    filterLinks.forEach(l => l.classList.remove('filter-active'));
+                    link.classList.add('filter-active');
+                    
+                    // Get filter value and display temples
+                    const filter = link.getAttribute('data-filter');
+                    
+                    // Add click animation
+                    link.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        link.style.transform = '';
+                    }, 150);
+                    
+                    displayTemples(filter);
+                    
+                    // Smooth scroll to top of gallery
+                    document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+        
+        // Update footer with current year and last modified date
+        function updateFooter() {
+            const yearSpan = document.getElementById('current-year');
+            const modifiedSpan = document.getElementById('last-modified');
+            
+            yearSpan.textContent = new Date().getFullYear();
+            modifiedSpan.textContent = new Date().toLocaleDateString();
+        }
+        
+        // Initialize the page
+        function init() {
+            displayTemples('all');
+            setupFilters();
+            updateFooter();
+        }
+        
+        // Run when page loads
+        init();
+    </script>
+</body>
+</html>
