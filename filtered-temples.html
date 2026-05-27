@@ -144,17 +144,6 @@
             position: relative;
         }
 
-        .image-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(to top, white, transparent);
-            pointer-events: none;
-        }
-
         .temple-card h3 {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -175,18 +164,7 @@
 
         .temple-info strong {
             color: #2c3e50;
-            display: inline-block;
-            min-width: 85px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
+            font-weight: bold;
         }
 
         footer {
@@ -257,7 +235,7 @@
     </header>
     
     <main>
-        <h2 id="filter-title">All Temples</h2>
+        <h1 id="filter-title">All Temples</h1>
         <div class="stats" id="temple-stats"></div>
         <div class="gallery" id="temple-gallery"></div>
     </main>
@@ -269,127 +247,143 @@
     </footer>
 
     <script>
-        // Temple data in ALPHABETICAL ORDER by name
+        // Temple data in ALPHABETICAL ORDER with proper images
         const temples = [
             {
-                name: "Aba Nigeria Temple",
+                name: "Aba Nigeria",
                 location: "Aba, Nigeria",
-                dedicated: "2005, August 7",
+                dedicated: "2005, August, 7",
                 area: 11500,
                 year: 2005,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-5087-main.jpg" alt="Aba Nigeria Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/aba-nigeria-temple/aba-nigeria-temple-lds-1024x768.jpg"
             },
             {
-                name: "Barcelona Spain Temple",
+                name: "Barcelona Spain",
                 location: "Barcelona, Spain",
-                dedicated: "2023, March 19",
+                dedicated: "2023, March, 19",
                 area: 54300,
                 year: 2023,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/barcelona-spain-temple/barcelona-spain-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/barcelona-spain-temple/barcelona-spain-temple-43015-main.jpg" alt="Barcelona Spain Temple">" "https://churchofjesuschristtemples.org/assets/img/temples/barcelona-spain-temple/barcelona-spain-temple-lds-1024x768.jpg"
             },
             {
-                name: "Cape Town South Africa Temple",
+                name: "Cape Town South Africa",
                 location: "Cape Town, South Africa",
-                dedicated: "2023, July 9",
+                dedicated: "2023, July, 9",
                 area: 21900,
                 year: 2023,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/cape-town-south-africa-temple/cape-town-south-africa-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/cape-town-south-africa-temple/cape-town-south-africa-temple-64609-main.jpg" alt="Cape Town South Africa Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/cape-town-south-africa-temple/cape-town-south-africa-temple-lds-1024x768.jpg"
             },
             {
-                name: "Dallas Texas Temple",
+                name: "Dallas Texas",
                 location: "Dallas, Texas, United States",
-                dedicated: "1984, October 28",
+                dedicated: "1984, October, 28",
                 area: 44934,
                 year: 1984,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/dallas-texas-temple/dallas-texas-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/dallas-texas-temple/dallas-texas-temple-55240-main.jpg" alt="Dallas Texas Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/dallas-texas-temple/dallas-texas-temple-lds-1024x768.jpg"
             },
             {
-                name: "Edmonton Alberta Temple",
+                name: "Edmonton Alberta",
                 location: "Edmonton, Alberta, Canada",
-                dedicated: "1999, December 11",
+                dedicated: "1999, December, 11",
                 area: 10700,
                 year: 1999,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/edmonton-alberta-temple/edmonton-alberta-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/edmonton-alberta-temple/edmonton-alberta-temple-51155-main.jpg" alt="Edmonton Alberta Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/edmonton-alberta-temple/edmonton-alberta-temple-lds-1024x768.jpg"
             },
             {
-                name: "Farmington New Mexico Temple",
+                name: "Farmington New Mexico",
                 location: "Farmington, New Mexico, United States",
-                dedicated: "2021, October 10",
+                dedicated: "2021, October, 10",
                 area: 9300,
                 year: 2021,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/farmington-new-mexico-temple/farmington-new-mexico-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/farmington-new-mexico-temple/farmington-new-mexico-temple-62288-main.jpg" alt="Farmington New Mexico Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/farmington-new-mexico-temple/farmington-new-mexico-temple-lds-1024x768.jpg"
             },
             {
-                name: "Gilbert Arizona Temple",
+                name: "Gilbert Arizona",
                 location: "Gilbert, Arizona, United States",
-                dedicated: "2014, March 2",
+                dedicated: "2014, March, 2",
                 area: 85219,
                 year: 2014,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/gilbert-arizona-temple/gilbert-arizona-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/gilbert-arizona-temple/gilbert-arizona-temple-3802-main.jpg" alt="Gilbert Arizona Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/gilbert-arizona-temple/gilbert-arizona-temple-lds-1024x768.jpg"
             },
             {
-                name: "Idaho Falls Idaho Temple",
+                name: "Idaho Falls Idaho",
                 location: "Idaho Falls, Idaho, United States",
-                dedicated: "1945, September 23",
+                dedicated: "1945, September, 23",
                 area: 102953,
                 year: 1945,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/idaho-falls-idaho-temple/idaho-falls-idaho-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/idaho-falls-idaho-temple/idaho-falls-idaho-temple-55801-main.jpg" alt="Idaho Falls Idaho Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/idaho-falls-idaho-temple/idaho-falls-idaho-temple-lds-1024x768.jpg"
             },
             {
-                name: "Kansas City Missouri Temple",
+                name: "Kansas City Missouri",
                 location: "Kansas City, Missouri, United States",
-                dedicated: "2012, May 6",
+                dedicated: "2012, May, 6",
                 area: 32100,
                 year: 2012,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/kansas-city-missouri-temple/kansas-city-missouri-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/kansas-city-missouri-temple/kansas-city-missouri-temple-36983-main.jpg" alt="Kansas City Missouri Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/kansas-city-missouri-temple/kansas-city-missouri-temple-lds-1024x768.jpg"
             },
             {
-                name: "Logan Utah Temple",
+                name: "Logan Utah",
                 location: "Logan, Utah, United States",
-                dedicated: "1884, May 17",
+                dedicated: "1884, May, 17",
                 area: 119619,
                 year: 1884,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/logan-utah-temple/logan-utah-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/logan-utah-temple/logan-utah-temple-40550-main.jpg" alt="Logan Utah Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/logan-utah-temple/logan-utah-temple-lds-1024x768.jpg"
             },
             {
-                name: "London England Temple",
+                name: "London England",
                 location: "Newchapel, Surrey, England",
-                dedicated: "1958, September 7",
+                dedicated: "1958, September, 7",
                 area: 42990,
                 year: 1958,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/london-england-temple/london-england-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/london-england-temple/london-england-temple-56886-main.jpg" alt="London England Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/london-england-temple/london-england-temple-lds-1024x768.jpg"
             },
             {
-                name: "Manti Utah Temple",
+                name: "Manti Utah",
                 location: "Manti, Utah, United States",
-                dedicated: "1888, May 21",
+                dedicated: "1888, May, 21",
                 area: 100000,
                 year: 1888,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-40551-main.jpg" alt="Manti Utah Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/manti-utah-temple/manti-utah-temple-lds-1024x768.jpg"
             },
             {
-                name: "Rome Italy Temple",
+                name: "Payson Utah",
+                location: "Payson, Utah, United States",
+                dedicated: "2015, June, 7",
+                area: 96630,
+                year: 2015,
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/payson-utah-temple/payson-utah-temple-40552-main.jpg" alt="Payson Utah Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/payson-utah-temple/payson-utah-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Rome Italy",
                 location: "Rome, Italy",
-                dedicated: "2019, March 10",
+                dedicated: "2019, March, 10",
                 area: 41010,
                 year: 2019,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-2642-main.jpg" alt="Rome Italy Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/rome-italy-temple/rome-italy-temple-lds-1024x768.jpg"
             },
             {
-                name: "Salt Lake Temple",
+                name: "Salt Lake",
                 location: "Salt Lake City, Utah, United States",
-                dedicated: "1893, April 6",
+                dedicated: "1893, April, 6",
                 area: 253015,
                 year: 1893,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-15669-main.jpg" alt="Salt Lake Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/salt-lake-temple/salt-lake-temple-lds-1024x768.jpg"
             },
             {
-                name: "St. George Utah Temple",
+                name: "St. George Utah",
                 location: "St. George, Utah, United States",
-                dedicated: "1877, April 6",
+                dedicated: "1877, April, 6",
                 area: 110000,
                 year: 1877,
-                image: "https://churchofjesuschristtemples.org/assets/img/temples/st-george-utah-temple/st-george-utah-temple-lds-1024x768.jpg"
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/st.-george-utah-temple/st.-george-utah-temple-40435-main.jpg" alt="St. George Utah Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/st-george-utah-temple/st-george-utah-temple-lds-1024x768.jpg"
+            },
+            {
+                name: "Yigo Guam",
+                location: "Yigo, Guam",
+                dedicated: "2020, May, 2",
+                area: 6861,
+                year: 2020,
+                image: <image src="https://churchofjesuschristtemples.org/assets/img/temples/yigo-guam-temple/yigo-guam-temple-26495-main.jpg" alt="Yigo Guam Temple"> "https://churchofjesuschristtemples.org/assets/img/temples/yigo-guam-temple/yigo-guam-temple-lds-1024x768.jpg"
             }
         ];
 
@@ -454,24 +448,21 @@
                 card.style.opacity = '0';
                 card.style.animation = 'fadeInUp 0.5s ease forwards';
                 
-                // Determine size badge
-                let sizeBadge = '';
-                if (temple.area > 90000) sizeBadge = '<span class="badge">Large</span>';
-                else if (temple.area < 10000) sizeBadge = '<span class="badge">Small</span>';
-                
                 card.innerHTML = `
                     <div class="image-container">
                         <img class="temple-image" 
                              src="${temple.image}" 
-                             alt="${temple.name}" 
+                             alt="${temple.name} Temple" 
                              loading="lazy"
-                             onerror="this.src='https://via.placeholder.com/400x250?text=Image+Coming+Soon'">
+                             width="400"
+                             height="300"
+                             onerror="this.src='https://via.placeholder.com/400x300?text=${temple.name}+Temple'">
                     </div>
-                    <h3>${temple.name} ${sizeBadge}</h3>
+                    <h3>${temple.name}</h3>
                     <div class="temple-info">
-                        <p><strong>📍 Location:</strong> ${temple.location}</p>
-                        <p><strong>📅 Dedicated:</strong> ${temple.dedicated}</p>
-                        <p><strong>📏 Size:</strong> ${formatArea(temple.area)} sq ft</p>
+                        <p><strong>LOCATION:</strong> ${temple.location}</p>
+                        <p><strong>DEDICATED:</strong> ${temple.dedicated}</p>
+                        <p><strong>SIZE:</strong> ${formatArea(temple.area)} sq ft</p>
                     </div>
                 `;
                 gallery.appendChild(card);
