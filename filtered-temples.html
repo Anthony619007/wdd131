@@ -510,17 +510,17 @@
       <nav id="primaryNav">
         <ul class="nav-list">
           <li><a href="#" data-filter="all" class="active-nav"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="#" data-filter="old"><i class="fas fa-hourglass-half"></i> Old (before 1900)</a></li>
-          <li><a href="#" data-filter="new"><i class="fas fa-star-of-life"></i> New (after 2000)</a></li>
-          <li><a href="#" data-filter="large"><i class="fas fa-expand-alt"></i> Large (>90k sq ft)</a></li>
-          <li><a href="#" data-filter="small"><i class="fas fa-compress-alt"></i> Small (<10k sq ft)</a></li>
+          <li><a href="#" data-filter="old"><i class="fas fa-hourglass-half"></i> Old </a></li>
+          <li><a href="#" data-filter="new"><i class="fas fa-star-of-life"></i> New </a></li>
+          <li><a href="#" data-filter="large"><i class="fas fa-expand-alt"></i> Large </a></li>
+          <li><a href="#" data-filter="small"><i class="fas fa-compress-alt"></i> Small </a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <h1 id="dynamicTitle">✨ Sacred Temple Gallery ✨</h1>
+    <h1 id="dynamicTitle">Sacred Temple Gallery </h1>
     
     <div class="filter-stats" id="filterStats">
       <div class="stats-badge"><i class="fas fa-church"></i> <span id="templeCount">0</span> Temples</div>
@@ -594,14 +594,14 @@
       let filterDisplayName = '';
       let titleEmoji = '🏛️';
       switch(filterType) {
-        case 'old': filterDisplayName = 'Ancient Temples (Before 1900)'; titleEmoji = '⏳'; break;
-        case 'new': filterDisplayName = 'Modern Temples (After 2000)'; titleEmoji = '✨'; break;
-        case 'large': filterDisplayName = 'Majestic Large Temples'; titleEmoji = '📐'; break;
-        case 'small': filterDisplayName = 'Intimate Small Temples'; titleEmoji = '🔍'; break;
-        default: filterDisplayName = 'All Sacred Temples'; titleEmoji = '🕊️';
+        case 'old': filterDisplayName = 'Old'; titleEmoji = '⏳'; break;
+        case 'new': filterDisplayName = 'New'; titleEmoji = '✨'; break;
+        case 'large': filterDisplayName = 'Large'; titleEmoji = '📐'; break;
+        case 'small': filterDisplayName = 'Small'; titleEmoji = '🔍'; break;
+        default: filterDisplayName = 'All Sacred Temples';
       }
       activeFilterSpan.innerText = filterDisplayName;
-      dynamicTitle.innerHTML = `${titleEmoji} ${filterDisplayName} ${titleEmoji}`;
+    
       
       if (filtered.length === 0) {
         gallery.innerHTML = `<div class="empty-state"><i class="fas fa-temple"></i><h3>No temples match this filter</h3><p>Try another beautiful category ✨</p></div>`;
