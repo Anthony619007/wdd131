@@ -15,7 +15,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome 6 -->
+  <!-- Font Awesome 6 (kept for other icons, but navigation icons removed) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
   <style>
@@ -84,6 +84,48 @@
       filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.6));
     }
 
+    /* Navigation styling - NO ICONS in nav links (text only) */
+    .nav-list {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-list li a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 40px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Icons inside nav links completely removed */
+    .nav-list li a i {
+      display: none;
+    }
+
+    .nav-list li a:hover {
+      background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(230, 180, 34, 0.2));
+      color: #FFD966;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(230, 180, 34, 0.2);
+    }
+
+    .nav-list li a.active-nav {
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      color: #0a0f1c;
+      box-shadow: 0 6px 20px rgba(230, 180, 34, 0.4);
+    }
+
+    /* Hamburger menu adjustments for mobile */
     .hamburger {
       display: none;
       background: none;
@@ -128,50 +170,6 @@
 
     .hamburger.active .hamburger-x {
       display: block;
-    }
-
-    .nav-list {
-      display: flex;
-      gap: 1rem;
-      list-style: none;
-    }
-
-    .nav-list li a {
-      text-decoration: none;
-      color: #cbd5e1;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border-radius: 40px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-      letter-spacing: 0.3px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(4px);
-    }
-
-    .nav-list li a i {
-      font-size: 1rem;
-      transition: transform 0.2s;
-    }
-
-    .nav-list li a:hover {
-      background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(230, 180, 34, 0.2));
-      color: #FFD966;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(230, 180, 34, 0.2);
-    }
-
-    .nav-list li a:hover i {
-      transform: scale(1.1);
-    }
-
-    .nav-list li a.active-nav {
-      background: linear-gradient(135deg, #FFD966, #E6B422);
-      color: #0a0f1c;
-      box-shadow: 0 6px 20px rgba(230, 180, 34, 0.4);
     }
 
     main {
@@ -444,6 +442,7 @@
       margin-bottom: 1rem;
     }
 
+    /* Responsive: mobile nav open state, no icons */
     @media (max-width: 768px) {
       .header-container {
         padding: 1rem;
@@ -498,7 +497,7 @@
   <header>
     <div class="header-container">
       <div class="logo-title">
-        <span class="brand-icon"></span>
+        <span class="brand-icon">🕍</span>
         <span class="brand-text">Temple Album</span>
       </div>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
@@ -509,23 +508,25 @@
       </button>
       <nav id="primaryNav">
         <ul class="nav-list">
-          <li><a href="#" data-filter="all" class="active-nav"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="#" data-filter="old"><i class="fas fa-hourglass-half"></i> Old </a></li>
-          <li><a href="#" data-filter="new"><i class="fas fa-star-of-life"></i> New </a></li>
-          <li><a href="#" data-filter="large"><i class="fas fa-expand-alt"></i> Large </a></li>
-          <li><a href="#" data-filter="small"><i class="fas fa-compress-alt"></i> Small </a></li>
+          <!-- Navigation links: icons completely removed as requested -->
+          <li><a href="#" data-filter="all" class="active-nav">Home</a></li>
+          <li><a href="#" data-filter="old">Old</a></li>
+          <li><a href="#" data-filter="new">New</a></li>
+          <li><a href="#" data-filter="large">Large</a></li>
+          <li><a href="#" data-filter="small">Small</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <h1 id="dynamicTitle">Sacred Temple Gallery </h1>
+    <h1 id="dynamicTitle">Sacred Temple Gallery</h1>
     
     <div class="filter-stats" id="filterStats">
       <div class="stats-badge"><i class="fas fa-church"></i> <span id="templeCount">0</span> Temples</div>
       <div class="stats-badge"><i class="fas fa-filter"></i> <span id="activeFilterName">All Temples</span></div>
     </div>
+    
     <div class="gallery-grid" id="templeGallery"></div>
   </main>
 
@@ -592,16 +593,14 @@
       
       templeCountSpan.innerText = filtered.length;
       let filterDisplayName = '';
-      let titleEmoji = '🏛️';
       switch(filterType) {
-        case 'old': filterDisplayName = 'Old';  break;
-        case 'new': filterDisplayName = 'New';  break;
-        case 'large': filterDisplayName = 'Large'; break;
-        case 'small': filterDisplayName = 'Small'; break;
+        case 'old': filterDisplayName = 'Old Temples (Pre-1900)'; break;
+        case 'new': filterDisplayName = 'New Temples (Post-2000)'; break;
+        case 'large': filterDisplayName = 'Large Temples (>90k sq ft)'; break;
+        case 'small': filterDisplayName = 'Small Temples (<10k sq ft)'; break;
         default: filterDisplayName = 'All Sacred Temples';
       }
       activeFilterSpan.innerText = filterDisplayName;
-    
       
       if (filtered.length === 0) {
         gallery.innerHTML = `<div class="empty-state"><i class="fas fa-temple"></i><h3>No temples match this filter</h3><p>Try another beautiful category ✨</p></div>`;
@@ -619,8 +618,8 @@
         const dedicatedDisplay = temple.dedicated;
         const imageSrc = getImageSource(temple);
         
-        // YEAR BUILT field has been REMOVED from display as requested
-        // Only showing: LOCATION, DEDICATED, and TEMPLE SIZE
+        // YEAR BUILT field is removed from display as requested.
+        // Only showing: LOCATION, DEDICATED, TEMPLE SIZE
         figure.innerHTML = `
           <div class="image-wrapper">
             <img src="${imageSrc}" 
