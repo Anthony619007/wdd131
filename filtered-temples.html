@@ -8,7 +8,7 @@
   
   <title>Temple Album | Sacred Temple Gallery | Interactive Filtering</title>
 
-  <!-- Google Fonts preconnect links (required for assignment) -->
+  <!-- Google Fonts preconnect links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
@@ -17,10 +17,6 @@
   
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  <!-- External CSS Files (required for assignment) -->
-  <link rel="stylesheet" href="temples.css">
-  <link rel="stylesheet" href="temples-large.css">
   
   <style>
     /* ==============================================
@@ -96,6 +92,12 @@
       font-weight: 700;
     }
 
+    /* FLEXBOX on nav element - Required */
+    nav {
+      display: flex;
+      width: 100%;
+    }
+
     .nav-list {
       display: flex;
       gap: 1rem;
@@ -118,10 +120,7 @@
       backdrop-filter: blur(4px);
     }
 
-    .nav-list li a i {
-      display: none;
-    }
-
+    /* :HOVER pseudo-class on navigation elements - Required */
     .nav-list li a:hover {
       background: linear-gradient(135deg, rgba(255, 217, 102, 0.2), rgba(230, 180, 34, 0.2));
       color: #FFD966;
@@ -192,11 +191,6 @@
       flex-direction: column;
     }
 
-    nav {
-      display: flex;
-      width: 100%;
-    }
-
     #primaryNav.open {
       max-height: 300px;
       transition: max-height 0.5s ease-in;
@@ -248,6 +242,70 @@
       color: #FFD966;
     }
 
+    .image-upload-panel {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 25, 45, 0.9));
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 217, 102, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .upload-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #FFD966;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .upload-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .file-input-label {
+      background: linear-gradient(135deg, #FFD966, #E6B422);
+      color: #0a0f1c;
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .file-input-label:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 180, 34, 0.4);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .image-preview-area {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .preview-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #FFD966;
+    }
+
+    /* CSS GRID for gallery - Required */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -364,69 +422,6 @@
       font-size: 0.75rem;
     }
 
-    .image-upload-panel {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 25, 45, 0.9));
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255, 217, 102, 0.3);
-      backdrop-filter: blur(10px);
-    }
-
-    .upload-title {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #FFD966;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .upload-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .file-input-label {
-      background: linear-gradient(135deg, #FFD966, #E6B422);
-      color: #0a0f1c;
-      padding: 0.7rem 1.5rem;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .file-input-label:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(230, 180, 34, 0.4);
-    }
-
-    input[type="file"] {
-      display: none;
-    }
-
-    .image-preview-area {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .preview-img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #FFD966;
-    }
-
     footer {
       background: linear-gradient(180deg, rgba(10, 15, 28, 0.98), rgba(5, 8, 15, 0.98));
       border-top: 1px solid rgba(255, 217, 102, 0.2);
@@ -471,7 +466,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Tablet Styles */
+    /* MEDIA QUERIES - Required */
     @media screen and (min-width: 768px) {
       .header-container {
         flex-wrap: nowrap;
@@ -496,9 +491,10 @@
       .nav-list li {
         margin: 0;
       }
-      .nav-list a {
+      .nav-list li a {
         padding: 0.6rem 1.2rem;
         white-space: nowrap;
+        width: auto;
       }
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -509,7 +505,6 @@
       }
     }
 
-    /* Desktop Styles */
     @media screen and (min-width: 1024px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -518,7 +513,7 @@
       main {
         max-width: 1400px;
       }
-      .nav-list a {
+      .nav-list li a {
         padding: 0.7rem 1.5rem;
         font-size: 1rem;
       }
@@ -572,8 +567,6 @@
       }
     }
   </style>
-  <!-- External JavaScript File (required for assignment) -->
-  <script src="temples.js" defer></script>
 </head>
 <body>
 
@@ -625,8 +618,6 @@
       <p class="footer-credit"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</p>
     </div>
   </footer>
-
-  
 
   <!-- External JavaScript content (temples.js - all lowercase variables) -->
   <script>
@@ -704,7 +695,7 @@
         
         figure.innerHTML = `
           <div class="image-wrapper">
-            <img src="{imagesrc}" alt="${temple.name} Temple" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='${temple.fallbackurl}'; this.style.opacity='0.9';">
+            <img src="${imagesrc}" alt="${temple.name} Temple" loading="lazy" width="400" height="300" onerror="this.onerror=null; this.src='${temple.fallbackurl}'; this.style.opacity='0.9';">
             <div class="temple-overlay"><span class="detail-badge"><i class="fas fa-ruler-combined"></i> ${formatnumber(temple.area)} sq ft</span></div>
           </div>
           <figcaption><i class="fas fa-landmark"></i> ${temple.name}</figcaption>
@@ -746,7 +737,7 @@
           const reader = new FileReader();
           reader.onload = function(e) {
             currentlyselectedimage = e.target.result;
-            previewarea.innerHTML = `<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,217,102,0.1); padding: 8px 15px; border-radius: 40px;"><img src="{currentlyselectedimage}" class="preview-img" alt="preview"><span style="color: #FFD966;"><i class="fas fa-check-circle"></i> Image ready!</span><span style="font-size: 0.8rem; color: #94a3b8;">{file.name}</span><button id="clearimagebtn" style="background: none; border: none; color: #FFD966; cursor: pointer;"><i class="fas fa-times"></i></button></div>`;
+            previewarea.innerHTML = `<div style="display: flex; align-items: center; gap: 12px; background: rgba(255,217,102,0.1); padding: 8px 15px; border-radius: 40px;"><img src="${currentlyselectedimage}" class="preview-img" alt="preview"><span style="color: #FFD966;"><i class="fas fa-check-circle"></i> Image ready!</span><span style="font-size: 0.8rem; color: #94a3b8;">${file.name}</span><button id="clearimagebtn" style="background: none; border: none; color: #FFD966; cursor: pointer;"><i class="fas fa-times"></i></button></div>`;
             const clearbtn = document.getElementById('clearimagebtn');
             if (clearbtn) {
               clearbtn.addEventListener('click', () => {
