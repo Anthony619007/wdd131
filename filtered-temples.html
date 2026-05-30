@@ -22,61 +22,6 @@
   <link rel="stylesheet" href="temples.css">
   <link rel="stylesheet" href="temples-large.css">
   
-  <!-- External JavaScript File (required for assignment) -->
-  <script src="temples.js" defer></script>
-</head>
-<body>
-
-  <header>
-    <div class="header-container">
-      <div class="logo-title">
-        <span class="brand-icon">🕍</span>
-        <span class="brand-text">Temple Album</span>
-      </div>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-x">✕</span>
-      </button>
-      <nav id="primaryNav">
-        <ul class="nav-list">
-          <li><a href="#" data-filter="all" class="active-nav">Home</a></li>
-          <li><a href="#" data-filter="old">Old</a></li>
-          <li><a href="#" data-filter="new">New</a></li>
-          <li><a href="#" data-filter="large">Large</a></li>
-          <li><a href="#" data-filter="small">Small</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <h1 id="dynamicTitle">Sacred Temple Gallery</h1>
-    
-    <div class="filter-stats" id="filterStats">
-      <div class="stats-badge"><i class="fas fa-church"></i> <span id="templeCount">0</span> Temples</div>
-      <div class="stats-badge"><i class="fas fa-filter"></i> <span id="activeFilterName">All Temples</span></div>
-    </div>
-    
-    
-    
-    <div class="gallery-grid" id="templeGallery"></div>
-  </main>
-
-  <footer>
-    <div class="footer-content">
-      <p class="footer-copyright">
-        <i class="far fa-copyright"></i> <span id="currentYear"></span> Temple Album • Anthony Anusiem
-      </p>
-      <p class="footer-last-modified">
-        <i class="fas fa-sync-alt"></i> Last Modification: <span id="lastModified"></span>
-      </p>
-      <p class="footer-credit"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</p>
-    </div>
-  </footer>
-
-  <!-- Complete external CSS content (temples.css + temples-large.css combined for manual copy) -->
   <style>
     /* ==============================================
        BASE STYLES & RESET
@@ -627,6 +572,61 @@
       }
     }
   </style>
+  <!-- External JavaScript File (required for assignment) -->
+  <script src="temples.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-title">
+        <span class="brand-icon">🕍</span>
+        <span class="brand-text">Temple Album</span>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-x">✕</span>
+      </button>
+      <nav id="primaryNav">
+        <ul class="nav-list">
+          <li><a href="#" data-filter="all" class="active-nav">Home</a></li>
+          <li><a href="#" data-filter="old">Old</a></li>
+          <li><a href="#" data-filter="new">New</a></li>
+          <li><a href="#" data-filter="large">Large</a></li>
+          <li><a href="#" data-filter="small">Small</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1 id="dynamicTitle">Sacred Temple Gallery</h1>
+    
+    <div class="filter-stats" id="filterStats">
+      <div class="stats-badge"><i class="fas fa-church"></i> <span id="templeCount">0</span> Temples</div>
+      <div class="stats-badge"><i class="fas fa-filter"></i> <span id="activeFilterName">All Temples</span></div>
+    </div>
+    
+    
+    
+    <div class="gallery-grid" id="templeGallery"></div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-copyright">
+        <i class="far fa-copyright"></i> <span id="currentYear"></span> Temple Album • Anthony Anusiem
+      </p>
+      <p class="footer-last-modified">
+        <i class="fas fa-sync-alt"></i> Last Modification: <span id="lastModified"></span>
+      </p>
+      <p class="footer-credit"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</p>
+    </div>
+  </footer>
+
+  
 
   <!-- External JavaScript content (temples.js - all lowercase variables) -->
   <script>
