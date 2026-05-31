@@ -45,12 +45,12 @@ body::before {
 
 /* ::after pseudo-element - Required */
 body::after {
-  content: '✨';
+  content: '';
   position: fixed;
   bottom: 20px;
   right: 20px;
   font-size: 2rem;
-  opacity: 0.4;
+  opacity: 0;
   pointer-events: none;
   z-index: 999;
 }
