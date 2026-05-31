@@ -1,7 +1,7 @@
-/* ==============================================
-   BASE STYLES & RESET
+* ==============================================
+   CSS VARIABLES with :root selector (Required)
    ============================================== */
-* {
+:root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -445,7 +445,11 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* MEDIA QUERIES - Required */
+/* ==============================================
+   MEDIA QUERIES (Required for assignment)
+   ============================================== */
+
+/* Mobile styles (default above) - Tablet 768px */
 @media screen and (min-width: 768px) {
   .header-container {
     flex-wrap: nowrap;
