@@ -2,223 +2,574 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Site Plan | eWiseHome – Reduce E-waste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 131 – Site Plan | eWiseHome – Reduce E-waste at Home</title>
     <meta name="description" content="Website planning document for the 'How to Reduce E-waste at Home' project. Includes site name, purpose, user scenarios, color schema, typography, and responsive wireframes.">
-    <!-- External CSS & JavaScript files -->
-    <link rel="stylesheet" href="style-plan.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="author" content="Anthony Anusiem">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="scripts/getdates.js" defer></script>
+    <style>
+        /* Additional styles specific to site plan while maintaining base.css consistency */
+        .planning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .color-swatch-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .color-swatch-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+        }
+        
+        .swatch-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .wireframe-mock {
+            background: #f0f0f0;
+            border-radius: 16px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .mobile-mockup {
+            max-width: 280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .desktop-mockup {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .mock-header {
+            background: #2B6E3C;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mock-logo {
+            width: 32px;
+            height: 32px;
+            background: #F4A261;
+            border-radius: 8px;
+        }
+        
+        .mock-menu span {
+            display: inline-block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px;
+            border-radius: 3px;
+        }
+        
+        .mock-hero {
+            background: #E8F5E9;
+            margin: 12px;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .mock-card-row {
+            display: flex;
+            gap: 8px;
+            margin: 12px;
+        }
+        
+        .mock-card {
+            background: #FAFAFA;
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .mock-footer {
+            background: #1E2F2F;
+            height: 40px;
+            margin-top: 12px;
+        }
+        
+        .desktop-nav {
+            background: #2B6E3C;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .desktop-logo {
+            width: 40px;
+            height: 40px;
+            background: #F4A261;
+            border-radius: 8px;
+        }
+        
+        .desktop-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .desktop-links span {
+            width: 60px;
+            height: 20px;
+            background: #A5D6A7;
+            border-radius: 20px;
+        }
+        
+        .desktop-hero {
+            background: #E8F5E9;
+            margin: 16px;
+            padding: 30px;
+            border-radius: 16px;
+        }
+        
+        .desktop-grid {
+            display: flex;
+            gap: 16px;
+            margin: 16px;
+        }
+        
+        .desktop-card {
+            background: #FAFAFA;
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 16px;
+            margin: 16px;
+        }
+        
+        .main-col {
+            background: #F5F5F5;
+            flex: 2;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .sidebar-col {
+            background: #E8F5E9;
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .desktop-footer {
+            background: #1E2F2F;
+            height: 48px;
+        }
+        
+        .legend {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        .interactive-btn {
+            background: #2B6E3C;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-family: 'Roboto', sans-serif;
+            transition: background 0.2s;
+        }
+        
+        .interactive-btn:hover {
+            background: #F4A261;
+        }
+        
+        .demo-result {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-left: 3px solid #F4A261;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #2B6E3C 0%, #3A8A4A 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .font-preview {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .font-box {
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 12px;
+            flex: 1;
+        }
+        
+        .montserrat-demo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .roboto-demo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+    </style>
 </head>
 <body>
-<div class="site-plan-container" id="app">
-    <!-- HERO SECTION WITH BACKGROUND IMAGE THEME -->
-    <div class="hero-banner">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="brand-icon">🌿</div>
-            <h1 class="hero-title">eWiseHome</h1>
-            <p class="hero-tagline">Reduce E-waste • Smart Choices • Greener Future</p>
-            <div class="hero-badge">🌍 Every device matters</div>
-        </div>
-    </div>
+<div class="page-container">
+    <header>
+        <span id="course-title">WDD 131 – Site Plan | eWiseHome</span>
+        <nav>
+            <a href="https://www.linkedin.com/in/example" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://byupw.instructure.com/" target="_blank" rel="noopener noreferrer">Canvas</a>
+            <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/3?lang=eng&id=p7#p7" target="_blank" rel="noopener noreferrer">Scripture</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Final Project</a>
+        </nav>
+    </header>
 
-    <!-- DOMAIN & NAME SECTION -->
-    <div class="brand-bar">
-        <div class="site-name-card">
-            <span class="domain-name">ewisehome.org</span>
-            <span class="domain-status">planning document</span>
-        </div>
-        <div class="domain-chip">📡 domain: ewisehome.org (conceptual)</div>
-    </div>
-
-    <!-- WHY THIS NAME - with image accent -->
-    <div class="badge-eco" id="dynamicMessage">
-        <div class="badge-icon">💡</div>
-        <div class="badge-content">
-            <strong>Why "eWiseHome"?</strong> The name blends "e-waste" with "wise decisions" and "home" — emphasizing practical, household-level action. It's easy to remember, positive, and signals empowerment. The .org domain fits our educational, community-driven mission.
-        </div>
-        <button class="toggle-message-btn" id="toggleMessageBtn" aria-label="Show additional tip">💡 Show eco tip</button>
-        <div id="extraTipMessage" class="extra-tip" style="display: none;"></div>
-    </div>
-
-    <!-- SITE PURPOSE WITH THEMATIC IMAGE -->
-    <div class="section-with-decoration">
-        <h2>📌 Site Purpose</h2>
-        <div class="purpose-grid">
-            <div class="purpose-text">
-                <p><strong>eWiseHome</strong> provides a clear, actionable blueprint for reducing electronic waste at home. The website serves as a go-to resource for individuals who want to minimize their environmental footprint by extending the life of electronics, recycling responsibly, and buying sustainable tech.</p>
-                <ul class="feature-list">
-                    <li>📱 What e-waste is and why it's a fast-growing environmental crisis</li>
-                    <li>🛠️ Actionable tips: repair, upgrade, maintain devices</li>
-                    <li>♻️ Local & online recycling/donation directories</li>
-                    <li>🛒 Guidance on purchasing repairable, sustainable electronics</li>
-                    <li>✅ Interactive decision tree: "Repair, Donate, Recycle, or Keep?"</li>
-                    <li>🗺️ Curated list of certified e-waste recyclers</li>
-                </ul>
-            </div>
-            <div class="purpose-image">
-                <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=250&fit=crop" alt="Electronic waste recycling concept" loading="lazy">
-                <div class="img-caption">Responsible e-waste management matters</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCENARIOS WITH VISUAL THEME -->
-    <h2>🧑‍🌾 Scenarios</h2>
-    <div class="scenario-grid" id="scenarioContainer">
-        <div class="scenario-card">
-            <div class="scenario-icon">🔋</div>
-            <div class="scenario-question">“I have 3 old phones and a dead laptop. Where can I recycle them safely without risking my personal data?”</div>
-            <p>eWiseHome will answer with a searchable map of certified recyclers, step-by-step data wiping instructions, and a "repair or recycle?" decision flowchart.</p>
-        </div>
-        <div class="scenario-card">
-            <div class="scenario-icon">💡</div>
-            <div class="scenario-question">“Which brands offer spare parts, repair guides, and long-term software updates?”</div>
-            <p>The website includes a buyer's guide to repairable electronics, right-to-repair champions, and certified refurbished products.</p>
-        </div>
-        <div class="scenario-card">
-            <div class="scenario-icon">🏠</div>
-            <div class="scenario-question">“What's the simplest daily habit to reduce e-waste at home?”</div>
-            <p>Practical micro-tips: extending charge cycles, using energy-saving modes, donating functional electronics, and hosting repair swaps.</p>
-        </div>
-    </div>
-
-    <!-- COLOR SCHEMA WITH VISUAL SWATCHES -->
-    <h2>🎨 Color Schema</h2>
-    <div class="color-palette">
-        <div class="color-card"><div class="swatch" style="background: #2B6E3C;"></div><span class="color-label">Primary Green #2B6E3C</span><span class="color-usage">Headings, nav, buttons</span></div>
-        <div class="color-card"><div class="swatch" style="background: #F4A261;"></div><span class="color-label">Warm Accent #F4A261</span><span class="color-usage">CTA, hover, highlights</span></div>
-        <div class="color-card"><div class="swatch" style="background: #EEF5E8;"></div><span class="color-label">Soft Background #EEF5E8</span><span class="color-usage">Page backdrop</span></div>
-        <div class="color-card"><div class="swatch" style="background: #1E2F2F;"></div><span class="color-label">Dark Forest #1E2F2F</span><span class="color-usage">Body text, footer</span></div>
-    </div>
-
-    <!-- TYPOGRAPHY -->
-    <h2>✒️ Typography</h2>
-    <div class="typography-card">
-        <div class="font-demo montserrat-demo">Montserrat — Headings & Titles</div>
-        <div class="font-demo opensans-demo">Open Sans — Body text, navigation, paragraphs</div>
-        <p class="font-note">Only 2 primary fonts maintain clean, accessible design. Monospace optional for code/references.</p>
-    </div>
-
-    <!-- WIREFRAMES WITH IMAGE BACKGROUNDS -->
-    <h2>📱 Wireframes</h2>
-    <div class="wireframes-wrapper">
-        <!-- MOBILE WIREFRAME -->
-        <div class="wireframe-item">
-            <div class="wireframe-header">📲 MOBILE VIEW (≤ 640px)</div>
-            <div class="wireframe-body">
-                <div class="mobile-mock">
-                    <div class="mock-header">
-                        <div class="mock-logo"></div>
-                        <div class="mock-menu"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="mock-hero">
-                        <div class="mock-hero-line1"></div>
-                        <div class="mock-hero-line2"></div>
-                        <div class="mock-hero-cta"></div>
-                    </div>
-                    <div class="mock-card-row">
-                        <div class="mock-card">🔧 Repair</div>
-                        <div class="mock-card">♻️ Recycle</div>
-                        <div class="mock-card">📦 Donate</div>
-                    </div>
-                    <div class="mock-card-row">
-                        <div class="mock-card">✅ Checklist</div>
-                        <div class="mock-card">🗺️ Locator</div>
-                    </div>
-                    <div class="mock-footer"></div>
+    <main>
+        <h1>🌿 eWiseHome | Reduce E-waste at Home</h1>
+        
+        <div class="cards-grid">
+            <!-- Site Name & Purpose Card -->
+            <section class="card">
+                <h2><i class="fas fa-globe"></i> Site Identity</h2>
+                <div class="card-content">
+                    <p><strong>Domain:</strong> <code>ewisehome.org</code> (conceptual)</p>
+                    <p><strong>Why "eWiseHome"?</strong> The name blends <strong>e-waste</strong> with <strong>wise decisions</strong> and <strong>home</strong> — emphasizing practical, household-level action. It's memorable, positive, and signals empowerment. The .org domain fits our educational, community-driven mission.</p>
+                    <hr style="margin: 1rem 0;">
+                    <h3><i class="fas fa-bullseye"></i> Site Purpose</h3>
+                    <p><strong>eWiseHome</strong> provides a clear, actionable blueprint for reducing electronic waste at home. The website serves as a go-to resource for individuals who want to minimize their environmental footprint by extending the life of electronics, recycling responsibly, and buying sustainable tech.</p>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                        <li>📱 What e-waste is and why it's a fast-growing crisis</li>
+                        <li>🛠️ Actionable tips: repair, upgrade, maintain devices</li>
+                        <li>♻️ Local & online recycling/donation directories</li>
+                        <li>🛒 Guidance on repairable, sustainable electronics</li>
+                        <li>✅ Decision tree: Repair, Donate, Recycle, Keep</li>
+                    </ul>
                 </div>
-                <div class="legend-text">Mobile: Hamburger menu, hero, action cards, checklist row, footer.</div>
-            </div>
-        </div>
+            </section>
 
-        <!-- DESKTOP WIREFRAME -->
-        <div class="wireframe-item">
-            <div class="wireframe-header">🖥️ DESKTOP VIEW (≥ 1024px)</div>
-            <div class="wireframe-body">
-                <div class="desktop-mock">
-                    <div class="desktop-nav">
-                        <div class="desktop-logo"></div>
-                        <div class="desktop-links"><span></span><span></span><span></span><span></span></div>
+            <!-- Scenarios Card -->
+            <section class="card">
+                <h2><i class="fas fa-question-circle"></i> User Scenarios</h2>
+                <div class="card-content">
+                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <i class="fas fa-mobile-alt"></i> <strong>“I have 3 old phones and a dead laptop. Where can I recycle them safely without risking my personal data?”</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">The site provides a searchable map of certified recyclers, data-wiping instructions, and a repair-or-recycle flowchart.</p>
                     </div>
-                    <div class="desktop-hero">
-                        <div class="desktop-hero-title"></div>
-                        <div class="desktop-hero-sub"></div>
-                        <div class="desktop-hero-btn"></div>
+                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <i class="fas fa-laptop-code"></i> <strong>“Which brands offer spare parts, repair guides, and long-term software updates?”</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Includes a buyer's guide to repairable electronics with iFixit scores and right-to-repair champions.</p>
                     </div>
-                    <div class="desktop-grid-3">
-                        <div class="grid-card"><strong>🔧 Extend Life</strong><div class="grid-placeholder"></div></div>
-                        <div class="grid-card"><strong>♻️ Recycle/Donate</strong><div class="grid-placeholder"></div></div>
-                        <div class="grid-card"><strong>🛒 Sustainable Buy</strong><div class="grid-placeholder"></div></div>
+                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px;">
+                        <i class="fas fa-home"></i> <strong>“What's the simplest daily habit to reduce e-waste at home?”</strong>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Practical micro-tips: extending charge cycles, energy-saving modes, donating to schools, and repair swaps.</p>
                     </div>
-                    <div class="two-col">
-                        <div class="main-area"><div class="main-title-placeholder"></div><div class="main-text-line"></div><div class="main-cta-small"></div></div>
-                        <div class="sidebar-area"><div class="sidebar-title"></div><div class="sidebar-line"></div><div class="sidebar-block"></div></div>
-                    </div>
-                    <div class="desktop-footer"></div>
                 </div>
-                <div class="legend-text">Desktop: Horizontal nav, hero, 3 feature cards, main content + sidebar for decision tree/resources.</div>
+            </section>
+
+            <!-- Color Schema Card -->
+            <section class="card">
+                <h2><i class="fas fa-palette"></i> Color Schema</h2>
+                <div class="card-content">
+                    <div class="color-swatch-grid">
+                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #2B6E3C;"></div><span><strong>#2B6E3C</strong> - Primary Green (headings, nav, buttons)</span></div>
+                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #F4A261;"></div><span><strong>#F4A261</strong> - Warm Accent (CTA, hover, highlights)</span></div>
+                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #EEF5E8;"></div><span><strong>#EEF5E8</strong> - Soft Background (page backdrop)</span></div>
+                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #1E2F2F;"></div><span><strong>#1E2F2F</strong> - Dark Forest (body text, footer)</span></div>
+                    </div>
+                    <p><small>The green creates a trustworthy, natural identity. Orange draws users to interactive tools like checklists and recycling locators.</small></p>
+                </div>
+            </section>
+
+            <!-- Typography Card -->
+            <section class="card">
+                <h2><i class="fas fa-font"></i> Typography</h2>
+                <div class="card-content">
+                    <div class="font-preview">
+                        <div class="font-box">
+                            <div class="montserrat-demo" style="font-family: 'Playfair Display', serif;"><strong>Playfair Display</strong> - Headings & Titles</div>
+                            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Elegant, bold, perfect for section headers</p>
+                        </div>
+                        <div class="font-box">
+                            <div class="roboto-demo" style="font-family: 'Roboto', sans-serif;"><strong>Roboto</strong> - Body Text, Navigation, Paragraphs</div>
+                            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Clean, readable, modern sans-serif</p>
+                        </div>
+                    </div>
+                    <p><small>Only 2 primary fonts maintain clean, accessible design. Monospace optional for code/references.</small></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Wireframes Section -->
+        <h2 style="margin: 1.5rem 0 1rem 0;"><i class="fas fa-drafting-compass"></i> Wireframes</h2>
+        <div class="cards-grid">
+            <!-- Mobile Wireframe -->
+            <section class="card">
+                <h2><i class="fas fa-mobile-alt"></i> Mobile View (≤640px)</h2>
+                <div class="card-content">
+                    <div class="wireframe-mock">
+                        <div class="mobile-mockup">
+                            <div class="mock-header">
+                                <div class="mock-logo"></div>
+                                <div class="mock-menu"><span></span><span></span><span></span></div>
+                            </div>
+                            <div class="mock-hero">
+                                <div style="height: 10px; width: 70%; background: #C8E6C9; margin: 0 auto 8px; border-radius: 10px;"></div>
+                                <div style="height: 8px; width: 85%; background: #A5D6A7; margin: 0 auto; border-radius: 10px;"></div>
+                                <div style="height: 28px; width: 100px; background: #F4A261; margin: 12px auto 0; border-radius: 20px;"></div>
+                            </div>
+                            <div class="mock-card-row">
+                                <div class="mock-card">🔧 Repair</div>
+                                <div class="mock-card">♻️ Recycle</div>
+                                <div class="mock-card">📦 Donate</div>
+                            </div>
+                            <div class="mock-card-row">
+                                <div class="mock-card">✅ Checklist</div>
+                                <div class="mock-card">🗺️ Locator</div>
+                            </div>
+                            <div class="mock-footer"></div>
+                        </div>
+                        <div class="legend">Stacked layout, hamburger menu, hero section, action cards, footer. Thumb-friendly navigation.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desktop Wireframe -->
+            <section class="card">
+                <h2><i class="fas fa-desktop"></i> Desktop View (≥1024px)</h2>
+                <div class="card-content">
+                    <div class="wireframe-mock">
+                        <div class="desktop-mockup">
+                            <div class="desktop-nav">
+                                <div class="desktop-logo"></div>
+                                <div class="desktop-links"><span></span><span></span><span></span><span></span></div>
+                            </div>
+                            <div class="desktop-hero">
+                                <div style="height: 12px; width: 40%; background: #A5D6A7; margin: 0 auto 10px; border-radius: 10px;"></div>
+                                <div style="height: 10px; width: 60%; background: #C8E6C9; margin: 0 auto; border-radius: 10px;"></div>
+                                <div style="height: 36px; width: 140px; background: #F4A261; margin: 16px auto 0; border-radius: 25px;"></div>
+                            </div>
+                            <div class="desktop-grid">
+                                <div class="desktop-card"><strong>🔧 Extend Life</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
+                                <div class="desktop-card"><strong>♻️ Recycle</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
+                                <div class="desktop-card"><strong>🛒 Buy Smart</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
+                            </div>
+                            <div class="two-column">
+                                <div class="main-col"><div style="height: 10px; width: 50%; background: #C8E6C9; border-radius: 5px; margin-bottom: 12px;"></div><div style="height: 8px; background: #E0E0E0; border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 8px; width: 80%; background: #E0E0E0; border-radius: 4px;"></div></div>
+                                <div class="sidebar-col"><div style="height: 10px; width: 60%; background: #A5D6A7; border-radius: 5px; margin-bottom: 12px;"></div><div style="height: 8px; background: #E0E0E0; border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 8px; width: 70%; background: #E0E0E0; border-radius: 4px;"></div></div>
+                            </div>
+                            <div class="desktop-footer"></div>
+                        </div>
+                        <div class="legend">Horizontal navigation, hero, 3 feature cards, main content + sidebar for decision tree/resources.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Interactive Demos & Stats -->
+        <div class="cards-grid">
+            <!-- Decision Tree Demo -->
+            <section class="card">
+                <h2><i class="fas fa-project-diagram"></i> Decision Tree Preview</h2>
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=300&h=160&fit=crop" alt="Decision tree concept" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;" loading="lazy">
+                    <p>Interactive flowchart: "Is device functional?" → repair, donate, recycle, or keep.</p>
+                    <button class="interactive-btn" id="demoTreeBtn"><i class="fas fa-eye"></i> Preview decision logic</button>
+                    <div id="treeDemoResult" class="demo-result" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- Resources Demo -->
+            <section class="card">
+                <h2><i class="fas fa-map-marked-alt"></i> Resource Directory Sample</h2>
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=300&h=160&fit=crop" alt="Recycling resources" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;" loading="lazy">
+                    <p>Certified recyclers, Call2Recycle, Best Buy, E-Stewards, and local repair cafes.</p>
+                    <button class="interactive-btn" id="showResourceTip"><i class="fas fa-book-open"></i> Show sample resource</button>
+                    <div id="resourceSample" class="demo-result" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- E-waste Statistics -->
+            <section class="card">
+                <h2><i class="fas fa-chart-line"></i> E-waste Crisis by Numbers</h2>
+                <div class="card-content">
+                    <div class="stats-container" style="margin: 0;">
+                        <div class="stat-card"><span class="stat-number">53.6M</span><span class="stat-label">metric tons (2023)</span></div>
+                        <div class="stat-card"><span class="stat-number">17.4%</span><span class="stat-label">recycled properly</span></div>
+                        <div class="stat-card"><span class="stat-number">$57B</span><span class="stat-label">lost raw materials</span></div>
+                    </div>
+                    <p class="legend" style="margin-top: 1rem;"><i class="fas fa-database"></i> Source: UN Global E-waste Monitor</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Validation & Requirements Card -->
+        <section class="card" style="margin-top: 1rem;">
+            <h2><i class="fas fa-check-circle"></i> Planning Document Requirements</h2>
+            <div class="card-content">
+                <div class="planning-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin: 0;">
+                    <ul style="margin-left: 1.2rem;">
+                        <li>✔ Site name + branding rationale</li>
+                        <li>✔ Site purpose with content description</li>
+                        <li>✔ Three user scenarios</li>
+                        <li>✔ Color schema (4 colors with usage)</li>
+                    </ul>
+                    <ul style="margin-left: 1.2rem;">
+                        <li>✔ Typography (2 fonts, ≤3)</li>
+                        <li>✔ Wireframes: mobile & desktop</li>
+                        <li>✔ CSS reflects color schema & fonts</li>
+                        <li>✔ Interactive JavaScript features</li>
+                    </ul>
+                </div>
+                <p class="accent-text" style="color: #F4A261; margin-top: 1rem;"><i class="fas fa-leaf"></i> The final website will implement interactive maps, decision trees, and resource directories.</p>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- INTERACTIVE PREVIEW CARDS WITH IMAGES -->
-    <hr>
-    <div class="info-duo">
-        <div class="info-card">
-            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=300&h=160&fit=crop" alt="Decision tree concept" class="card-image">
-            <h3>🌳 Decision Tree</h3>
-            <p>Interactive flowchart: "Is device functional?" → repair, donate, recycle, or keep.</p>
-            <button class="demo-interact" id="demoTreeBtn">🔍 Preview decision logic</button>
-            <div id="treeDemoResult" class="tree-result" style="display: none;"></div>
+        <!-- Extra Tip Section -->
+        <div style="background: #EEF5E8; border-radius: 16px; padding: 1rem; margin: 1rem 0; text-align: center;">
+            <button class="interactive-btn" id="toggleMessageBtn" style="background: #F4A261;"><i class="fas fa-seedling"></i> Show Eco Tip</button>
+            <div id="extraTipMessage" style="margin-top: 12px; display: none; color: #2B6E3C; font-weight: 500;"></div>
         </div>
-        <div class="info-card">
-            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=300&h=160&fit=crop" alt="Recycling resources" class="card-image">
-            <h3>🗺️ Resources</h3>
-            <p>Certified recyclers, Call2Recycle, Best Buy, E-Stewards, and local repair cafes.</p>
-            <button class="demo-interact" id="showResourceTip">📘 Show sample resource</button>
-            <div id="resourceSample" class="resource-sample" style="display: none;"></div>
-        </div>
-    </div>
-
-    <!-- STATS / IMPACT SECTION (visual theme) -->
-    <div class="impact-stats">
-        <h3>🌍 E-waste Crisis by Numbers</h3>
-        <div class="stats-grid">
-            <div class="stat-item"><span class="stat-number">53.6M</span><span class="stat-label">metric tons of e-waste generated (2023)</span></div>
-            <div class="stat-item"><span class="stat-number">17.4%</span><span class="stat-label">officially recycled</span></div>
-            <div class="stat-item"><span class="stat-number">$57B</span><span class="stat-label">value of raw materials lost</span></div>
-        </div>
-        <p class="stat-source">Source: UN Global E-waste Monitor</p>
-    </div>
-
-    <!-- VALIDATION NOTE -->
-    <div class="validation-note">
-        <p class="validation-title">✅ Planning Document Requirements Met</p>
-        <ul>
-            <li>✔ Site name (eWiseHome) + branding rationale</li>
-            <li>✔ Site purpose with detailed content description</li>
-            <li>✔ At least two user scenarios (three provided)</li>
-            <li>✔ Color schema (4 colors with usage)</li>
-            <li>✔ Typography (Montserrat + Open Sans, ≤3 fonts)</li>
-            <li>✔ Wireframes: mobile & desktop layouts</li>
-            <li>✔ CSS styling reflects chosen schema & fonts</li>
-            <li>✔ External CSS & JavaScript linked and functional</li>
-            <li>✔ Images and visual themes enhance presentation</li>
-        </ul>
-        <p class="accent-text">🌿 The final website will implement all content with interactive maps, decision trees, and resource directories.</p>
-    </div>
+    </main>
 
     <footer>
-        <div class="footer-content">
-            <span>eWiseHome — Website Planning Document</span>
-            <span>WDD131 Project | Reducing E-waste starts at home ♻️</span>
-        </div>
-        <span id="liveTimestamp" class="timestamp"></span>
+        <p>© <span id="currentyear"></span> ✨ Anthony Anusiem ✨ eWiseHome Site Plan | Reduce E-waste at Home</p>
+        <p id="lastModified"></p>
     </footer>
 </div>
 
-<script src="script-plan.js" defer></script>
+<script>
+    // JavaScript for interactive features
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set current year
+        const yearSpan = document.getElementById('currentyear');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+        
+        // Set last modified
+        const lastModifiedSpan = document.getElementById('lastModified');
+        if (lastModifiedSpan) {
+            lastModifiedSpan.textContent = 'Last Modified: ' + document.lastModified;
+        }
+        
+        // Toggle extra tip message
+        const toggleBtn = document.getElementById('toggleMessageBtn');
+        const extraTip = document.getElementById('extraTipMessage');
+        if (toggleBtn && extraTip) {
+            toggleBtn.addEventListener('click', function() {
+                if (extraTip.style.display === 'none') {
+                    extraTip.style.display = 'block';
+                    extraTip.innerHTML = '✨ Did you know? Extending your phone\'s life by just one year reduces its carbon footprint by 30%! 🌍';
+                    toggleBtn.innerHTML = '<i class="fas fa-times"></i> Hide Tip';
+                } else {
+                    extraTip.style.display = 'none';
+                    toggleBtn.innerHTML = '<i class="fas fa-seedling"></i> Show Eco Tip';
+                }
+            });
+        }
+        
+        // Decision tree preview
+        const demoTreeBtn = document.getElementById('demoTreeBtn');
+        const treeResult = document.getElementById('treeDemoResult');
+        if (demoTreeBtn && treeResult) {
+            demoTreeBtn.addEventListener('click', function() {
+                if (treeResult.style.display === 'none') {
+                    treeResult.style.display = 'block';
+                    treeResult.innerHTML = '<strong>🌳 Decision Tree Preview:</strong><br>┌─ Is device working? ─┐<br>├─ ✅ YES → Keep / Donate / Sell<br>└─ ❌ NO → Can it be repaired?<br>&nbsp;&nbsp;&nbsp;&nbsp;├─ 🔧 YES → Find repair guide<br>&nbsp;&nbsp;&nbsp;&nbsp;└─ ♻️ NO → Recycle responsibly<br><br><span style="color:#2B6E3C;">Full interactive flowchart coming in final website!</span>';
+                    demoTreeBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide preview';
+                } else {
+                    treeResult.style.display = 'none';
+                    demoTreeBtn.innerHTML = '<i class="fas fa-eye"></i> Preview decision logic';
+                }
+            });
+        }
+        
+        // Resource sample
+        const resourceBtn = document.getElementById('showResourceTip');
+        const resourceSample = document.getElementById('resourceSample');
+        if (resourceBtn && resourceSample) {
+            resourceBtn.addEventListener('click', function() {
+                if (resourceSample.style.display === 'none') {
+                    resourceSample.style.display = 'block';
+                    resourceSample.innerHTML = '📍 <strong>Certified Recyclers:</strong><br>• Call2Recycle - Battery & phone recycling<br>• Best Buy - Free electronics recycling<br>• E-Stewards - Certified responsible recyclers<br><em>Interactive map will be included in final site.</em>';
+                    resourceBtn.innerHTML = '<i class="fas fa-bookmark"></i> Hide resources';
+                } else {
+                    resourceSample.style.display = 'none';
+                    resourceBtn.innerHTML = '<i class="fas fa-book-open"></i> Show sample resource';
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>
