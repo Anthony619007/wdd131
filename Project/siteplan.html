@@ -2,574 +2,653 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WDD 131 – Site Plan | eWiseHome – Reduce E-waste at Home</title>
-    <meta name="description" content="Website planning document for the 'How to Reduce E-waste at Home' project. Includes site name, purpose, user scenarios, color schema, typography, and responsive wireframes.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>eWisePlan | Smart E-waste Management Site Plan — Zoomlion Inspired</title>
+    <meta name="description" content="Strategic site plan for e-waste management platform inspired by Zoomlion Ghana. Includes purpose, user scenarios, color schema, typography, responsive wireframes, and interactive decision tools.">
     <meta name="author" content="Anthony Anusiem">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="scripts/getdates.js" defer></script>
     <style>
-        /* Additional styles specific to site plan while maintaining base.css consistency */
-        .planning-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .color-swatch-grid {
+
+        /* ----- GLOBAL STYLES (Zoomlion Ghana inspired palette: vibrant green, deep blue-grey, clean whites, energetic orange accents) ----- */
+        :root {
+            --primary: #007A3D;      /* bold zoom-green, eco authority */
+            --primary-dark: #00552A;
+            --secondary: #F39200;    /* warm orange → CTA, alerts, interactive */
+            --accent-light: #EFF7F0;
+            --neutral-dark: #1F2A3A;
+            --neutral-gray: #4B5C6E;
+            --soft-bg: #F9FCF9;
+            --card-shadow: 0 12px 28px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.02);
+            --border-radius-card: 20px;
+            --transition-default: all 0.25s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-bg);
+            color: #1E2A2F;
+            line-height: 1.5;
+        }
+
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* header / navigation inspired by Zoomlion's clean corporate style */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(0, 122, 61, 0.2);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            background: var(--primary);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+        }
+        .brand h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.7rem;
+            color: var(--primary-dark);
+            letter-spacing: -0.3px;
+        }
+        .brand p {
+            font-size: 0.75rem;
+            color: var(--neutral-gray);
+            font-weight: 500;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            transition: var(--transition-default);
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* card system (modern, elevated) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: var(--border-radius-card);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
+            border: 1px solid #eef2f0;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+        }
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: #F9FCF9;
+            padding: 1.2rem 1.5rem 0.6rem 1.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            margin: 0 0 0 1.5rem;
+            width: auto;
+            color: var(--primary-dark);
+        }
+        .card-content {
+            padding: 1.2rem 1.5rem 1.8rem;
+        }
+        .color-palette-row {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin: 1rem 0;
         }
-        
-        .color-swatch-item {
+        .color-chip {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            background: #f5f5f5;
-            padding: 0.5rem 1rem;
+            gap: 12px;
+            background: #F2F4F8;
             border-radius: 40px;
+            padding: 0.4rem 1.2rem;
         }
-        
-        .swatch-circle {
-            width: 40px;
-            height: 40px;
+        .color-circle {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
-        
         .wireframe-mock {
-            background: #f0f0f0;
-            border-radius: 16px;
+            background: #F3F6F5;
+            border-radius: 24px;
             padding: 1rem;
-            margin-top: 0.5rem;
         }
-        
-        .mobile-mockup {
+        .mobile-mock {
             max-width: 280px;
             margin: 0 auto;
             background: white;
-            border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 32px;
             overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
-        .desktop-mockup {
+        .desktop-mock {
             background: white;
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
         }
-        
-        .mock-header {
-            background: #2B6E3C;
-            padding: 12px;
+        .mock-header-green {
+            background: var(--primary);
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .mock-logo {
-            width: 32px;
-            height: 32px;
-            background: #F4A261;
+        .mock-logo-sm {
+            width: 28px;
+            height: 28px;
+            background: var(--secondary);
             border-radius: 8px;
         }
-        
         .mock-menu span {
             display: inline-block;
-            width: 25px;
+            width: 24px;
             height: 3px;
             background: white;
             margin: 3px;
             border-radius: 3px;
         }
-        
-        .mock-hero {
-            background: #E8F5E9;
+        .mock-hero-green {
+            background: #E2F0E6;
             margin: 12px;
-            padding: 20px;
-            border-radius: 16px;
+            padding: 24px 12px;
+            border-radius: 20px;
             text-align: center;
         }
-        
         .mock-card-row {
             display: flex;
             gap: 8px;
             margin: 12px;
         }
-        
-        .mock-card {
-            background: #FAFAFA;
+        .mock-mini-card {
+            background: #F4F6F9;
             flex: 1;
             padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 11px;
+            border-radius: 16px;
             font-weight: 600;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 11px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-        
-        .mock-footer {
-            background: #1E2F2F;
-            height: 40px;
-            margin-top: 12px;
+        .mock-footer-dark {
+            background: var(--neutral-dark);
+            height: 36px;
+            margin-top: 16px;
         }
-        
-        .desktop-nav {
-            background: #2B6E3C;
-            padding: 12px 20px;
+        .desktop-nav-bar {
+            background: var(--primary);
+            padding: 14px 20px;
             display: flex;
             justify-content: space-between;
         }
-        
-        .desktop-logo {
-            width: 40px;
-            height: 40px;
-            background: #F4A261;
-            border-radius: 8px;
+        .desktop-logo-lg {
+            width: 42px;
+            height: 42px;
+            background: var(--secondary);
+            border-radius: 10px;
         }
-        
         .desktop-links {
             display: flex;
-            gap: 20px;
+            gap: 24px;
         }
-        
         .desktop-links span {
             width: 60px;
-            height: 20px;
-            background: #A5D6A7;
+            height: 18px;
+            background: #A8D5BA;
+            border-radius: 30px;
+        }
+        .desktop-hero {
+            background: #E9F3EC;
+            margin: 20px;
+            padding: 36px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .desktop-three-cols {
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+        .desktop-card-item {
+            background: #FEFEFE;
+            flex: 1;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .two-col-layout {
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+        .main-col-mock {
+            flex: 2;
+            background: #F5F8F5;
+            padding: 20px;
             border-radius: 20px;
         }
-        
-        .desktop-hero {
-            background: #E8F5E9;
-            margin: 16px;
-            padding: 30px;
-            border-radius: 16px;
-        }
-        
-        .desktop-grid {
-            display: flex;
-            gap: 16px;
-            margin: 16px;
-        }
-        
-        .desktop-card {
-            background: #FAFAFA;
+        .side-col-mock {
             flex: 1;
-            padding: 16px;
-            border-radius: 12px;
-        }
-        
-        .two-column {
-            display: flex;
-            gap: 16px;
-            margin: 16px;
-        }
-        
-        .main-col {
-            background: #F5F5F5;
-            flex: 2;
+            background: #E2F0E6;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 20px;
         }
-        
-        .sidebar-col {
-            background: #E8F5E9;
-            flex: 1;
-            padding: 20px;
-            border-radius: 12px;
-        }
-        
-        .desktop-footer {
-            background: #1E2F2F;
-            height: 48px;
-        }
-        
         .legend {
             font-size: 0.7rem;
-            color: #666;
-            margin-top: 8px;
+            color: #5F6C7A;
             text-align: center;
-        }
-        
-        .interactive-btn {
-            background: #2B6E3C;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
             margin-top: 12px;
-            font-family: 'Roboto', sans-serif;
-            transition: background 0.2s;
         }
-        
-        .interactive-btn:hover {
-            background: #F4A261;
-        }
-        
-        .demo-result {
-            margin-top: 12px;
-            padding: 12px;
-            background: #f9f9f9;
-            border-left: 3px solid #F4A261;
-            border-radius: 8px;
-            font-size: 0.85rem;
-        }
-        
-        .stats-container {
+        .stats-flex {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
-            margin: 1.5rem 0;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #2B6E3C 0%, #3A8A4A 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        .font-preview {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
             margin: 1rem 0;
         }
-        
-        .font-box {
+        .stat-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, #2C9B5A 100%);
             padding: 1rem;
-            background: #f5f5f5;
-            border-radius: 12px;
+            border-radius: 24px;
+            color: white;
+            text-align: center;
             flex: 1;
+            min-width: 130px;
         }
-        
-        .montserrat-demo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+        }
+        .btn-interactive {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 40px;
             font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
         }
-        
-        .roboto-demo {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
+        .btn-interactive:hover {
+            background: var(--secondary);
+            transform: scale(0.98);
+        }
+        .demo-panel {
+            background: #F9F9F9;
+            border-left: 4px solid var(--secondary);
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 1.8rem 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            color: var(--neutral-gray);
+            font-size: 0.85rem;
+        }
+        @media (max-width: 750px) {
+            .page-container {
+                padding: 1rem;
+            }
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ddd, transparent);
+        }
+        .accent-text {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        i.fa, i.far, i.fas {
+            margin-right: 6px;
         }
     </style>
 </head>
 <body>
 <div class="page-container">
-    <header>
-        <span id="course-title">WDD 131 – Site Plan | eWiseHome</span>
-        <nav>
-            <a href="https://www.linkedin.com/in/example" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://byupw.instructure.com/" target="_blank" rel="noopener noreferrer">Canvas</a>
-            <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/3?lang=eng&id=p7#p7" target="_blank" rel="noopener noreferrer">Scripture</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Final Project</a>
-        </nav>
-    </header>
+    <!-- Header: refined, Zoomlion-inspired branding -->
+    <div class="site-header">
+        <div class="logo-area">
+            <div class="logo-icon"><i class="fas fa-recycle"></i></div>
+            <div class="brand">
+                <h1>eWisePlan</h1>
+                <p>strategic e-waste management · inspired by circular economy leaders</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-chalkboard-user"></i> Site Plan</a>
+            <a href="#"><i class="fas fa-chart-simple"></i> Impact</a>
+            <a href="#"><i class="fas fa-leaf"></i> Resources</a>
+        </div>
+    </div>
 
     <main>
-        <h1>🌿 eWiseHome | Reduce E-waste at Home</h1>
+        <div style="margin-bottom: 0.5rem;">
+            <span style="background: #EFF7F0; padding: 0.2rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600;"><i class="fas fa-microchip"></i> Zoomlion Ghana operational synergy | Sustainable e-waste blueprint</span>
+        </div>
+        <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2rem; color: var(--primary-dark); margin: 0.5rem 0 0.25rem;">⚡ eWaste Management Site Plan</h1>
+        <p style="font-size: 1.05rem; max-width: 800px; margin-bottom: 1rem;">A professional roadmap for a responsible e-waste reduction platform — combining user education, recycling locators, and circular economy tools.</p>
         
+        <!-- Main planning cards (identity + scenarios + color & typography) -->
         <div class="cards-grid">
-            <!-- Site Name & Purpose Card -->
-            <section class="card">
-                <h2><i class="fas fa-globe"></i> Site Identity</h2>
+            <!-- Identity & Domain -->
+            <div class="card">
+                <h2><i class="fas fa-globe-africa"></i> Site Identity</h2>
                 <div class="card-content">
-                    <p><strong>Domain:</strong> <code>ewisehome.org</code> (conceptual)</p>
-                    <p><strong>Why "eWiseHome"?</strong> The name blends <strong>e-waste</strong> with <strong>wise decisions</strong> and <strong>home</strong> — emphasizing practical, household-level action. It's memorable, positive, and signals empowerment. The .org domain fits our educational, community-driven mission.</p>
-                    <hr style="margin: 1rem 0;">
-                    <h3><i class="fas fa-bullseye"></i> Site Purpose</h3>
-                    <p><strong>eWiseHome</strong> provides a clear, actionable blueprint for reducing electronic waste at home. The website serves as a go-to resource for individuals who want to minimize their environmental footprint by extending the life of electronics, recycling responsibly, and buying sustainable tech.</p>
-                    <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
-                        <li>📱 What e-waste is and why it's a fast-growing crisis</li>
-                        <li>🛠️ Actionable tips: repair, upgrade, maintain devices</li>
-                        <li>♻️ Local & online recycling/donation directories</li>
-                        <li>🛒 Guidance on repairable, sustainable electronics</li>
-                        <li>✅ Decision tree: Repair, Donate, Recycle, Keep</li>
+                    <p><strong>Domain:</strong> <code>ewisecircle.org</code> (conceptual)</p>
+                    <p><strong>Name rationale:</strong> "eWiseCircle" merges <strong>e-waste wisdom</strong> with <strong>circular economy</strong> — echoing Zoomlion Ghana’s commitment to sustainable waste management. The name emphasizes closing the loop at home.</p>
+                    <hr>
+                    <h3><i class="fas fa-bullhorn"></i> Core Purpose</h3>
+                    <p>eWiseCircle provides an interactive guide to reduce household e-waste through <strong>repair tutorials, certified recyclers database, data sanitation tools, and sustainable buying guides</strong>. The platform acts as a digital companion for conscious tech users.</p>
+                    <ul style="margin-left: 1.2rem; margin-top: 0.6rem;">
+                        <li>📊 Real-time e-waste impact stats</li>
+                        <li>🛠️ Right-to-repair resources & step-by-step guides</li>
+                        <li>🗺️ Interactive recycling hub (Zoomlion-like service map)</li>
+                        <li>🤝 Donation network for functional electronics</li>
                     </ul>
                 </div>
-            </section>
-
-            <!-- Scenarios Card -->
-            <section class="card">
-                <h2><i class="fas fa-question-circle"></i> User Scenarios</h2>
+            </div>
+            <!-- Scenarios (context-driven) -->
+            <div class="card">
+                <h2><i class="fas fa-users"></i> User Scenarios</h2>
                 <div class="card-content">
-                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px; margin-bottom: 1rem;">
-                        <i class="fas fa-mobile-alt"></i> <strong>“I have 3 old phones and a dead laptop. Where can I recycle them safely without risking my personal data?”</strong>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">The site provides a searchable map of certified recyclers, data-wiping instructions, and a repair-or-recycle flowchart.</p>
+                    <div style="background: #F4FBF6; padding: 0.8rem; border-radius: 18px; margin-bottom: 1rem;">
+                        <i class="fas fa-database" style="color: var(--primary);"></i> <strong>“My laptop broke after 3 years — is it recyclable or repairable? I need local certified centers.”</strong>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">The site will offer ZIP-based recycling locator (Zoomlion style coverage) and AI-assisted repair-or-recycle decision engine.</p>
                     </div>
-                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px; margin-bottom: 1rem;">
-                        <i class="fas fa-laptop-code"></i> <strong>“Which brands offer spare parts, repair guides, and long-term software updates?”</strong>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Includes a buyer's guide to repairable electronics with iFixit scores and right-to-repair champions.</p>
+                    <div style="background: #F4FBF6; padding: 0.8rem; border-radius: 18px; margin-bottom: 1rem;">
+                        <i class="fas fa-school"></i> <strong>“I run a small community workshop — where can I donate 20 old monitors responsibly?”</strong>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">Dedicated donation hub connecting NGOs, schools, and refurbishers — plus tax-deduction receipts.</p>
                     </div>
-                    <div style="background: #f9f9f9; padding: 0.75rem; border-radius: 12px;">
-                        <i class="fas fa-home"></i> <strong>“What's the simplest daily habit to reduce e-waste at home?”</strong>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Practical micro-tips: extending charge cycles, energy-saving modes, donating to schools, and repair swaps.</p>
+                    <div style="background: #F4FBF6; padding: 0.8rem; border-radius: 18px;">
+                        <i class="fas fa-chart-line"></i> <strong>“What is the environmental impact of my old smartphone if I keep it in a drawer?”</strong>
+                        <p style="margin-top: 8px; font-size: 0.9rem;">Carbon impact calculator, material recovery insights, and behavioral nudges to recycle or resell.</p>
                     </div>
                 </div>
-            </section>
-
-            <!-- Color Schema Card -->
-            <section class="card">
-                <h2><i class="fas fa-palette"></i> Color Schema</h2>
+            </div>
+            <!-- Color Schema (Zoomlion-inspired dynamic) -->
+            <div class="card">
+                <h2><i class="fas fa-palette"></i> Color Identity</h2>
                 <div class="card-content">
-                    <div class="color-swatch-grid">
-                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #2B6E3C;"></div><span><strong>#2B6E3C</strong> - Primary Green (headings, nav, buttons)</span></div>
-                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #F4A261;"></div><span><strong>#F4A261</strong> - Warm Accent (CTA, hover, highlights)</span></div>
-                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #EEF5E8;"></div><span><strong>#EEF5E8</strong> - Soft Background (page backdrop)</span></div>
-                        <div class="color-swatch-item"><div class="swatch-circle" style="background: #1E2F2F;"></div><span><strong>#1E2F2F</strong> - Dark Forest (body text, footer)</span></div>
+                    <div class="color-palette-row">
+                        <div class="color-chip"><div class="color-circle" style="background: #007A3D;"></div><span><strong>#007A3D</strong> — primary green (trust, eco action, headers)</span></div>
+                        <div class="color-chip"><div class="color-circle" style="background: #F39200;"></div><span><strong>#F39200</strong> — vibrant orange (CTA, interactive focus)</span></div>
+                        <div class="color-chip"><div class="color-circle" style="background: #1F2A3A;"></div><span><strong>#1F2A3A</strong> — deep navy (text, footer)</span></div>
+                        <div class="color-chip"><div class="color-circle" style="background: #EFF7F0;"></div><span><strong>#EFF7F0</strong> — light mint (backgrounds)</span></div>
                     </div>
-                    <p><small>The green creates a trustworthy, natural identity. Orange draws users to interactive tools like checklists and recycling locators.</small></p>
+                    <p><i class="fas fa-leaf"></i> This palette echoes Zoomlion Ghana's trustworthy green and energetic orange — creating high contrast for accessibility and modern appeal.</p>
                 </div>
-            </section>
-
+            </div>
             <!-- Typography Card -->
-            <section class="card">
-                <h2><i class="fas fa-font"></i> Typography</h2>
+            <div class="card">
+                <h2><i class="fas fa-font"></i> Typography System</h2>
                 <div class="card-content">
-                    <div class="font-preview">
-                        <div class="font-box">
-                            <div class="montserrat-demo" style="font-family: 'Playfair Display', serif;"><strong>Playfair Display</strong> - Headings & Titles</div>
-                            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Elegant, bold, perfect for section headers</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div style="flex:1; background: #F6F8F6; padding: 1rem; border-radius: 18px;">
+                            <div style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem;">Montserrat Bold</div>
+                            <div style="font-size: 0.8rem; color: gray;">Headings, Navigation, Hero Titles</div>
                         </div>
-                        <div class="font-box">
-                            <div class="roboto-demo" style="font-family: 'Roboto', sans-serif;"><strong>Roboto</strong> - Body Text, Navigation, Paragraphs</div>
-                            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Clean, readable, modern sans-serif</p>
+                        <div style="flex:1; background: #F6F8F6; padding: 1rem; border-radius: 18px;">
+                            <div style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1rem;">Inter Regular / Medium</div>
+                            <div style="font-size: 0.8rem; color: gray;">Body text, paragraphs, cards, UI elements</div>
                         </div>
                     </div>
-                    <p><small>Only 2 primary fonts maintain clean, accessible design. Monospace optional for code/references.</small></p>
+                    <p class="legend" style="margin-top: 12px;">Clean, readable, and modern — consistent with corporate environmental platforms.</p>
                 </div>
-            </section>
+            </div>
         </div>
 
-        <!-- Wireframes Section -->
-        <h2 style="margin: 1.5rem 0 1rem 0;"><i class="fas fa-drafting-compass"></i> Wireframes</h2>
+        <!-- Wireframes: Mobile + Desktop (Detailed mockups mirroring Zoomlion's responsive clarity) -->
+        <h2 style="margin: 2rem 0 0.5rem;"><i class="fas fa-drafting-compass"></i> Responsive Wireframes</h2>
         <div class="cards-grid">
             <!-- Mobile Wireframe -->
-            <section class="card">
-                <h2><i class="fas fa-mobile-alt"></i> Mobile View (≤640px)</h2>
+            <div class="card">
+                <h2><i class="fas fa-mobile-alt"></i> Mobile-first (≤640px)</h2>
                 <div class="card-content">
                     <div class="wireframe-mock">
-                        <div class="mobile-mockup">
-                            <div class="mock-header">
-                                <div class="mock-logo"></div>
+                        <div class="mobile-mock">
+                            <div class="mock-header-green">
+                                <div class="mock-logo-sm"></div>
                                 <div class="mock-menu"><span></span><span></span><span></span></div>
                             </div>
-                            <div class="mock-hero">
-                                <div style="height: 10px; width: 70%; background: #C8E6C9; margin: 0 auto 8px; border-radius: 10px;"></div>
-                                <div style="height: 8px; width: 85%; background: #A5D6A7; margin: 0 auto; border-radius: 10px;"></div>
-                                <div style="height: 28px; width: 100px; background: #F4A261; margin: 12px auto 0; border-radius: 20px;"></div>
+                            <div class="mock-hero-green">
+                                <div style="height: 12px; width: 70%; background: #B8D9C2; margin: 0 auto 8px; border-radius: 20px;"></div>
+                                <div style="height: 8px; width: 85%; background: #9EC5A8; margin: 0 auto; border-radius: 20px;"></div>
+                                <div style="height: 32px; width: 120px; background: #F39200; margin: 12px auto; border-radius: 40px;"></div>
                             </div>
                             <div class="mock-card-row">
-                                <div class="mock-card">🔧 Repair</div>
-                                <div class="mock-card">♻️ Recycle</div>
-                                <div class="mock-card">📦 Donate</div>
+                                <div class="mock-mini-card">🔧 Repair</div>
+                                <div class="mock-mini-card">♻️ Recycle</div>
+                                <div class="mock-mini-card">📦 Donate</div>
                             </div>
                             <div class="mock-card-row">
-                                <div class="mock-card">✅ Checklist</div>
-                                <div class="mock-card">🗺️ Locator</div>
+                                <div class="mock-mini-card">📍 Locator</div>
+                                <div class="mock-mini-card">📘 Guide</div>
                             </div>
-                            <div class="mock-footer"></div>
+                            <div class="mock-footer-dark"></div>
                         </div>
-                        <div class="legend">Stacked layout, hamburger menu, hero section, action cards, footer. Thumb-friendly navigation.</div>
+                        <div class="legend">Hamburger menu, stacked content, thumb-optimized CTA blocks. Bottom navigation optional for key actions.</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Desktop Wireframe -->
-            <section class="card">
-                <h2><i class="fas fa-desktop"></i> Desktop View (≥1024px)</h2>
+            </div>
+            <!-- Desktop Wireframe (≥1024px) Zoomlion-style layout -->
+            <div class="card">
+                <h2><i class="fas fa-laptop"></i> Desktop (≥1024px)</h2>
                 <div class="card-content">
                     <div class="wireframe-mock">
-                        <div class="desktop-mockup">
-                            <div class="desktop-nav">
-                                <div class="desktop-logo"></div>
+                        <div class="desktop-mock">
+                            <div class="desktop-nav-bar">
+                                <div class="desktop-logo-lg"></div>
                                 <div class="desktop-links"><span></span><span></span><span></span><span></span></div>
                             </div>
                             <div class="desktop-hero">
-                                <div style="height: 12px; width: 40%; background: #A5D6A7; margin: 0 auto 10px; border-radius: 10px;"></div>
-                                <div style="height: 10px; width: 60%; background: #C8E6C9; margin: 0 auto; border-radius: 10px;"></div>
-                                <div style="height: 36px; width: 140px; background: #F4A261; margin: 16px auto 0; border-radius: 25px;"></div>
+                                <div style="height: 14px; width: 35%; background: #A8D5BA; margin: 0 auto 10px; border-radius: 30px;"></div>
+                                <div style="height: 10px; width: 55%; background: #C2E0C9; margin: 0 auto; border-radius: 30px;"></div>
+                                <div style="height: 38px; width: 160px; background: #F39200; margin: 18px auto 0; border-radius: 30px;"></div>
                             </div>
-                            <div class="desktop-grid">
-                                <div class="desktop-card"><strong>🔧 Extend Life</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
-                                <div class="desktop-card"><strong>♻️ Recycle</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
-                                <div class="desktop-card"><strong>🛒 Buy Smart</strong><div style="height: 8px; background: #E0E0E0; margin-top: 8px; border-radius: 4px;"></div></div>
+                            <div class="desktop-three-cols">
+                                <div class="desktop-card-item"><strong>♻️ Recycling</strong><div style="height: 6px; background:#E2E8E2; margin-top: 8px; width: 100%; border-radius: 8px;"></div></div>
+                                <div class="desktop-card-item"><strong>🛠️ Repair Hub</strong><div style="height: 6px; background:#E2E8E2; margin-top: 8px;"></div></div>
+                                <div class="desktop-card-item"><strong>📊 Impact</strong><div style="height: 6px; background:#E2E8E2; margin-top: 8px;"></div></div>
                             </div>
-                            <div class="two-column">
-                                <div class="main-col"><div style="height: 10px; width: 50%; background: #C8E6C9; border-radius: 5px; margin-bottom: 12px;"></div><div style="height: 8px; background: #E0E0E0; border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 8px; width: 80%; background: #E0E0E0; border-radius: 4px;"></div></div>
-                                <div class="sidebar-col"><div style="height: 10px; width: 60%; background: #A5D6A7; border-radius: 5px; margin-bottom: 12px;"></div><div style="height: 8px; background: #E0E0E0; border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 8px; width: 70%; background: #E0E0E0; border-radius: 4px;"></div></div>
+                            <div class="two-col-layout">
+                                <div class="main-col-mock"><div style="height: 12px; width: 45%; background: var(--primary); border-radius: 20px; margin-bottom: 12px;"></div><div style="height: 8px; background: #CBCBCB; width: 90%; border-radius: 8px;"></div><div style="height: 8px; margin-top: 8px; width: 70%; background: #CBCBCB;"></div></div>
+                                <div class="side-col-mock"><div style="height: 12px; width: 60%; background: #F39200; border-radius: 20px; margin-bottom: 12px;"></div><div style="height: 8px; background: #CBCBCB; width: 80%;"></div></div>
                             </div>
-                            <div class="desktop-footer"></div>
+                            <div style="background: #1F2A3A; height: 42px;"></div>
                         </div>
-                        <div class="legend">Horizontal navigation, hero, 3 feature cards, main content + sidebar for decision tree/resources.</div>
+                        <div class="legend">Horizontal navigation, hero banner, 3-column service cards, main content + sidebar for decision tree or events.</div>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <!-- Interactive Demos & Stats -->
-        <div class="cards-grid">
-            <!-- Decision Tree Demo -->
-            <section class="card">
-                <h2><i class="fas fa-project-diagram"></i> Decision Tree Preview</h2>
-                <div class="card-content">
-                    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=300&h=160&fit=crop" alt="Decision tree concept" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;" loading="lazy">
-                    <p>Interactive flowchart: "Is device functional?" → repair, donate, recycle, or keep.</p>
-                    <button class="interactive-btn" id="demoTreeBtn"><i class="fas fa-eye"></i> Preview decision logic</button>
-                    <div id="treeDemoResult" class="demo-result" style="display: none;"></div>
-                </div>
-            </section>
-
-            <!-- Resources Demo -->
-            <section class="card">
-                <h2><i class="fas fa-map-marked-alt"></i> Resource Directory Sample</h2>
-                <div class="card-content">
-                    <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=300&h=160&fit=crop" alt="Recycling resources" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;" loading="lazy">
-                    <p>Certified recyclers, Call2Recycle, Best Buy, E-Stewards, and local repair cafes.</p>
-                    <button class="interactive-btn" id="showResourceTip"><i class="fas fa-book-open"></i> Show sample resource</button>
-                    <div id="resourceSample" class="demo-result" style="display: none;"></div>
-                </div>
-            </section>
-
-            <!-- E-waste Statistics -->
-            <section class="card">
-                <h2><i class="fas fa-chart-line"></i> E-waste Crisis by Numbers</h2>
-                <div class="card-content">
-                    <div class="stats-container" style="margin: 0;">
-                        <div class="stat-card"><span class="stat-number">53.6M</span><span class="stat-label">metric tons (2023)</span></div>
-                        <div class="stat-card"><span class="stat-number">17.4%</span><span class="stat-label">recycled properly</span></div>
-                        <div class="stat-card"><span class="stat-number">$57B</span><span class="stat-label">lost raw materials</span></div>
-                    </div>
-                    <p class="legend" style="margin-top: 1rem;"><i class="fas fa-database"></i> Source: UN Global E-waste Monitor</p>
-                </div>
-            </section>
-        </div>
-
-        <!-- Validation & Requirements Card -->
-        <section class="card" style="margin-top: 1rem;">
-            <h2><i class="fas fa-check-circle"></i> Planning Document Requirements</h2>
-            <div class="card-content">
-                <div class="planning-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin: 0;">
-                    <ul style="margin-left: 1.2rem;">
-                        <li>✔ Site name + branding rationale</li>
-                        <li>✔ Site purpose with content description</li>
-                        <li>✔ Three user scenarios</li>
-                        <li>✔ Color schema (4 colors with usage)</li>
-                    </ul>
-                    <ul style="margin-left: 1.2rem;">
-                        <li>✔ Typography (2 fonts, ≤3)</li>
-                        <li>✔ Wireframes: mobile & desktop</li>
-                        <li>✔ CSS reflects color schema & fonts</li>
-                        <li>✔ Interactive JavaScript features</li>
-                    </ul>
-                </div>
-                <p class="accent-text" style="color: #F4A261; margin-top: 1rem;"><i class="fas fa-leaf"></i> The final website will implement interactive maps, decision trees, and resource directories.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Extra Tip Section -->
-        <div style="background: #EEF5E8; border-radius: 16px; padding: 1rem; margin: 1rem 0; text-align: center;">
-            <button class="interactive-btn" id="toggleMessageBtn" style="background: #F4A261;"><i class="fas fa-seedling"></i> Show Eco Tip</button>
-            <div id="extraTipMessage" style="margin-top: 12px; display: none; color: #2B6E3C; font-weight: 500;"></div>
+        <!-- E-waste Stats & Interactive Decision Demos (Zoomlion-style engagement) -->
+        <div class="cards-grid">
+            <div class="card">
+                <h2><i class="fas fa-chart-simple"></i> Global E-waste Snapshot</h2>
+                <div class="card-content">
+                    <div class="stats-flex">
+                        <div class="stat-badge"><span class="stat-number">62M tons</span><span class="stat-label">ewaste generated 2024</span></div>
+                        <div class="stat-badge"><span class="stat-number">22%</span><span class="stat-label">recycled formally</span></div>
+                        <div class="stat-badge"><span class="stat-number">$62B</span><span class="stat-label">value of recoverable materials</span></div>
+                    </div>
+                    <p class="legend"><i class="fas fa-chart-line"></i> Source: UN Global Monitor & Zoomlion environmental reports (conceptual).</p>
+                </div>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-code-branch"></i> Decision Tree Demo</h2>
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=300&h=160&fit=crop" alt="E-waste decision tree" style="width: 100%; border-radius: 18px; margin-bottom: 10px;" loading="lazy">
+                    <p>Interactive flowchart: “Should I repair, recycle, or donate?” — mimics Zoomlion’s decision support system.</p>
+                    <button class="btn-interactive" id="decisionTreeBtn"><i class="fas fa-diagram-project"></i> Simulate Logic</button>
+                    <div id="decisionOutput" class="demo-panel" style="display: none;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-map-pin"></i> Recycling Locator Sample</h2>
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=300&h=160&fit=crop" alt="Recycling map" style="width: 100%; border-radius: 18px; margin-bottom: 10px;" loading="lazy">
+                    <p>Zoomlion-style certified collection points & e-waste bins — dynamic resource mapper.</p>
+                    <button class="btn-interactive" id="resourceBtn"><i class="fas fa-book-open"></i> Show nearby partners</button>
+                    <div id="resourceDemo" class="demo-panel" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- extra interactive section: Eco tip & complete planning requirements -->
+        <div class="card" style="margin-top: 1rem;">
+            <h2><i class="fas fa-clipboard-list"></i> Planning Requirements & Next Steps</h2>
+            <div class="card-content">
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+                    <ul style="margin-left: 1.2rem;">
+                        <li>✔ Site name + domain rationale</li>
+                        <li>✔ Clear purpose with content map</li>
+                        <li>✔ 3+ user scenarios</li>
+                        <li>✔ Color schema (4 colors + usage notes)</li>
+                    </ul>
+                    <ul>
+                        <li>✔ Typography (2 font families)</li>
+                        <li>✔ Wireframes mobile & desktop</li>
+                        <li>✔ CSS applied with eco-theme</li>
+                        <li>✔ Interactive JS (decision tree + resources)</li>
+                    </ul>
+                </div>
+                <button class="btn-interactive" id="ecoWisdomBtn" style="background: #F39200; margin-top: 24px;"><i class="fas fa-seedling"></i> Daily Eco Insight</button>
+                <div id="ecoMessage" class="demo-panel" style="display: none; background: #FEF5E8;"></div>
+                <p class="accent-text" style="margin-top: 1rem;"><i class="fas fa-hand-sparkles"></i> Final site will integrate real-time recycling API, carbon savings calculator, and Zoomlion-inspired collection network.</p>
+            </div>
         </div>
     </main>
 
     <footer>
-        <p>© <span id="currentyear"></span> ✨ Anthony Anusiem ✨ eWiseHome Site Plan | Reduce E-waste at Home</p>
-        <p id="lastModified"></p>
+        <p>© <span id="currentYear"></span> ✦ Anthony Anusiem ✦ eWisePlan | E-waste Management Site Plan — Inspired by Zoomlion Ghana’s circular leadership</p>
+        <p id="modifiedDate" style="font-size: 0.7rem;"></p>
     </footer>
 </div>
 
 <script>
-    // JavaScript for interactive features
-    document.addEventListener('DOMContentLoaded', function() {
-        // Set current year
-        const yearSpan = document.getElementById('currentyear');
-        if (yearSpan) {
-            yearSpan.textContent = new Date().getFullYear();
-        }
-        
-        // Set last modified
-        const lastModifiedSpan = document.getElementById('lastModified');
-        if (lastModifiedSpan) {
-            lastModifiedSpan.textContent = 'Last Modified: ' + document.lastModified;
-        }
-        
-        // Toggle extra tip message
-        const toggleBtn = document.getElementById('toggleMessageBtn');
-        const extraTip = document.getElementById('extraTipMessage');
-        if (toggleBtn && extraTip) {
-            toggleBtn.addEventListener('click', function() {
-                if (extraTip.style.display === 'none') {
-                    extraTip.style.display = 'block';
-                    extraTip.innerHTML = '✨ Did you know? Extending your phone\'s life by just one year reduces its carbon footprint by 30%! 🌍';
-                    toggleBtn.innerHTML = '<i class="fas fa-times"></i> Hide Tip';
+    (function() {
+        // set dynamic footer dates
+        const yearSpan = document.getElementById('currentYear');
+        if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+        const modSpan = document.getElementById('modifiedDate');
+        if(modSpan) modSpan.textContent = 'Site Plan Last Modified: ' + document.lastModified;
+
+        // Decision tree simulation (Interactive)
+        const treeBtn = document.getElementById('decisionTreeBtn');
+        const decisionOutput = document.getElementById('decisionOutput');
+        if(treeBtn && decisionOutput) {
+            treeBtn.addEventListener('click', () => {
+                if(decisionOutput.style.display === 'none' || decisionOutput.style.display === '') {
+                    decisionOutput.style.display = 'block';
+                    decisionOutput.innerHTML = `<strong>🌱 eWise Decision Assistant</strong><br>❓ Is your device functional?<br> ✅ YES → Consider: Donate / Sell / Trade-in<br> ❌ NO → Can it be repaired?<br> 🔧 YES → iFixit guide & repair shops nearby<br> ♻️ NO → Certified recyclers (Zoomlion network)<br><span style="color: #007A3D;"><i class="fas fa-chalkboard"></i> Full interactive version → final launch</span>`;
+                    treeBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide tree preview';
                 } else {
-                    extraTip.style.display = 'none';
-                    toggleBtn.innerHTML = '<i class="fas fa-seedling"></i> Show Eco Tip';
+                    decisionOutput.style.display = 'none';
+                    treeBtn.innerHTML = '<i class="fas fa-diagram-project"></i> Simulate Logic';
                 }
             });
+            decisionOutput.style.display = 'none';
         }
-        
-        // Decision tree preview
-        const demoTreeBtn = document.getElementById('demoTreeBtn');
-        const treeResult = document.getElementById('treeDemoResult');
-        if (demoTreeBtn && treeResult) {
-            demoTreeBtn.addEventListener('click', function() {
-                if (treeResult.style.display === 'none') {
-                    treeResult.style.display = 'block';
-                    treeResult.innerHTML = '<strong>🌳 Decision Tree Preview:</strong><br>┌─ Is device working? ─┐<br>├─ ✅ YES → Keep / Donate / Sell<br>└─ ❌ NO → Can it be repaired?<br>&nbsp;&nbsp;&nbsp;&nbsp;├─ 🔧 YES → Find repair guide<br>&nbsp;&nbsp;&nbsp;&nbsp;└─ ♻️ NO → Recycle responsibly<br><br><span style="color:#2B6E3C;">Full interactive flowchart coming in final website!</span>';
-                    demoTreeBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide preview';
+
+        // resource sample demonstration
+        const resBtn = document.getElementById('resourceBtn');
+        const resourceDemoDiv = document.getElementById('resourceDemo');
+        if(resBtn && resourceDemoDiv) {
+            resBtn.addEventListener('click', () => {
+                if(resourceDemoDiv.style.display === 'none' || resourceDemoDiv.style.display === '') {
+                    resourceDemoDiv.style.display = 'block';
+                    resourceDemoDiv.innerHTML = `📍 <strong>eWise Recycling Network (Zoomlion-style):</strong><br>• Accra Central Collection Hub<br>• Kumasi E-Waste Drop-off Zone<br>• Tema certified dismantler<br>• Mobile collection events every Saturday<br><i class="fas fa-globe"></i> Final site includes interactive map and real-time availability.`;
+                    resBtn.innerHTML = '<i class="fas fa-bookmark"></i> Hide resources';
                 } else {
-                    treeResult.style.display = 'none';
-                    demoTreeBtn.innerHTML = '<i class="fas fa-eye"></i> Preview decision logic';
+                    resourceDemoDiv.style.display = 'none';
+                    resBtn.innerHTML = '<i class="fas fa-map-pin"></i> Show nearby partners';
                 }
             });
+            resourceDemoDiv.style.display = 'none';
         }
-        
-        // Resource sample
-        const resourceBtn = document.getElementById('showResourceTip');
-        const resourceSample = document.getElementById('resourceSample');
-        if (resourceBtn && resourceSample) {
-            resourceBtn.addEventListener('click', function() {
-                if (resourceSample.style.display === 'none') {
-                    resourceSample.style.display = 'block';
-                    resourceSample.innerHTML = '📍 <strong>Certified Recyclers:</strong><br>• Call2Recycle - Battery & phone recycling<br>• Best Buy - Free electronics recycling<br>• E-Stewards - Certified responsible recyclers<br><em>Interactive map will be included in final site.</em>';
-                    resourceBtn.innerHTML = '<i class="fas fa-bookmark"></i> Hide resources';
+
+        // Eco wisdom tip
+        const ecoBtn = document.getElementById('ecoWisdomBtn');
+        const ecoMsgDiv = document.getElementById('ecoMessage');
+        if(ecoBtn && ecoMsgDiv) {
+            ecoBtn.addEventListener('click', () => {
+                if(ecoMsgDiv.style.display === 'none' || ecoMsgDiv.style.display === '') {
+                    ecoMsgDiv.style.display = 'block';
+                    ecoMsgDiv.innerHTML = '💡 <strong>Zoomlion-Inspired Insight:</strong> "Recycling 1 million phones recovers 35kg gold, 350kg silver, & 15kg palladium — keeping toxins out of landfills. Be eWise!" ♻️';
+                    ecoBtn.innerHTML = '<i class="fas fa-times-circle"></i> Hide insight';
                 } else {
-                    resourceSample.style.display = 'none';
-                    resourceBtn.innerHTML = '<i class="fas fa-book-open"></i> Show sample resource';
+                    ecoMsgDiv.style.display = 'none';
+                    ecoBtn.innerHTML = '<i class="fas fa-seedling"></i> Daily Eco Insight';
                 }
             });
+            ecoMsgDiv.style.display = 'none';
         }
-    });
+    })();
 </script>
 </body>
 </html>
