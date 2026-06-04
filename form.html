@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pizza Perfector product review form — rate your pizza experience including toppings, crust, and overall satisfaction.">
+  <meta name="author" content="Anthony Anusiem">
   <title>Pizza Perfector | Review Form</title>
   <style>
     /* -------------------------------
@@ -271,10 +273,12 @@
 <body>
 
 <div class="form-container">
+  <header>
   <div class="form-header">
     <h1>Pizza Master Review</h1>
     <p>Rate your latest pizza creation — from dough to toppings</p>
   </div>
+  </header>
 
   <div class="review-form">
     <!-- Form: method=get, action=review.html (confirmation page) -->
@@ -286,7 +290,8 @@
           🍕 Product Name <span class="required-star">*</span>
         </label>
         <select id="productNameSelect" name="productName" required>
-          <option value="" disabled selected>Select a Pizza ...</option>
+          <option value="" disabled selected>Select a Product ...</option>
+          <!-- additional options injected via JS -->
         </select>
       </div>
 
@@ -299,6 +304,11 @@
         <div class="rating-group">
           <div class="stars-container" id="starsRatingContainer">
             <!-- dynamic radio stars created by JS but we can also prebuild cleanly -->
+            <label class="star-option"><input type="radio" name="overallRating" value="1" id="rating_1" required><span>★☆☆☆☆</span></label>
+            <label class="star-option"><input type="radio" name="overallRating" value="2" id="rating_2" required><span>★★☆☆☆</span></label>
+            <label class="star-option"><input type="radio" name="overallRating" value="3" id="rating_3" required><span>★★★☆☆</span></label>
+            <label class="star-option"><input type="radio" name="overallRating" value="4" id="rating_4" required><span>★★★★☆</span></label>
+            <label class="star-option"><input type="radio" name="overallRating" value="5" id="rating_5" required><span>★★★★★</span></label>
           </div>
         </div>
       </div>
@@ -316,6 +326,10 @@
         <label>✨ Which features did you find useful? <span class="optional-hint">(check all that apply)</span></label>
         <div class="checkbox-group" id="featuresChecklist">
           <!-- populated via js to ensure id/name/value pattern -->
+          <label class="checkbox-item"><input type="checkbox" id="featureDurability" name="durability" value="Durability"><span>Durability</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="featureEase" name="easeOfUse" value="Ease of Use"><span>Ease of Use</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="featurePerformance" name="performance" value="Performance"><span>Performance</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="featureDesign" name="design" value="Design"><span>Design</span></label>
         </div>
       </div>
 
@@ -336,11 +350,12 @@
     </form>
   </div>
 
-  <!-- Common footer as per assignments -->
+  <footer>
   <div class="footer-common">
     ©2024 ⚠️ Rubia Magdelena Francesco ⚠️ Madagascar — Last Modification: 02/26/2024 13:56:10<br>
     <span>🍕 Every pizza review helps us perfect the slice! 🍕</span>
   </div>
+  </footer>
 </div>
 
 <script>
