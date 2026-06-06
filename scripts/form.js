@@ -3,14 +3,14 @@
 // Value attribute = product name as required.
 // --------------------------------------------------------------
 const pizzaProducts = [
-  { id: 101, name: "Margherita Classic" },
-  { id: 102, name: "Pepperoni Blaze" },
-  { id: 103, name: "Quattro Formaggi" },
-  { id: 104, name: "Diavola Inferno" },
-  { id: 105, name: "Veggie Supreme" },
-  { id: 106, name: "BBQ Chicken Crunch" },
-  { id: 107, name: "Pesto Genovese" },
-  { id: 108, name: "Hawaiian Luau" }
+  { id: 101, name: "iPhone 15 Pro" },
+  { id: 102, name: "Samsung Galaxy S24 Ultra" },
+  { id: 103, name: "Google Pixel 9 Pro" },
+  { id: 104, name: "OnePlus 12" },
+  { id: 105, name: "Sony Xperia 1 VI" },
+  { id: 106, name: "Xiaomi 14 Ultra" },
+  { id: 107, name: "Samsung Galaxy A55" },
+  { id: 108, name: "Nothing Phone (2a)" }
 ];
 
 // --------------------------------------------------------------
