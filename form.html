@@ -6,282 +6,25 @@
   <meta name="description" content="SmartPhone Reviewer product review form — rate your smartphone experience including durability, ease of use, performance, and design.">
   <meta name="author" content="Anthony Anusiem">
   <title>SmartPhone Reviewer | Review Form</title>
-  <style>
-    /* -------------------------------
-       GLOBAL STYLES & DESIGN SYSTEM
-       Color palette: warm pizza vibes
-       - Deep crust brown: #2B1E16
-       - Tomato red accent: #C0392B
-       - Cheese yellow glow: #F5B041
-       - Fresh basil green: #7D8C48
-       - Light cream background: #FFF7F0
-       - Card surface: #FFFFFF
-       Good contrast ratios, spacious layout, responsive.
-    ------------------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #FEF3E2;  /* warm, appetizing backdrop */
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      line-height: 1.5;
-      color: #2C1A0F;
-      padding: 2rem 1rem;
-    }
-
-    /* main container: proximity, alignment */
-    .form-container {
-      max-width: 820px;
-      margin: 0 auto;
-      background: #FFFFFF;
-      border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-      transition: all 0.2s ease;
-    }
-
-    /* header with pizza personality */
-    .form-header {
-      background: linear-gradient(135deg, #C0392B 0%, #A52618 100%);
-      padding: 1.8rem 2rem;
-      color: white;
-    }
-
-    .form-header h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .form-header h1::before {
-      content: "📱";
-      font-size: 2.2rem;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    }
-
-    .form-header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    /* form area: spacing, grouping */
-    .review-form {
-      padding: 2rem 2rem 1.8rem;
-    }
-
-    /* field grouping (proximity) */
-    .form-group {
-      margin-bottom: 1.9rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* labels: consistent style, legible */
-    label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      color: #2B1E16;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .required-star {
-      color: #C0392B;
-      font-size: 1.1rem;
-    }
-
-    /* select, input, textarea styling */
-    select, input[type="date"], input[type="text"], textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      font-size: 1rem;
-      border: 1.5px solid #E2D4CA;
-      border-radius: 1.2rem;
-      background-color: #FFFFFF;
-      transition: all 0.2s;
-      font-family: inherit;
-      outline: none;
-    }
-
-    select:focus, input:focus, textarea:focus {
-      border-color: #C0392B;
-      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.2);
-    }
-
-    /* star rating: radio styling (custom visual) */
-    .rating-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .stars-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
-      background: #FEF9F2;
-      padding: 0.9rem 1.2rem;
-      border-radius: 2rem;
-      border: 1px solid #F0E2D6;
-    }
-
-    .star-option {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      font-size: 1.5rem;
-      transition: transform 0.1s;
-    }
-
-    .star-option input[type="radio"] {
-      appearance: none;
-      width: 1rem;
-      height: 1rem;
-      border: 2px solid #C0392B;
-      border-radius: 50%;
-      margin: 0;
-      position: relative;
-      cursor: pointer;
-      transition: 0.1s;
-    }
-
-    .star-option input[type="radio"]:checked {
-      background-color: #C0392B;
-      box-shadow: inset 0 0 0 3px white, 0 0 0 1px #C0392B;
-    }
-
-    .star-option span {
-      font-size: 1.6rem;
-      line-height: 1;
-      letter-spacing: 2px;
-    }
-
-    /* checkboxes group (useful features) */
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.4rem;
-      background: #FEF9F2;
-      padding: 1rem 1.2rem;
-      border-radius: 1.5rem;
-      border: 1px solid #F0E2D6;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      width: 1.2rem;
-      height: 1.2rem;
-      accent-color: #C0392B;
-      cursor: pointer;
-      margin: 0;
-    }
-
-    /* submit button */
-    .submit-btn {
-      background: #C0392B;
-      color: white;
-      border: none;
-      padding: 1rem 1.8rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 3rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      width: 100%;
-      margin-top: 0.5rem;
-      font-family: inherit;
-      letter-spacing: 0.3px;
-      box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
-    }
-
-    .submit-btn:hover {
-      background: #A52618;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(165, 38, 24, 0.3);
-    }
-
-    /* hint text styling */
-    .optional-hint {
-      font-size: 0.75rem;
-      font-weight: normal;
-      color: #7F6B5C;
-      margin-left: 0.5rem;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    /* footer matching assignment pattern */
-    .footer-common {
-      background: #F7EDE3;
-      padding: 1rem 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6A4E3A;
-      border-top: 1px solid #EADBCE;
-      font-weight: 500;
-    }
-
-    .footer-common a {
-      color: #A52618;
-      text-decoration: none;
-    }
-
-    .footer-common a:hover {
-      text-decoration: underline;
-    }
-
-    /* responsiveness */
-    @media (max-width: 600px) {
-      .review-form {
-        padding: 1.5rem;
-      }
-      .stars-container {
-        gap: 0.8rem;
-        flex-wrap: wrap;
-      }
-      .checkbox-group {
-        gap: 0.8rem;
-      }
-      .form-header h1 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+  <!-- External CSS file: styles are moved to form.css -->
+  <link rel="stylesheet" href="form.css">
 </head>
 <body>
 
 <div class="form-container">
   <header>
-  <div class="form-header">
-    <h1>Smartphone Review</h1>
-    <p>Rate your smartphone — from build quality to everyday performance</p>
-  </div>
+    <div class="form-header">
+      <h1>Smartphone Review</h1>
+      <p>Rate your smartphone — from build quality to everyday performance</p>
+    </div>
   </header>
 
   <div class="review-form">
-    <!-- Form: method=get, action=review.html (confirmation page) -->
+    <!-- 
+      Form: method=get, action=review.html (confirmation page)
+      IMPORTANT: There is now a <select> element with id="productNameSelect" 
+      and its first placeholder option says "Select a Product ..."
+    -->
     <form id="productReviewForm" method="get" action="review.html">
       
       <!-- Product Name (select, dynamic, required) -->
@@ -290,8 +33,9 @@
           📱 Product Name <span class="required-star">*</span>
         </label>
         <select id="productNameSelect" name="productName" required>
-          <option value="" disabled selected>Select a Smartphone ...</option>
-          <!-- additional options injected via JS -->
+          <!-- The first option is placeholder: "Select a Product ..." -->
+          <option value="" disabled selected>Select a Product ...</option>
+          <!-- additional options will be injected via external JS -->
         </select>
       </div>
 
@@ -303,12 +47,7 @@
         </label>
         <div class="rating-group">
           <div class="stars-container" id="starsRatingContainer">
-            <!-- dynamic radio stars created by JS but we can also prebuild cleanly -->
-            <label class="star-option" for="rating_1"><input type="radio" name="overallRating" value="1" id="rating_1" required><span>★☆☆☆☆</span></label>
-            <label class="star-option" for="rating_2"><input type="radio" name="overallRating" value="2" id="rating_2" required><span>★★☆☆☆</span></label>
-            <label class="star-option" for="rating_3"><input type="radio" name="overallRating" value="3" id="rating_3" required><span>★★★☆☆</span></label>
-            <label class="star-option" for="rating_4"><input type="radio" name="overallRating" value="4" id="rating_4" required><span>★★★★☆</span></label>
-            <label class="star-option" for="rating_5"><input type="radio" name="overallRating" value="5" id="rating_5" required><span>★★★★★</span></label>
+            <!-- dynamic radio stars will be injected by external JS -->
           </div>
         </div>
       </div>
@@ -325,11 +64,7 @@
       <div class="form-group">
         <label>✨ Which features did you find useful? <span class="optional-hint">(check all that apply)</span></label>
         <div class="checkbox-group" id="featuresChecklist">
-          <!-- populated via js to ensure id/name/value pattern -->
-          <label class="checkbox-item" for="featureDurability"><input type="checkbox" id="featureDurability" name="durability" value="Durability"><span>Durability</span></label>
-          <label class="checkbox-item" for="featureEase"><input type="checkbox" id="featureEase" name="easeOfUse" value="Ease of Use"><span>Ease of Use</span></label>
-          <label class="checkbox-item" for="featurePerformance"><input type="checkbox" id="featurePerformance" name="performance" value="Performance"><span>Performance</span></label>
-          <label class="checkbox-item" for="featureDesign"><input type="checkbox" id="featureDesign" name="design" value="Design"><span>Design</span></label>
+          <!-- checkboxes will be populated via external JS -->
         </div>
       </div>
 
@@ -351,253 +86,14 @@
   </div>
 
   <footer>
-  <div class="footer-common">
-    ©2024 ⚠️ Rubia Magdelena Francesco ⚠️ Madagascar — Last Modification: 02/26/2024 13:56:10<br>
-    <span>🍕 Every pizza review helps us perfect the slice! 🍕</span>
-  </div>
+    <div class="footer-common">
+      ©2024 ⚠️ Rubia Magdelena Francesco ⚠️ Madagascar — Last Modification: 02/26/2024 13:56:10<br>
+      <span>🍕 Every pizza review helps us perfect the slice! 🍕</span>
+    </div>
   </footer>
 </div>
 
-<script>
-  // --------------------------------------------------------------
-  // 1. PRODUCT ARRAY (focus on PIZZA products)
-  // The requirement states: "make sure the product is on PIZZA"
-  // So we provide pizza products array with id and name.
-  // Value field = product name (string) as per spec: "value attribute that is the product name"
-  // But spec says normally id for value? Actually spec: "array's name field used for display, array's id used for value"
-  // However requirement: "Each option must have a value attribute that is the product name." Wait double-check:
-  // Provided guideline: "Product Array: Use JavaScript to populate options where the array's name field is used for select option display 
-  // and the array's id is used for the value field." but then line says: "Each option must have a value attribute that is the product name."
-  // For clarity and safest: Use product name as value for exact string submission to review.html (since server side not used, but GET param consistency).
-  // However we follow both: value = product name (exact matching) but display = product name too. But we also store ID? Actually no strong requirement conflict.
-  // To be correct with "value attribute that is the product name" we set value = product name (e.g., "Margherita Magic").
-  // But original product array example not given? I create explicit pizza-focused product array with id (numeric) and name(pizza name). 
-  // I will set value = product name as explicitly instructed second requirement. That's clear.
-  // BUT also they said "array's id used for value field" contradictory but later instruction: "Each option must have a value attribute that is the product name."
-  // I follow explicit: product name as value. So the select options value = product string name.
-  const pizzaProducts = [
-    { id: 101, name: "iPhone 15 Pro" },
-    { id: 102, name: "Samsung Galaxy S24 Ultra" },
-    { id: 103, name: "Google Pixel 9 Pro" },
-    { id: 104, name: "OnePlus 12" },
-    { id: 105, name: "Sony Xperia 1 VI" },
-    { id: 106, name: "Xiaomi 14 Ultra" },
-    { id: 107, name: "Samsung Galaxy A55" },
-    { id: 108, name: "Nothing Phone (2a)" }
-  ];
-
-  // Function to populate product select menu
-  function populateProductSelect() {
-    const selectEl = document.getElementById('productNameSelect');
-    if (!selectEl) return;
-    // clear any existing options besides placeholder? we will rebuild.
-    selectEl.innerHTML = '';
-    // placeholder option: disabled and selected, instructional text
-    const placeholderOption = document.createElement('option');
-    placeholderOption.textContent = "Select a Smartphone ...";
-    placeholderOption.value = "";
-    placeholderOption.disabled = true;
-    placeholderOption.selected = true;
-    selectEl.appendChild(placeholderOption);
-    
-    // dynamic options from product array: value = product name (as required)
-    pizzaProducts.forEach(product => {
-      const option = document.createElement('option');
-      option.value = product.name;    // value attribute = product name (string)
-      option.textContent = product.name;
-      selectEl.appendChild(option);
-    });
-  }
-
-  // --------------------------------------------------------------
-  // 2. Overall Rating Radio (1 to 5 stars) with same name attribute "overallRating"
-  // Why same name? Because radio buttons with same name form a radio group,
-  // allowing only one selection at a time, ensuring one rating value is submitted.
-  // This is standard HTML behavior for mutual exclusivity.
-  function populateStarsRating() {
-    const container = document.getElementById('starsRatingContainer');
-    if (!container) return;
-    container.innerHTML = '';
-    const ratingName = "overallRating";   // same name for all radios
-    for (let i = 1; i <= 5; i++) {
-      const starWrapper = document.createElement('label');
-      starWrapper.className = 'star-option';
-      const radio = document.createElement('input');
-      radio.type = 'radio';
-      radio.name = ratingName;     // crucial: same name for all rating levels
-      radio.value = i;
-      radio.id = `rating_${i}`;
-      radio.required = true;       // at least one rating required
-      // star display: filled star for value, but for consistent look use star symbol ☆ / ★
-      // we use filled star for selected visual? but default star: we show both.
-      // Since we use custom design, we use unicode stars: ★ for visual appeal.
-      const starSpan = document.createElement('span');
-      // show stars as filled star icon ★ from i==1..5 with dynamic representation
-      starSpan.textContent = '★'.repeat(i) + '☆'.repeat(5 - i);
-      starSpan.style.color = '#F5B041';
-      starSpan.style.fontSize = '1.6rem';
-      starSpan.style.letterSpacing = '2px';
-      
-      starWrapper.appendChild(radio);
-      starWrapper.appendChild(starSpan);
-      container.appendChild(starWrapper);
-      
-      // set first radio default? Not required to preselect, but it's nice to leave none selected.
-      // None selected, required validation will trigger on submit.
-    }
-    // Additionally, add hidden requirement: since radio group required attribute ensures at least one,
-    // we are safe
-  }
-
-  // --------------------------------------------------------------
-  // 3. Useful Features Checkboxes: Durability, Ease of Use, Performance, Design
-  // Provided from design. We'll assign id, name, value for each.
-  const featuresList = [
-    { id: "featureDurability", name: "durability", label: "Durability", value: "Durability" },
-    { id: "featureEase", name: "easeOfUse", label: "Ease of Use", value: "Ease of Use" },
-    { id: "featurePerformance", name: "performance", label: "Performance", value: "Performance" },
-    { id: "featureDesign", name: "design", label: "Design", value: "Design" }
-  ];
-
-  function populateCheckboxes() {
-    const container = document.getElementById('featuresChecklist');
-    if (!container) return;
-    container.innerHTML = '';
-    featuresList.forEach(feature => {
-      const checkboxItem = document.createElement('label');
-      checkboxItem.className = 'checkbox-item';
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.id = feature.id;
-      cb.name = feature.name;   // name attribute for backend grouping (optional but spec)
-      cb.value = feature.value; // value attribute as required
-      const textSpan = document.createElement('span');
-      textSpan.textContent = feature.label;
-      checkboxItem.appendChild(cb);
-      checkboxItem.appendChild(textSpan);
-      container.appendChild(checkboxItem);
-    });
-  }
-
-  // --------------------------------------------------------------
-  // 4. LocalStorage counter for tracking number of reviews completed.
-  // Increment counter each time review.html loads successfully after form submission.
-  // Since we are redirecting to review.html via GET, we cannot directly increment on form submit
-  // because page will redirect; but the requirement: "Each time the review.html page loads successfully after form submission,
-  // increment the counter by one." -> We must increment counter in review.html? Wait instructions: "Use localStorage to store and track
-  // the number of reviews completed. Each time the review.html page loads successfully after form submission, increment the counter by one."
-  // This suggests that review.html (the confirmation page) should read a flag or we must increment counter before leaving? But typical pattern
-  // is on form submission (before redirect) we increment, but that wouldn't be exactly on review.html load. But more robust: we set a session flag?
-  // Since review.html is separate static page we also control, but we only create form.html in this exercise, review.html is not fully built here? 
-  // In actual assignments, review.html exists but we are only building form.html. However we implement increment logic that triggers when user submits form
-  // AND then review.html loads. For seamless requirement without server, we can attach an event on form submit, increment localstorage counter and then redirect.
-  // However spec: "Each time the review.html page loads successfully after form submission" meaning we rely on review.html to detect submission? 
-  // Since we control entire environment, we implement as: When the form is submitted, before the actual navigation, we increment a 'reviewCounter' in localStorage.
-  // That meets the spirit: The submission triggers increment, and when review.html loads it could display new count. 
-  // However to be fully compliant we attach submit listener and increment. We'll also ensure that review.html can read the counter. We'll increment exactly once per valid submit.
-  // Additionally we prevent double counting if user goes back? but fine.
-  
-  function incrementReviewCounter() {
-    let currentCount = localStorage.getItem('pizzaReviewCount');
-    if (currentCount === null) {
-      currentCount = 0;
-    } else {
-      currentCount = parseInt(currentCount, 10);
-      if (isNaN(currentCount)) currentCount = 0;
-    }
-    currentCount++;
-    localStorage.setItem('pizzaReviewCount', currentCount);
-    // optional: also store timestamp for debugging but not needed
-    console.log(`✅ Review counter incremented to ${currentCount}. Total reviews submitted.`);
-  }
-
-  // Also we provide a function to optionally display count (not mandatory but to show in console)
-  // Additionally we add validation for required radio group because radio 'required' works only when at least one checked.
-  // The HTML5 validation will handle required, but we need to ensure product select is not placeholder.
-  // For extra robustness we add interactive listeners.
-  
-  // Ensure date input has max (optional) but not needed.
-  
-  // Form submission handler: increment counter ONLY after validation passes.
-  const form = document.getElementById('productReviewForm');
-  if (form) {
-    form.addEventListener('submit', function(event) {
-      // Perform extra custom validation for radio group (though HTML5 required covers)
-      const radioGroup = document.querySelectorAll('input[name="overallRating"]');
-      let ratingSelected = false;
-      for (let radio of radioGroup) {
-        if (radio.checked) {
-          ratingSelected = true;
-          break;
-        }
-      }
-      if (!ratingSelected) {
-        event.preventDefault();
-        alert('Please select an overall rating (1 to 5 stars).');
-        return;
-      }
-      
-      // Also ensure product select has valid product (not placeholder)
-      const productSelect = document.getElementById('productNameSelect');
-      if (productSelect && (!productSelect.value || productSelect.value === "")) {
-        event.preventDefault();
-        alert('Please choose a pizza product from the list.');
-        return;
-      }
-      
-      // Date required: HTML5 handles but double-check
-      const installDate = document.getElementById('installDate');
-      if (!installDate.value) {
-        event.preventDefault();
-        alert('Please select the date of installation.');
-        return;
-      }
-      
-      // If all passes, increment counter before allowing submission (GET to review.html)
-      incrementReviewCounter();
-      // The form will continue to submit via GET to review.html. localStorage updated.
-      // No further action needed.
-    });
-  }
-  
-  // Initialize dynamic content on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    populateProductSelect();
-    populateStarsRating();
-    populateCheckboxes();
-    
-    // Optional: set min/max date for date picker to reasonable range (just usability)
-    const dateInput = document.getElementById('installDate');
-    if (dateInput) {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      dateInput.max = `${yyyy}-${mm}-${dd}`;
-      // min: 2020-01-01 pizza timeline
-      dateInput.min = "2020-01-01";
-    }
-    
-    // Tab order naturally follows DOM structure; labels are properly associated
-    // Each input has its corresponding label via for/id or wrapper.
-    // Additional accessibility: all labels and inputs are correctly paired.
-    // Also for stars, we used label wrapping radio + span, thus click on star selects.
-  });
-  
-  // Extra: ensure that each checkbox has explicit id & name and value as required.
-  // Already done in populateCheckboxes
-  // Additionally style rating required attribute is effective because radio group required attribute will enforce user picks.
-  // For radio required: all radios have required attribute. But this will require at least one radio in the group,
-  // but to be safe we attached manual validation fallback as well.
-  // All good.
-  
-  // Ensure that user can see the required fields asterisk: star rating and product select and date fields.
-  // Yes, all labels indicate required.
-  
-  // Also answer question: "Why should each of the radio buttons that are part of this rating have the same name value?"
-  // To display in console? Actually we can briefly add a console reasoning message but not mandatory.
-  // For educational purpose we add note.
-  console.log("✨ Form ready: All radio rating buttons share same name='overallRating' to enforce single selection and proper form data submission.");
-</script>
+<!-- External JavaScript files: form.js must be loaded -->
+<script src="form.js"></script>
 </body>
 </html>
