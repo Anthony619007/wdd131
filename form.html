@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pizza Perfector product review form — rate your pizza experience including toppings, crust, and overall satisfaction.">
+  <meta name="description" content="SmartPhone Reviewer product review form — rate your smartphone experience including durability, ease of use, performance, and design.">
   <meta name="author" content="Anthony Anusiem">
-  <title>Pizza Perfector | Review Form</title>
+  <title>SmartPhone Reviewer | Review Form</title>
   <style>
     /* -------------------------------
        GLOBAL STYLES & DESIGN SYSTEM
@@ -61,7 +61,7 @@
     }
 
     .form-header h1::before {
-      content: "🍕";
+      content: "📱";
       font-size: 2.2rem;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
@@ -275,8 +275,8 @@
 <div class="form-container">
   <header>
   <div class="form-header">
-    <h1>Pizza Master Review</h1>
-    <p>Rate your latest pizza creation — from dough to toppings</p>
+    <h1>Smartphone Review</h1>
+    <p>Rate your smartphone — from build quality to everyday performance</p>
   </div>
   </header>
 
@@ -287,10 +287,10 @@
       <!-- Product Name (select, dynamic, required) -->
       <div class="form-group">
         <label for="productNameSelect">
-          🍕 Product Name <span class="required-star">*</span>
+          📱 Product Name <span class="required-star">*</span>
         </label>
         <select id="productNameSelect" name="productName" required>
-          <option value="" disabled selected>Select a Product ...</option>
+          <option value="" disabled selected>Select a Smartphone ...</option>
           <!-- additional options injected via JS -->
         </select>
       </div>
@@ -304,11 +304,11 @@
         <div class="rating-group">
           <div class="stars-container" id="starsRatingContainer">
             <!-- dynamic radio stars created by JS but we can also prebuild cleanly -->
-            <label class="star-option"><input type="radio" name="overallRating" value="1" id="rating_1" required><span>★☆☆☆☆</span></label>
-            <label class="star-option"><input type="radio" name="overallRating" value="2" id="rating_2" required><span>★★☆☆☆</span></label>
-            <label class="star-option"><input type="radio" name="overallRating" value="3" id="rating_3" required><span>★★★☆☆</span></label>
-            <label class="star-option"><input type="radio" name="overallRating" value="4" id="rating_4" required><span>★★★★☆</span></label>
-            <label class="star-option"><input type="radio" name="overallRating" value="5" id="rating_5" required><span>★★★★★</span></label>
+            <label class="star-option" for="rating_1"><input type="radio" name="overallRating" value="1" id="rating_1" required><span>★☆☆☆☆</span></label>
+            <label class="star-option" for="rating_2"><input type="radio" name="overallRating" value="2" id="rating_2" required><span>★★☆☆☆</span></label>
+            <label class="star-option" for="rating_3"><input type="radio" name="overallRating" value="3" id="rating_3" required><span>★★★☆☆</span></label>
+            <label class="star-option" for="rating_4"><input type="radio" name="overallRating" value="4" id="rating_4" required><span>★★★★☆</span></label>
+            <label class="star-option" for="rating_5"><input type="radio" name="overallRating" value="5" id="rating_5" required><span>★★★★★</span></label>
           </div>
         </div>
       </div>
@@ -326,23 +326,23 @@
         <label>✨ Which features did you find useful? <span class="optional-hint">(check all that apply)</span></label>
         <div class="checkbox-group" id="featuresChecklist">
           <!-- populated via js to ensure id/name/value pattern -->
-          <label class="checkbox-item"><input type="checkbox" id="featureDurability" name="durability" value="Durability"><span>Durability</span></label>
-          <label class="checkbox-item"><input type="checkbox" id="featureEase" name="easeOfUse" value="Ease of Use"><span>Ease of Use</span></label>
-          <label class="checkbox-item"><input type="checkbox" id="featurePerformance" name="performance" value="Performance"><span>Performance</span></label>
-          <label class="checkbox-item"><input type="checkbox" id="featureDesign" name="design" value="Design"><span>Design</span></label>
+          <label class="checkbox-item" for="featureDurability"><input type="checkbox" id="featureDurability" name="durability" value="Durability"><span>Durability</span></label>
+          <label class="checkbox-item" for="featureEase"><input type="checkbox" id="featureEase" name="easeOfUse" value="Ease of Use"><span>Ease of Use</span></label>
+          <label class="checkbox-item" for="featurePerformance"><input type="checkbox" id="featurePerformance" name="performance" value="Performance"><span>Performance</span></label>
+          <label class="checkbox-item" for="featureDesign"><input type="checkbox" id="featureDesign" name="design" value="Design"><span>Design</span></label>
         </div>
       </div>
 
       <!-- Written Review (textarea, optional) -->
       <div class="form-group">
         <label for="writtenReview">📝 Written Review <span class="optional-hint">(optional)</span></label>
-        <textarea id="writtenReview" name="writtenReview" placeholder="Share your pizza experience... crust crispiness? sauce perfection?"></textarea>
+        <textarea id="writtenReview" name="writtenReview" placeholder="Share your experience... battery life? camera quality? build feel?"></textarea>
       </div>
 
       <!-- User Name (text, optional) -->
       <div class="form-group">
         <label for="userName">👤 Your Name <span class="optional-hint">(optional)</span></label>
-        <input type="text" id="userName" name="userName" placeholder="e.g., Luca, Margherita Lover">
+        <input type="text" id="userName" name="userName" placeholder="e.g., Anthony,Anusiem">
       </div>
 
       <!-- Submit Button -->
@@ -376,14 +376,14 @@
   // BUT also they said "array's id used for value field" contradictory but later instruction: "Each option must have a value attribute that is the product name."
   // I follow explicit: product name as value. So the select options value = product string name.
   const pizzaProducts = [
-    { id: 101, name: "Margherita Classic" },
-    { id: 102, name: "Pepperoni Blaze" },
-    { id: 103, name: "Quattro Formaggi" },
-    { id: 104, name: "Diavola Inferno" },
-    { id: 105, name: "Veggie Supreme" },
-    { id: 106, name: "BBQ Chicken Crunch" },
-    { id: 107, name: "Pesto Genovese" },
-    { id: 108, name: "Hawaiian Luau" }
+    { id: 101, name: "iPhone 15 Pro" },
+    { id: 102, name: "Samsung Galaxy S24 Ultra" },
+    { id: 103, name: "Google Pixel 9 Pro" },
+    { id: 104, name: "OnePlus 12" },
+    { id: 105, name: "Sony Xperia 1 VI" },
+    { id: 106, name: "Xiaomi 14 Ultra" },
+    { id: 107, name: "Samsung Galaxy A55" },
+    { id: 108, name: "Nothing Phone (2a)" }
   ];
 
   // Function to populate product select menu
@@ -394,7 +394,7 @@
     selectEl.innerHTML = '';
     // placeholder option: disabled and selected, instructional text
     const placeholderOption = document.createElement('option');
-    placeholderOption.textContent = "Select a Pizza ...";
+    placeholderOption.textContent = "Select a Smartphone ...";
     placeholderOption.value = "";
     placeholderOption.disabled = true;
     placeholderOption.selected = true;
