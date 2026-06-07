@@ -18,11 +18,7 @@
        - Card surface: #FFFFFF
        Good contrast ratios, spacious layout, responsive.
     ------------------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * * { margin: 0; padding: 0; box-sizing: border-box; } body { background: #FEF3E2; font-family: 'Inter', sans-serif; ... } .form-container { max-width: 820px; margin: 0 auto; ... } ... rest of your CSS rules ...
 
     body {
       background: #FEF3E2;  /* warm, appetizing backdrop */
@@ -269,6 +265,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="form.css">
 </head>
 <body>
 
@@ -289,10 +286,7 @@
         <label for="productNameSelect">
           📱 Product Name <span class="required-star">*</span>
         </label>
-        <select id="productNameSelect" name="productName" required>
-          <option value="" disabled selected>Select a Smartphone ...</option>
-          <!-- additional options injected via JS -->
-        </select>
+        <select id="productNameSelect" name="productName" required> <option value="" disabled selected>Select a Product ...</option> <option value="iPhone 15 Pro">iPhone 15 Pro</option> <option value="Samsung Galaxy S24 Ultra">Samsung Galaxy S24 Ultra</option> <option value="Google Pixel 9 Pro">Google Pixel 9 Pro</option> <option value="OnePlus 12">OnePlus 12</option> <option value="Sony Xperia 1 VI">Sony Xperia 1 VI</option> <option value="Xiaomi 14 Ultra">Xiaomi 14 Ultra</option> <option value="Samsung Galaxy A55">Samsung Galaxy A55</option> <option value="Nothing Phone (2a)">Nothing Phone (2a)</option> </select>
       </div>
 
       <!-- Overall Rating (radio, 1-5 stars) with same name for mutual exclusivity -->
@@ -598,6 +592,6 @@
   // To display in console? Actually we can briefly add a console reasoning message but not mandatory.
   // For educational purpose we add note.
   console.log("✨ Form ready: All radio rating buttons share same name='overallRating' to enforce single selection and proper form data submission.");
-</script>
+<script src="form.js"></script>
 </body>
 </html>
