@@ -1,59 +1,80 @@
-// ─── Star Rating ────────────────────────────────────────────────────────────
-(function buildStars() {
-  const container = document.getElementById("starsRatingContainer");
-  if (!container) return;
+// --------------------------------------------------------------
+// Smartphone product array
+const pizzaProducts = [
+  { id: 101, name: "iPhone 15 Pro" },
+  { id: 102, name: "Samsung Galaxy S24 Ultra" },
+  { id: 103, name: "Google Pixel 9 Pro" },
+  { id: 104, name: "OnePlus 12" },
+  { id: 105, name: "Sony Xperia 1 VI" },
+  { id: 106, name: "Xiaomi 14 Ultra" },
+  { id: 107, name: "Samsung Galaxy A55" },
+  { id: 108, name: "Nothing Phone (2a)" }
+];
 
-  for (let i = 1; i <= 5; i++) {
-    // Radio input
-    const input = document.createElement("input");
-    input.type  = "radio";
-    input.name  = "overallRating";
-    input.id    = "star" + i;
-    input.value = i;
-    input.required = true;
-
-    // Label with star emoji
-    const label = document.createElement("label");
-    label.htmlFor   = "star" + i;
-    label.textContent = "★";
-    label.setAttribute("aria-label", i + " star" + (i > 1 ? "s" : ""));
-
-    container.appendChild(input);
-    container.appendChild(label);
+// --------------------------------------------------------------
+// localStorage counter
+function incrementReviewCounter() {
+  let currentCount = localStorage.getItem('smartphoneReviewCount');
+  if (currentCount === null) {
+    currentCount = 0;
+  } else {
+    currentCount = parseInt(currentCount, 10);
+    if (isNaN(currentCount)) currentCount = 0;
   }
-})();
+  currentCount++;
+  localStorage.setItem('smartphoneReviewCount', currentCount);
+  console.log('Review counter incremented to ' + currentCount + '. Total reviews submitted.');
+}
 
-// ─── Features Checklist ──────────────────────────────────────────────────────
-(function buildFeatures() {
-  const container = document.getElementById("featuresChecklist");
-  if (!container) return;
+// --------------------------------------------------------------
+// Form submission validation
+const form = document.getElementById('productReviewForm');
+if (form) {
+  form.addEventListener('submit', function(event) {
+    const radioGroup = document.querySelectorAll('input[name="overallRating"]');
+    let ratingSelected = false;
+    for (let radio of radioGroup) {
+      if (radio.checked) {
+        ratingSelected = true;
+        break;
+      }
+    }
+    if (!ratingSelected) {
+      event.preventDefault();
+      alert('Please select an overall rating (1 to 5 stars).');
+      return;
+    }
 
-  const features = [
-    { value: "crispy-crust",     label: "Crispy Crust"       },
-    { value: "rich-sauce",       label: "Rich Sauce"         },
-    { value: "fresh-toppings",   label: "Fresh Toppings"     },
-    { value: "generous-cheese",  label: "Generous Cheese"    },
-    { value: "good-value",       label: "Good Value"         },
-    { value: "fast-delivery",    label: "Fast Delivery"      },
-    { value: "great-packaging",  label: "Great Packaging"    },
-  ];
+    const productSelect = document.getElementById('productNameSelect');
+    if (productSelect && (!productSelect.value || productSelect.value === "")) {
+      event.preventDefault();
+      alert('Please choose a smartphone from the list.');
+      return;
+    }
 
-  features.forEach(function (feat) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "checkbox-item";
+    const installDate = document.getElementById('installDate');
+    if (!installDate.value) {
+      event.preventDefault();
+      alert('Please select the date of purchase.');
+      return;
+    }
 
-    const input = document.createElement("input");
-    input.type  = "checkbox";
-    input.name  = "features";
-    input.id    = feat.value;
-    input.value = feat.value;
-
-    const label = document.createElement("label");
-    label.htmlFor     = feat.value;
-    label.textContent = feat.label;
-
-    wrapper.appendChild(input);
-    wrapper.appendChild(label);
-    container.appendChild(wrapper);
+    incrementReviewCounter();
   });
-})();
+}
+
+// --------------------------------------------------------------
+// On page load: set date limits
+document.addEventListener('DOMContentLoaded', function() {
+  const dateInput = document.getElementById('installDate');
+  if (dateInput) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.max = yyyy + '-' + mm + '-' + dd;
+    dateInput.min = "2020-01-01";
+  }
+});
+
+console.log("Form ready: All radio rating buttons share name='overallRating' to enforce single selection.");
