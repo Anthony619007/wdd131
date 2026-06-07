@@ -1,372 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base target="_self">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SmartPhone Reviewer product review form - Share your honest smartphone experience">
-    <meta name="author" content="Anthony Anusiem">
-    <title>SmartPhone Reviewer | Review Form</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom CSS with media queries */
-        @media (max-width: 640px) {
-            .mobile-stack {
-                flex-direction: column;
-            }
-            .mobile-full {
-                width: 100%;
-            }
-        }
-        
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .tablet-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-        }
-        
-        @media (min-width: 1025px) {
-            .desktop-container {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-        }
-        
-        /* Star rating styling */
-        .star-rating input {
-            display: none;
-        }
-        
-        .star-rating label {
-            cursor: pointer;
-            font-size: 2rem;
-            color: #d1d5db;
-            transition: color 0.2s;
-        }
-        
-        .star-rating input:checked ~ label,
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: #fbbf24;
-        }
-        
-        .star-rating input:checked + label {
-            color: #f59e0b;
-        }
-        
-        /* Checkbox and radio styling */
-        .custom-checkbox,
-        .custom-radio {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            transition: background-color 0.2s;
-        }
-        
-        .custom-checkbox:hover,
-        .custom-radio:hover {
-            background-color: #f3f4f6;
-        }
-        
-        .custom-checkbox input,
-        .custom-radio input {
-            width: 1.25rem;
-            height: 1.25rem;
-            cursor: pointer;
-        }
-        
-        /* Form validation */
-        .required-star {
-            color: #ef4444;
-        }
-        
-        input:invalid,
-        select:invalid,
-        textarea:invalid {
-            border-color: #ef4444;
-        }
-        
-        input:focus:invalid,
-        select:focus:invalid,
-        textarea:focus:invalid {
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartPhone Reviewer product review form - Share your honest smartphone experience">
+  <meta name="author" content="Anthony Anusiem">
+  <title>SmartPhone Reviewer | Review Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(145deg, #e9eff5 0%, #dce3ec 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 2rem 1.5rem;
+      color: #1a2c3e;
+    }
+    .review-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .form-header {
+      background: #0f2c3b;
+      padding: 1.8rem 2rem;
+      border-bottom: 4px solid #ffb347;
+    }
+    .form-header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #f9f7f3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-header h1::before {
+      content: "📱";
+      font-size: 2rem;
+    }
+    .form-header p {
+      color: #cfdfe8;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .smart-review-form {
+      padding: 2rem 2rem 1.8rem;
+    }
+    .form-group {
+      margin-bottom: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1e3a4d;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .required-ast {
+      color: #c24b2a;
+    }
+    .optional-badge {
+      font-weight: normal;
+      font-size: 0.7rem;
+      background: #eef2f5;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 0.75rem;
+      color: #4a627a;
+    }
+    .hint-text {
+      color: #507b9b;
+      font-size: 0.75rem;
+    }
+    select, input[type="date"], input[type="text"], textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #d4dee8;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background-color: #fefefe;
+      outline: none;
+      transition: all 0.2s;
+    }
+    select:focus, input:focus, textarea:focus {
+      border-color: #ffb347;
+      box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
+    }
+    .rating-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: #f9fafc;
+      padding: 1rem 1.2rem;
+      border-radius: 48px;
+      border: 1px solid #e2e8f0;
+    }
+    .rating-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+    }
+    .rating-option:hover {
+      background: #fff7ed;
+      border-color: #ffb347;
+    }
+    .rating-option input {
+      accent-color: #ffb347;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin: 0;
+      cursor: pointer;
+    }
+    .rating-option label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #2c5a74;
+      cursor: pointer;
+    }
+    .checkbox-group {
+      background: #fefbf6;
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid #e9edf2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+    }
+    .checkbox-item input {
+      accent-color: #ffb347;
+      width: 1.1rem;
+      height: 1.1rem;
+      margin: 0;
+    }
+    .checkbox-item label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin: 0;
+      cursor: pointer;
+    }
+    /* Centered submit button */
+    .submit-area {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .submit-btn {
+      background: #0f2c3b;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: auto;
+      min-width: 240px;
+      display: inline-block;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .submit-btn:hover {
+      background: #ff8c42;
+      transform: translateY(-2px);
+    }
+    .assignment-footer {
+      background: #f0f3f7;
+      padding: 1rem 2rem;
+      border-top: 1px solid #dce3ec;
+      font-size: 0.75rem;
+      color: #4f6f8f;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-family: monospace;
+    }
+    /* Media Queries */
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      .smart-review-form { padding: 1.5rem; }
+      .form-header { padding: 1.2rem; }
+      .form-header h1 { font-size: 1.5rem; }
+      .rating-group { flex-direction: column; align-items: flex-start; }
+      .checkbox-group { flex-direction: column; }
+      .submit-btn { width: 100%; max-width: 280px; }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .review-container { max-width: 95%; }
+    }
+    @media (min-width: 1025px) {
+      .review-container { max-width: 960px; }
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-gray-50">
-    <div class="form-container desktop-container min-h-screen flex flex-col">
-        <header class="form-header bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8 px-4 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">Smartphone Review</h1>
-            <p class="text-lg md:text-xl opacity-90">Rate your smartphone experience</p>
-        </header>
+<body>
+<div class="review-container">
+  <header class="form-header">
+    <h1>⚡ Smartphone Review</h1>
+    <p>Share your real experience — help others choose the perfect device</p>
+  </header>
 
-        <main class="review-form flex-grow p-4 md:p-8">
-            <form id="productReviewForm" method="get" action="review.html" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
-                <!-- Product Selection -->
-                <div class="form-group mb-6">
-                    <label for="productNameSelect" class="block text-gray-700 font-medium mb-2">
-                        Product Name <span class="required-star">*</span>
-                    </label>
-                    <select id="productNameSelect" name="productName" required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                        <option value="" disabled selected>Select a Product...</option>
-                    </select>
-                </div>
-
-                <!-- Overall Rating - Radio Inputs -->
-                <div class="form-group mb-6">
-                    <label class="block text-gray-700 font-medium mb-2">
-                        Overall Rating <span class="required-star">*</span>
-                    </label>
-                    <div class="star-rating flex gap-1" id="starsRatingContainer">
-                        <!-- Radio inputs will be generated here -->
-                    </div>
-                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3" id="radioRatingContainer">
-                        <!-- Radio buttons will be generated here -->
-                    </div>
-                </div>
-
-                <!-- Date of Installation -->
-                <div class="form-group mb-6">
-                    <label for="installDate" class="block text-gray-700 font-medium mb-2">
-                        Date of Installation <span class="required-star">*</span>
-                    </label>
-                    <input type="date" id="installDate" name="installDate" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                </div>
-
-                <!-- Useful Features - Checkbox Inputs -->
-                <div class="form-group mb-6">
-                    <label class="block text-gray-700 font-medium mb-2">Useful Features</label>
-                    <div class="checkbox-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="featuresChecklist">
-                        <!-- Checkboxes will be generated here -->
-                    </div>
-                </div>
-
-                <!-- Additional Checkbox Section -->
-                <div class="form-group mb-6">
-                    <label class="block text-gray-700 font-medium mb-2">Additional Preferences</label>
-                    <div class="additional-checkboxes grid grid-cols-1 sm:grid-cols-2 gap-3" id="additionalCheckboxes">
-                        <!-- Additional checkboxes will be generated here -->
-                    </div>
-                </div>
-
-                <!-- Written Review -->
-                <div class="form-group mb-6">
-                    <label for="writtenReview" class="block text-gray-700 font-medium mb-2">Written Review</label>
-                    <textarea id="writtenReview" name="writtenReview" placeholder="Share your experience..." rows="5"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition resize-y"></textarea>
-                </div>
-
-                <!-- User Name -->
-                <div class="form-group mb-8">
-                    <label for="userName" class="block text-gray-700 font-medium mb-2">Your Name</label>
-                    <input type="text" id="userName" name="userName" placeholder="Your name"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="submit-btn w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition duration-300">
-                    Submit Review
-                </button>
-            </form>
-        </main>
-
-        <footer class="footer-common bg-gray-800 text-white py-6 px-4 text-center">
-            <p>© 2026 Anthony Anusiem</p>
-        </footer>
+  <form class="smart-review-form" method="get" action="review.html" id="phoneReviewForm">
+    <!-- Product selection -->
+    <div class="form-group">
+      <label for="productName">📱 Product Name <span class="required-ast">*</span></label>
+      <select id="productName" name="productName" required>
+        <option value="" disabled selected>Select a Product ...</option>
+      </select>
     </div>
 
-    <script>
-        // Data layer
-        const smartphoneProducts = [
-            { "id": "iphone15", "name": "iPhone 15 Pro", "brand": "Apple" },
-            { "id": "samsung23", "name": "Samsung Galaxy S23 Ultra", "brand": "Samsung" },
-            { "id": "pixel8", "name": "Google Pixel 8 Pro", "brand": "Google" },
-            { "id": "oneplus11", "name": "OnePlus 11", "brand": "OnePlus" },
-            { "id": "xiaomi13", "name": "Xiaomi 13 Pro", "brand": "Xiaomi" },
-            { "id": "nothing2", "name": "Nothing Phone (2)", "brand": "Nothing" },
-            { "id": "asusrog", "name": "ASUS ROG Phone 7", "brand": "ASUS" },
-            { "id": "motorola", "name": "Motorola Edge 40 Pro", "brand": "Motorola" }
-        ];
+    <!-- Overall Rating - exactly 5 radio inputs -->
+    <div class="form-group">
+      <label>⭐ Overall Rating <span class="required-ast">*</span></label>
+      <div class="rating-group" id="ratingGroup"></div>
+      <small class="hint-text">Select a rating from 1 (poor) to 5 (excellent)</small>
+    </div>
 
-        const ratingOptions = [
-            { "value": "1", "label": "1 Star - Poor", "description": "Very dissatisfied" },
-            { "value": "2", "label": "2 Stars - Fair", "description": "Below average" },
-            { "value": "3", "label": "3 Stars - Good", "description": "Average experience" },
-            { "value": "4", "label": "4 Stars - Very Good", "description": "Above average" },
-            { "value": "5", "label": "5 Stars - Excellent", "description": "Outstanding" }
-        ];
+    <!-- Date of Installation -->
+    <div class="form-group">
+      <label for="installDate">📅 Date of Installation <span class="required-ast">*</span></label>
+      <input type="date" id="installDate" name="installDate" required>
+    </div>
 
-        const usefulFeatures = [
-            { "id": "camera", "label": "Camera Quality", "checked": false },
-            { "id": "battery", "label": "Battery Life", "checked": false },
-            { "id": "display", "label": "Display Quality", "checked": false },
-            { "id": "performance", "label": "Performance", "checked": false },
-            { "id": "design", "label": "Design & Build", "checked": false },
-            { "id": "software", "label": "Software Experience", "checked": false },
-            { "id": "audio", "label": "Audio Quality", "checked": false },
-            { "id": "connectivity", "label": "Connectivity", "checked": false }
-        ];
+    <!-- Useful Features (8 checkboxes) -->
+    <div class="form-group">
+      <label>✅ Which features did you find useful?</label>
+      <div class="checkbox-group" id="featuresChecklist"></div>
+    </div>
 
-        const additionalPreferences = [
-            { "id": "recommend", "label": "Would recommend to others", "checked": false },
-            { "id": "repurchase", "label": "Would purchase again", "checked": false },
-            { "id": "value", "label": "Good value for money", "checked": false },
-            { "id": "durable", "label": "Durable and reliable", "checked": false }
-        ];
+    <!-- Additional Preferences (4 checkboxes) -->
+    <div class="form-group">
+      <label>📌 Additional Preferences</label>
+      <div class="checkbox-group" id="additionalChecklist"></div>
+    </div>
 
-        // Reusable render functions
-        function renderProductOptions(products) {
-            return products.map(product => 
-                `<option value="${product.id}">${product.name} (${product.brand})</option>`
-            ).join("");
-        }
+    <!-- Written Review -->
+    <div class="form-group">
+      <label for="writtenReview">✍️ Written Review <span class="optional-badge">Optional</span></label>
+      <textarea id="writtenReview" name="writtenReview" rows="4" placeholder="Tell us more about your experience... (optional)"></textarea>
+    </div>
 
-        function renderStarRating(ratingOptions) {
-            return ratingOptions.map((rating, index) => {
-                const stars = "★".repeat(parseInt(rating.value));
-                return `
-                    <div class="custom-radio">
-                        <input type="radio" id="rating${rating.value}" name="overallRating" value="${rating.value}" required>
-                        <label for="rating${rating.value}" class="flex flex-col">
-                            <span class="font-medium">${rating.label}</span>
-                            <span class="text-yellow-500 text-lg">${stars}</span>
-                            <span class="text-gray-500 text-sm">${rating.description}</span>
-                        </label>
-                    </div>
-                `;
-            }).join("");
-        }
+    <!-- Your Name -->
+    <div class="form-group">
+      <label for="userName">👤 Your Name <span class="optional-badge">Optional</span></label>
+      <input type="text" id="userName" name="userName" placeholder="e.g., Alex Johnson">
+    </div>
 
-        function renderCheckboxItems(items, groupName) {
-            return items.map(item => `
-                <div class="custom-checkbox">
-                    <input type="checkbox" id="${item.id}" name="${groupName}" value="${item.id}" ${item.checked ? "checked" : ""}>
-                    <label for="${item.id}" class="cursor-pointer">${item.label}</label>
-                </div>
-            `).join("");
-        }
+    <!-- Centered submit button -->
+    <div class="submit-area">
+      <button type="submit" class="submit-btn">📲 Post Review & Continue</button>
+    </div>
+  </form>
 
-        function renderStarIcons() {
-            return Array.from({length: 5}, (_, i) => {
-                const value = i + 1;
-                return `
-                    <input type="radio" id="star${value}" name="starRating" value="${value}">
-                    <label for="star${value}" class="text-3xl">★</label>
-                `;
-            }).join("");
-        }
+  <footer class="assignment-footer">
+    <div>©2024 ⚠️ Rubia Magdelena Francesco · Madagascar</div>
+    <div>Last Modification: 02/26/2024 13:56:10 · <span id="reviewCountDisplay">Reviews: 0</span></div>
+  </footer>
+</div>
 
-        // Initialize form elements
-        document.addEventListener("DOMContentLoaded", function() {
-            // Populate product select
-            const productSelect = document.getElementById("productNameSelect");
-            productSelect.innerHTML += renderProductOptions(smartphoneProducts);
-            
-            // Render star rating icons
-            const starsContainer = document.getElementById("starsRatingContainer");
-            starsContainer.className = "star-rating flex gap-1";
-            starsContainer.innerHTML = renderStarIcons();
-            
-            // Render radio rating options
-            const radioContainer = document.getElementById("radioRatingContainer");
-            radioContainer.innerHTML = renderStarRating(ratingOptions);
-            
-            // Render useful features checkboxes
-            const featuresContainer = document.getElementById("featuresChecklist");
-            featuresContainer.innerHTML = renderCheckboxItems(usefulFeatures, "usefulFeatures");
-            
-            // Render additional checkboxes
-            const additionalContainer = document.getElementById("additionalCheckboxes");
-            additionalContainer.innerHTML = renderCheckboxItems(additionalPreferences, "additionalPrefs");
-            
-            // Set min date to today for installation date
-            const today = new Date().toISOString().split("T")[0];
-            document.getElementById("installDate").min = today;
-            
-            // Form validation and submission
-            const form = document.getElementById("productReviewForm");
-            form.addEventListener("submit", function(event) {
-                event.preventDefault();
-                
-                // Validate required fields
-                const requiredFields = form.querySelectorAll("[required]");
-                let isValid = true;
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        field.classList.add("border-red-500");
-                        isValid = false;
-                    } else {
-                        field.classList.remove("border-red-500");
-                    }
-                });
-                
-                if (isValid) {
-                    // Collect form data
-                    const formData = new FormData(form);
-                    const reviewData = Object.fromEntries(formData.entries());
-                    
-                    // Add timestamp
-                    reviewData.timestamp = new Date().toISOString();
-                    
-                    // Store in localStorage (simulating submission)
-                    localStorage.setItem("lastReview", JSON.stringify(reviewData));
-                    
-                    // Show success message
-                    alert("Thank you for your review! Your feedback has been submitted.");
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Navigate to review page (simulated)
-                    setTimeout(() => {
-                        window.location.href = "review.html";
-                    }, 1000);
-                } else {
-                    alert("Please fill in all required fields marked with *");
-                }
-            });
-            
-            // Star rating interaction
-            starsContainer.addEventListener("click", function(event) {
-                if (event.target.tagName === "LABEL") {
-                    const starId = event.target.getAttribute("for");
-                    const starValue = document.getElementById(starId).value;
-                    
-                    // Update corresponding radio button
-                    const radioBtn = document.querySelector(`input[name="overallRating"][value="${starValue}"]`);
-                    if (radioBtn) {
-                        radioBtn.checked = true;
-                    }
-                }
-            });
-            
-            // Radio button interaction
-            radioContainer.addEventListener("change", function(event) {
-                if (event.target.name === "overallRating") {
-                    const starValue = event.target.value;
-                    const starId = `star${starValue}`;
-                    const starInput = document.getElementById(starId);
-                    if (starInput) {
-                        starInput.checked = true;
-                    }
-                }
-            });
-            
-            // Prevent default anchor behavior
-            document.addEventListener("click", function(event) {
-                if (event.target.tagName === "A") {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
+<script>
+  // Product data
+  const productArray = [
+    { id: "ph_001", name: "Galaxy Nexus X" },
+    { id: "ph_002", name: "iPhone 15 Pro Max" },
+    { id: "ph_003", name: "Pixel 9 Ultra" },
+    { id: "ph_004", name: "OnePlus 12T" },
+    { id: "ph_005", name: "Xiaomi 14 Pro" },
+    { id: "ph_006", name: "Nothing Phone (3)" },
+    { id: "ph_007", name: "Sony Xperia 5 V" }
+  ];
+
+  // 8 useful features checkboxes
+  const featuresList = [
+    { id: "feat_cam", label: "Camera Quality" },
+    { id: "feat_batt", label: "Battery Life" },
+    { id: "feat_disp", label: "Display Quality" },
+    { id: "feat_perf", label: "Performance" },
+    { id: "feat_design", label: "Design & Build" },
+    { id: "feat_soft", label: "Software Experience" },
+    { id: "feat_audio", label: "Audio Quality" },
+    { id: "feat_conn", label: "Connectivity" }
+  ];
+
+  // 4 additional preferences checkboxes
+  const additionalPrefs = [
+    { id: "pref_recommend", label: "Would recommend to others" },
+    { id: "pref_repurchase", label: "Would purchase again" },
+    { id: "pref_value", label: "Good value for money" },
+    { id: "pref_durable", label: "Durable and reliable" }
+  ];
+
+  // Populate product dropdown
+  function populateProductSelect() {
+    const selectEl = document.getElementById("productName");
+    if (!selectEl) return;
+    // keep only the placeholder
+    for (let i = selectEl.options.length - 1; i >= 0; i--) {
+      if (selectEl.options[i].value !== "") selectEl.options[i].remove();
+    }
+    productArray.forEach(product => {
+      const option = document.createElement("option");
+      option.value = product.id;
+      option.textContent = product.name;
+      selectEl.appendChild(option);
+    });
+  }
+
+  // Create 5 radio inputs for rating
+  function createRatingRadios() {
+    const container = document.getElementById("ratingGroup");
+    if (!container) return;
+    container.innerHTML = "";
+    for (let i = 1; i <= 5; i++) {
+      const div = document.createElement("div");
+      div.className = "rating-option";
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "overallRating";
+      radio.id = `rating_${i}`;
+      radio.value = i;
+      radio.required = true;
+      const label = document.createElement("label");
+      label.htmlFor = `rating_${i}`;
+      const stars = "★".repeat(i);
+      label.textContent = `${i} ★ (${stars})`;
+      div.appendChild(radio);
+      div.appendChild(label);
+      container.appendChild(div);
+    }
+  }
+
+  // Populate checkboxes
+  function populateCheckboxes(containerId, items, nameAttr) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = "";
+    items.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "checkbox-item";
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = item.id;
+      cb.name = nameAttr;
+      cb.value = item.label;
+      const label = document.createElement("label");
+      label.htmlFor = item.id;
+      label.textContent = item.label;
+      div.appendChild(cb);
+      div.appendChild(label);
+      container.appendChild(div);
+    });
+  }
+
+  // Set max date to today
+  function setDateMax() {
+    const dateInput = document.getElementById("installDate");
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.max = today;
+    }
+  }
+
+  // LocalStorage review counter
+  function getReviewCount() {
+    const stored = localStorage.getItem("smartphoneReviewsCount");
+    return stored ? parseInt(stored, 10) : 0;
+  }
+  function updateFooterCount() {
+    const span = document.getElementById("reviewCountDisplay");
+    if (span) span.textContent = `Reviews: ${getReviewCount()}`;
+  }
+  function incrementReviewCount() {
+    localStorage.setItem("smartphoneReviewsCount", getReviewCount() + 1);
+    updateFooterCount();
+  }
+
+  // Form validation
+  function setupValidation() {
+    const form = document.getElementById("phoneReviewForm");
+    if (!form) return;
+    form.addEventListener("submit", (e) => {
+      const product = document.getElementById("productName").value;
+      if (!product) {
+        e.preventDefault();
+        alert("Please select a smartphone product.");
+        return;
+      }
+      const selectedRating = document.querySelector('input[name="overallRating"]:checked');
+      if (!selectedRating) {
+        e.preventDefault();
+        alert("Please select an overall rating (1 to 5 stars).");
+        return;
+      }
+      const installDate = document.getElementById("installDate").value;
+      if (!installDate) {
+        e.preventDefault();
+        alert("Please select the date of installation.");
+        return;
+      }
+      incrementReviewCount();  // increment only if valid
+      // form submits to review.html
+    });
+  }
+
+  // Initialize everything
+  document.addEventListener("DOMContentLoaded", () => {
+    populateProductSelect();
+    createRatingRadios();          // 5 radios
+    populateCheckboxes("featuresChecklist", featuresList, "usefulFeatures");    // 8 checkboxes
+    populateCheckboxes("additionalChecklist", additionalPrefs, "additionalPrefs"); // 4 checkboxes
+    setDateMax();
+    updateFooterCount();
+    setupValidation();
+  });
+</script>
 </body>
 </html>
