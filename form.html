@@ -7,6 +7,261 @@
   <meta name="author" content="Anthony Anusiem">
   <title>Smartphone Review Form | Tech Insights</title>
   <link rel="stylesheet" href="form.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #e9eff5 0%, #dce3ec 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 2rem 1.5rem;
+      color: #1a2c3e;
+    }
+
+    .review-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: #0f2c3b;
+      padding: 1.8rem 2rem;
+      border-bottom: 4px solid #ffb347;
+    }
+
+    .form-header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #f9f7f3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-header h1::before {
+      content: "📱";
+      font-size: 2rem;
+    }
+
+    .form-header p {
+      color: #cfdfe8;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .smart-review-form {
+      padding: 2rem 2rem 1.8rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1e3a4d;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .required-ast {
+      color: #c24b2a;
+      font-size: 0.9rem;
+    }
+
+    .optional-badge {
+      font-weight: normal;
+      font-size: 0.7rem;
+      background: #eef2f5;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 0.75rem;
+      color: #4a627a;
+    }
+
+    .hint-text {
+      color: #507b9b;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    select, input[type="date"], input[type="text"], textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #d4dee8;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background-color: #fefefe;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: #ffb347;
+      box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
+    }
+
+    /* --- enhanced star rating widget (custom, reliable) --- */
+    .rating-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      background: #f9fafc;
+      padding: 1rem 1.2rem;
+      border-radius: 48px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .star-rating-custom {
+      display: flex;
+      flex-direction: row;
+      gap: 0.3rem;
+      align-items: center;
+    }
+
+    .star-btn {
+      font-size: 2.2rem;
+      cursor: pointer;
+      color: #cbd5e1;
+      transition: transform 0.1s, color 0.2s;
+      background: none;
+      border: none;
+      padding: 0 4px;
+      line-height: 1;
+      font-family: inherit;
+    }
+
+    .star-btn:hover {
+      transform: scale(1.1);
+      color: #ffb347;
+    }
+
+    .star-btn.active-star {
+      color: #ffb347;
+      text-shadow: 0 0 4px #ffcd7e;
+    }
+
+    .rating-text {
+      font-size: 0.85rem;
+      background: #ffffff;
+      padding: 0.4rem 0.9rem;
+      border-radius: 30px;
+      color: #2c5a74;
+      font-weight: 500;
+    }
+
+    .checkbox-group {
+      background: #fefbf6;
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid #e9edf2;
+    }
+
+    .checkbox-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 1.2rem;
+      height: 1.2rem;
+      accent-color: #ffb347;
+      margin: 0;
+    }
+
+    .checkbox-item label {
+      font-weight: 500;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .submit-area {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .submit-btn {
+      background: #0f2c3b;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 280px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .submit-btn:hover {
+      background: #ff8c42;
+      transform: translateY(-2px);
+    }
+
+    .assignment-footer {
+      background: #f0f3f7;
+      padding: 1rem 2rem;
+      border-top: 1px solid #dce3ec;
+      font-size: 0.75rem;
+      color: #4f6f8f;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-family: monospace;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .smart-review-form {
+        padding: 1.5rem 1.2rem;
+      }
+      .form-header {
+        padding: 1.5rem 1.2rem;
+      }
+      .form-header h1 {
+        font-size: 1.5rem;
+      }
+      .rating-group {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 24px;
+      }
+      .checkbox-list {
+        gap: 1rem;
+        flex-direction: column;
+      }
+      .star-btn {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -74,6 +329,231 @@
   </footer>
 </div>
 
+<script>
+ // ------------------------------------------------------------
+  // 1. Data definitions
+  // ------------------------------------------------------------
+  const productArray = [
+    { id: "ph_001", name: "Galaxy Nexus X" },
+    { id: "ph_002", name: "iPhone 15 Pro Max" },
+    { id: "ph_003", name: "Pixel 9 Ultra" },
+    { id: "ph_004", name: "OnePlus 12T" },
+    { id: "ph_005", name: "Xiaomi 14 Pro" },
+    { id: "ph_006", name: "Nothing Phone (3)" },
+    { id: "ph_007", name: "Sony Xperia 5 V" }
+  ];
+
+  const featuresList = [
+    { id: "feat_dura", name: "Durability", value: "Durability" },
+    { id: "feat_ease", name: "Ease of Use", value: "Ease of Use" },
+    { id: "feat_perf", name: "Performance", value: "Performance" },
+    { id: "feat_design", name: "Design", value: "Design" }
+  ];
+
+  // ------------------------------------------------------------
+  // 2. Populate product dropdown
+  // ------------------------------------------------------------
+  function populateProductSelect() {
+    const selectEl = document.getElementById("productName");
+    if (!selectEl) return;
+    // keep first disabled placeholder, remove other dynamic options except placeholder
+    const options = Array.from(selectEl.querySelectorAll('option'));
+    options.forEach(opt => {
+      if (opt.value !== "") opt.remove();
+    });
+    productArray.forEach(product => {
+      const option = document.createElement("option");
+      option.value = product.id;
+      option.textContent = product.name;
+      selectEl.appendChild(option);
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 3. Build interactive star rating (no radio conflicts, reliable)
+  // ------------------------------------------------------------
+  let currentRating = 0;   // internal rating (1-5, 0 = none)
+  const ratingHidden = document.getElementById("ratingHiddenValue");
+  const starsContainer = document.getElementById("dynamicStarsContainer");
+  const ratingFeedback = document.getElementById("ratingFeedback");
+
+  function updateStarsUI(ratingValue) {
+    if (!starsContainer) return;
+    const starButtons = starsContainer.querySelectorAll('.star-btn');
+    starButtons.forEach((btn, idx) => {
+      const starValue = parseInt(btn.getAttribute('data-value'), 10);
+      if (starValue <= ratingValue) {
+        btn.classList.add('active-star');
+      } else {
+        btn.classList.remove('active-star');
+      }
+    });
+    if (ratingFeedback) {
+      if (ratingValue > 0) {
+        ratingFeedback.textContent = `⭐ rated ${ratingValue} out of 5`;
+      } else {
+        ratingFeedback.textContent = `tap a star to rate (1–5)`;
+      }
+    }
+  }
+
+  function initStarRating() {
+    if (!starsContainer) return;
+    starsContainer.innerHTML = '';
+    // create stars from 1 to 5 (visual order 1..5)
+    for (let i = 1; i <= 5; i++) {
+      const starBtn = document.createElement('button');
+      starBtn.type = 'button';
+      starBtn.classList.add('star-btn');
+      starBtn.setAttribute('data-value', i);
+      starBtn.textContent = '★';
+      starBtn.setAttribute('aria-label', `Rate ${i} stars`);
+      starBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentRating = i;
+        ratingHidden.value = currentRating;
+        updateStarsUI(currentRating);
+      });
+      starsContainer.appendChild(starBtn);
+    }
+    // reset initial state
+    currentRating = 0;
+    ratingHidden.value = '';
+    updateStarsUI(0);
+  }
+
+  // ------------------------------------------------------------
+  // 4. Populate checkboxes (useful features)
+  // ------------------------------------------------------------
+  function populateCheckboxes() {
+    const container = document.getElementById("featuresChecklist");
+    if (!container) return;
+    container.innerHTML = "";
+    featuresList.forEach(feature => {
+      const div = document.createElement("div");
+      div.className = "checkbox-item";
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = feature.id;
+      cb.name = "usefulFeatures";
+      cb.value = feature.value;
+      const label = document.createElement("label");
+      label.htmlFor = feature.id;
+      label.textContent = feature.name;
+      div.appendChild(cb);
+      div.appendChild(label);
+      container.appendChild(div);
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 5. Date limitation (max = today)
+  // ------------------------------------------------------------
+  function setDateMax() {
+    const dateInput = document.getElementById("installDate");
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.max = today;
+    }
+  }
+
+  // ------------------------------------------------------------
+  // 6. LocalStorage review count management
+  // ------------------------------------------------------------
+  function getReviewCount() {
+    const stored = localStorage.getItem("smartphoneReviewsCount");
+    if (stored === null) return 0;
+    const parsed = parseInt(stored, 10);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+
+  function updateFooterCountDisplay() {
+    const count = getReviewCount();
+    const span = document.getElementById("reviewCountDisplay");
+    if (span) span.textContent = `Reviews: ${count}`;
+  }
+
+  function incrementReviewCount() {
+    let current = getReviewCount();
+    current++;
+    localStorage.setItem("smartphoneReviewsCount", current);
+    updateFooterCountDisplay();
+  }
+
+  // ------------------------------------------------------------
+  // 7. Form validation & submission (increment before redirect)
+  // ------------------------------------------------------------
+  function setupFormValidationAndIncrement() {
+    const form = document.getElementById("phoneReviewForm");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      // 1) Validate product selected
+      const productSelect = document.getElementById("productName");
+      const productValue = productSelect.value;
+      if (!productValue) {
+        e.preventDefault();
+        alert("📱 Please select a smartphone product.");
+        productSelect.focus();
+        return;
+      }
+
+      // 2) Validate rating (hidden field)
+      const ratingVal = ratingHidden.value;
+      if (!ratingVal || parseInt(ratingVal, 10) < 1 || parseInt(ratingVal, 10) > 5) {
+        e.preventDefault();
+        alert("⭐ Please select an overall rating (1 to 5 stars) before submitting.");
+        return;
+      }
+
+      // 3) Validate installation date
+      const installDate = document.getElementById("installDate").value;
+      if (!installDate) {
+        e.preventDefault();
+        alert("📅 Please select the date of installation.");
+        return;
+      }
+
+      // 4) Additional optional: ensure date not future (browser already limits via max, but double-check)
+      const todayStr = new Date().toISOString().split('T')[0];
+      if (installDate > todayStr) {
+        e.preventDefault();
+        alert("Installation date cannot be in the future.");
+        return;
+      }
+
+      // ALL VALIDATION PASSED -> increment review counter before submitting (GET to review.html)
+      incrementReviewCount();
+
+      // The form will naturally submit to action="review.html" with all GET parameters.
+      // no further action needed (redirect will happen)
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 8. Extra helper: sync localStorage on pageshow (in case user returns)
+  // ------------------------------------------------------------
+  function syncCountOnLoad() {
+    updateFooterCountDisplay();
+    // listen to storage changes from other tabs (nice addition)
+    window.addEventListener("storage", (e) => {
+      if (e.key === "smartphoneReviewsCount") {
+        updateFooterCountDisplay();
+      }
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 9. Final initialization when DOM ready
+  // ------------------------------------------------------------
+  document.addEventListener("DOMContentLoaded", () => {
+    populateProductSelect();      // fill product dropdown
+    initStarRating();             // build star rating widget
+    populateCheckboxes();         // feature checkboxes
+    setDateMax();                 // max date = today
+    setupFormValidationAndIncrement();  // attach validation + increment logic
+    syncCountOnLoad();            // display current total reviews from localStorage
+  });
 <script src="form.js"></script>
 </body>
 </html>

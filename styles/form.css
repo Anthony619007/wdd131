@@ -224,10 +224,14 @@ select:focus, input:focus, textarea:focus {
   gap: 0.5rem;
   font-family: monospace;
 }
-
-/* Media Queries (required for audit) */
-@media (max-width: 640px) {
-  body {
+/* ============================================
+   MEDIA QUERY — mobile layout  (FIX ✅)
+   ============================================ */
+@media (max-width: 600px) {
+  .smart-review-form  { padding: 1.5rem 1.2rem; }
+  .form-header        { padding: 1.5rem 1.2rem; }
+  .form-header h1     { font-size: 1.4rem; } 
+  {
     padding: 1rem;
   }
   .smart-review-form {
