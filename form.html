@@ -1,99 +1,502 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SmartPhone Reviewer product review form">
+    <meta name="description" content="Share your honest feedback on the latest smartphones. Rate features, write a review, and help others decide.">
     <meta name="author" content="Anthony Anusiem">
-    <title>SmartPhone Reviewer | Review Form</title>
+    <title>SmartPhone Reviewer | Share Your Honest Feedback</title>
+    <style>
+        /* -----------------------------------------------
+           1. RESET & BASE STYLES (FIXED & ENHANCED)
+        ----------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="form.css">
+        body {
+            background: #FEF3E2;
+            font-family: system-ui, 'Segoe UI', 'Arial', sans-serif;
+            padding: 2rem 1rem;
+            color: #2C1A0F;
+            line-height: 1.4;
+        }
+
+        .form-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        /* HEADER – modernized */
+        .form-header {
+            background: linear-gradient(135deg, #C0392B 0%, #A52618 100%);
+            color: white;
+            padding: 2rem 2rem 1.8rem;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            letter-spacing: -0.3px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            font-size: 1.05rem;
+            opacity: 0.92;
+        }
+
+        /* MAIN FORM AREA */
+        .review-form {
+            padding: 2.2rem 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            color: #2C1A0F;
+        }
+
+        .required-star {
+            color: #e03a2e;
+            font-size: 1.1rem;
+            margin-left: 2px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid #e2dcd5;
+            border-radius: 1rem;
+            font-size: 0.95rem;
+            background: #fff;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #C0392B;
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        /* ----- STAR RATING (radio inputs: custom design + accessibility) ----- */
+        .stars-custom-wrapper {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            border: none;
+            padding: 0.3rem 0;
+        }
+
+        .stars-custom-wrapper input[type="radio"] {
+            display: none;
+        }
+
+        .stars-custom-wrapper label {
+            font-size: 2rem;
+            color: #d4c9bc;
+            transition: color 0.15s;
+            cursor: pointer;
+            margin-bottom: 0;
+            line-height: 1;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .stars-custom-wrapper label::before {
+            content: "★";
+        }
+
+        .stars-custom-wrapper input[type="radio"]:checked ~ label,
+        .stars-custom-wrapper label:hover,
+        .stars-custom-wrapper label:hover ~ label {
+            color: #f5b642;
+        }
+
+        /* rating hint text */
+        .rating-hint {
+            font-size: 0.8rem;
+            color: #6b4c38;
+            margin-top: 6px;
+            font-weight: normal;
+        }
+
+        /* ----- CHECKBOX GROUP (4 features + clean layout) ----- */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fefaf5;
+            padding: 0.4rem 1rem 0.4rem 0.8rem;
+            border-radius: 40px;
+            border: 1px solid #f0e4d8;
+            transition: background 0.1s;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 1.1rem;
+            height: 1.1rem;
+            accent-color: #C0392B;
+            margin: 0;
+        }
+
+        .checkbox-item label {
+            margin-bottom: 0;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* submit button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background: #C0392B;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 0.8rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .submit-btn:hover {
+            background: #9e2d21;
+            transform: scale(0.99);
+            box-shadow: 0 6px 12px rgba(192,57,43,0.25);
+        }
+
+        .footer-common {
+            text-align: center;
+            padding: 1.2rem;
+            background: #faf7f2;
+            font-size: 0.85rem;
+            border-top: 1px solid #efe3d6;
+            color: #5c3f2b;
+        }
+
+        /* ---------- RESPONSIVE MEDIA QUERIES (FIXED & ENHANCED) ---------- */
+        @media (max-width: 700px) {
+            .review-form {
+                padding: 1.5rem;
+            }
+            .form-header h1 {
+                font-size: 1.6rem;
+            }
+            .checkbox-group {
+                gap: 0.8rem;
+            }
+            .stars-custom-wrapper label {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .review-form {
+                padding: 1.2rem;
+            }
+            .form-group {
+                margin-bottom: 1.3rem;
+            }
+            .stars-custom-wrapper {
+                gap: 0.2rem;
+            }
+            .stars-custom-wrapper label {
+                font-size: 1.7rem;
+            }
+            .checkbox-item {
+                padding: 0.3rem 0.8rem;
+            }
+            .checkbox-item label {
+                font-size: 0.85rem;
+            }
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* extra small devices */
+        @media (max-width: 420px) {
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .checkbox-item {
+                width: fit-content;
+            }
+            .stars-custom-wrapper {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="form-container">
+<div class="form-container">
+    <header class="form-header">
+        <h1>📱 Smartphone Review</h1>
+        <p>Rate your device & help the community decide</p>
+    </header>
 
-        <header class="form-header">
-            <h1>Smartphone Review</h1>
-            <p>Rate your smartphone experience</p>
-        </header>
+    <main class="review-form">
+        <!-- 
+            FORM with method GET, action "review.html"
+            Contains all required elements:
+            - product select (dynamic from JS)
+            - 5 radio inputs (star rating) INSIDE the form
+            - min 4 checkboxes (useful features)
+            - date picker, textarea, name field
+        -->
+        <form id="productReviewForm" method="get" action="review.html">
+            <!-- Product Name dropdown -->
+            <div class="form-group">
+                <label for="productNameSelect">
+                    Product Name <span class="required-star">*</span>
+                </label>
+                <select id="productNameSelect" name="productName" required>
+                    <option value="" disabled selected>— Select a smartphone —</option>
+                </select>
+            </div>
 
-        <main class="review-form">
-
-            <form id="productReviewForm" method="get" action="review.html">
-
-                <div class="form-group">
-                    <label for="productNameSelect">
-                        Product Name <span class="required-star">*</span>
-                    </label>
-
-                    <select id="productNameSelect" name="productName" required>
-                        <option value="" disabled selected>Select a Product...</option>
-                    </select>
+            <!-- Star Rating: 5 radio inputs (required) -->
+            <div class="form-group">
+                <label>
+                    Overall Rating <span class="required-star">*</span>
+                </label>
+                <div class="stars-custom-wrapper" id="starsRatingContainer">
+                    <!-- 5 radio inputs will be injected here with proper names/values 
+                         but to ensure they are rendered within form and accessible -->
                 </div>
+                <div class="rating-hint">⭐ Tap a star to rate (1 = Poor, 5 = Excellent)</div>
+            </div>
 
-                <div class="form-group">
-                    <label>
-                        Overall Rating
-                        <span class="required-star">*</span>
-                    </label>
+            <!-- Date of Installation -->
+            <div class="form-group">
+                <label for="installDate">
+                    Date of Installation <span class="required-star">*</span>
+                </label>
+                <input type="date" id="installDate" name="installDate" required>
+            </div>
 
-                    <div class="stars-container" id="starsRatingContainer"></div>
-                </div>
+            <!-- Useful Features (checkbox group, minimum 4 checkboxes) -->
+            <div class="form-group">
+                <label>Useful Features (select all that apply)</label>
+                <div class="checkbox-group" id="featuresChecklist"></div>
+            </div>
 
-                <div class="form-group">
-                    <label for="installDate">
-                        Date of Installation
-                        <span class="required-star">*</span>
-                    </label>
+            <!-- Written Review (optional) -->
+            <div class="form-group">
+                <label for="writtenReview">Written Review</label>
+                <textarea id="writtenReview" name="writtenReview" placeholder="What do you love or dislike about this phone?"></textarea>
+            </div>
 
-                    <input type="date" id="installDate" name="installDate" required>
-                </div>
+            <!-- User Name (optional) -->
+            <div class="form-group">
+                <label for="userName">Your Name (optional)</label>
+                <input type="text" id="userName" name="userName" placeholder="e.g., Alex Johnson">
+            </div>
 
-                <div class="form-group">
-                    <label>Useful Features</label>
+            <button type="submit" class="submit-btn">✍️ Submit Review</button>
+        </form>
+    </main>
 
-                    <div class="checkbox-group" id="featuresChecklist"></div>
-                </div>
+    <footer class="footer-common">
+        © 2026 Anthony Anusiem — Honest reviews, real experiences
+    </footer>
+</div>
 
-                <div class="form-group">
-                    <label for="writtenReview">Written Review</label>
+<script>
+    (function() {
+        // --------------------------------------------------------------
+        // 1. PRODUCT LIST (exactly as required)
+        // --------------------------------------------------------------
+        const products = [
+            "iPhone 15 Pro",
+            "Samsung Galaxy S24 Ultra",
+            "Google Pixel 9 Pro",
+            "OnePlus 12",
+            "Sony Xperia 1 VI",
+            "Xiaomi 14 Ultra",
+            "Samsung Galaxy A55",
+            "Nothing Phone (2a)"
+        ];
 
-                    <textarea
-                        id="writtenReview"
-                        name="writtenReview"
-                        placeholder="Share your experience..."
-                    ></textarea>
-                </div>
+        // Populate product select dropdown
+        const productSelect = document.getElementById("productNameSelect");
+        if (productSelect) {
+            products.forEach(product => {
+                const option = document.createElement("option");
+                option.value = product;
+                option.textContent = product;
+                productSelect.appendChild(option);
+            });
+        }
 
-                <div class="form-group">
-                    <label for="userName">Your Name</label>
+        // --------------------------------------------------------------
+        // 2. CREATE 5 RADIO BUTTONS for star rating (inside form)
+        //    Required: document must contain 5 radio <input type="radio"> 
+        //    elements inside <form> with appropriate attributes.
+        // --------------------------------------------------------------
+        const ratingContainer = document.getElementById("starsRatingContainer");
+        if (ratingContainer) {
+            // Clear any placeholder (if any) and inject stars in correct order
+            ratingContainer.innerHTML = "";
+            // we want star 5 on the left visually? Actually typical star rating (right-to-left for CSS)
+            // But for valid HTML and to meet radio requirement, we build 5 radios with names = "rating"
+            // and values 1 to 5. UI will be reversed with flex-direction but we ensure accessibility.
+            // For clean UX we'll generate from 1 to 5 but use CSS order trick? 
+            // We'll append them in 1..5 order but apply direction row-reverse to container.
+            // The container already has flex-direction: row-reverse? actually we used .stars-custom-wrapper
+            // with row-reverse, so we generate labels + inputs in natural order (1 to 5) and CSS reverses.
+            for (let i = 1; i <= 5; i++) {
+                const radioId = `star_rating_${i}`;
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'rating';       // Same name for group
+                radio.value = i;
+                radio.id = radioId;
+                radio.required = (i === 5) ? true : false; // make rating required: at least one selected, but we'll enforce via required attribute on group? 
+                // Actually HTML5 requires that at least one radio in group is selected, but we mark all as required? Only one required attribute on group but we set required on one radio ensures selection.
+                // To be safe, set required on first radio or any? We set required on the 5-star radio to force user to choose.
+                if (i === 5) radio.required = true;  // ensures user picks one star before submit
+                
+                const label = document.createElement('label');
+                label.htmlFor = radioId;
+                // no text content needed because we use ::before pseudo for stars
+                label.setAttribute('aria-label', `${i} star${i !== 1 ? 's' : ''}`);
+                
+                ratingContainer.appendChild(radio);
+                ratingContainer.appendChild(label);
+            }
+        }
 
-                    <input
-                        type="text"
-                        id="userName"
-                        name="userName"
-                        placeholder="Your name"
-                    >
-                </div>
+        // --------------------------------------------------------------
+        // 3. CREATE AT LEAST 4 CHECKBOXES (Useful Features)
+        //    Required by specs: at least 4 checkbox <input type="checkbox">
+        // --------------------------------------------------------------
+        const featuresList = ["Durability", "Ease of Use", "Performance", "Design"];
+        const checkboxContainer = document.getElementById("featuresChecklist");
+        if (checkboxContainer) {
+            checkboxContainer.innerHTML = "";
+            featuresList.forEach((feature, idx) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'checkbox-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `feature_chk_${idx}`;
+                checkbox.name = 'features';
+                checkbox.value = feature;
+                
+                const label = document.createElement('label');
+                label.htmlFor = checkbox.id;
+                label.textContent = feature;
+                
+                wrapper.appendChild(checkbox);
+                wrapper.appendChild(label);
+                checkboxContainer.appendChild(wrapper);
+            });
+            // extra insurance: also allow more if needed but 4 is minimum.
+        }
 
-                <button type="submit" class="submit-btn">
-                    Submit Review
-                </button>
-
-            </form>
-
-        </main>
-
-        <footer class="footer-common">
-            © 2026 Anthony Anusiem
-        </footer>
-
-    </div>
-
-    <script src="form.js"></script>
-
+        // optional: set max date for installation (prevent future dates)
+        const installDateInput = document.getElementById("installDate");
+        if (installDateInput) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const maxDate = `${yyyy}-${mm}-${dd}`;
+            installDateInput.setAttribute('max', maxDate);
+        }
+        
+        // Additional validation: Ensure rating is selected before submit? The required attribute on one radio works,
+        // but we also add custom form submit for cleaner UX and avoid GET submission without rating.
+        const form = document.getElementById("productReviewForm");
+        if (form) {
+            form.addEventListener("submit", function(event) {
+                // Validate that a rating (radio) is selected
+                const ratingRadios = document.querySelectorAll('input[name="rating"]');
+                let ratingSelected = false;
+                for (let radio of ratingRadios) {
+                    if (radio.checked) {
+                        ratingSelected = true;
+                        break;
+                    }
+                }
+                if (!ratingSelected) {
+                    event.preventDefault();
+                    alert("⭐ Please select an overall rating (1 to 5 stars) before submitting.");
+                    return false;
+                }
+                
+                // Validate product selection
+                const productVal = productSelect.value;
+                if (!productVal || productVal === "") {
+                    event.preventDefault();
+                    alert("Please choose a product name.");
+                    return false;
+                }
+                
+                // Validate installation date
+                const installDate = installDateInput.value;
+                if (!installDate) {
+                    event.preventDefault();
+                    alert("Please enter the date when you started using this smartphone.");
+                    return false;
+                }
+                
+                // optional: ensure at least one feature? Not required but enhance UX. Not mandatory.
+                // we let it pass but if they want extra warning: not required by base spec so optional.
+                return true;
+            });
+        }
+        
+        // Also ensure all fields meet the original markup structure
+        // Adding fallback for radio group to meet standard: The radios are inside the form.
+        // Check that starsRatingContainer children are inside form. Good.
+        
+        // Provide a console log for debug
+        console.log("✅ Smartphone review form fully loaded: radios(5), checkboxes(4), products, media queries active.");
+    })();
+</script>
 </body>
 </html>
-```
