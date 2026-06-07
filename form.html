@@ -1,81 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base target="_self">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SmartPhone Reviewer product review form - Share your honest smartphone experience">
     <meta name="author" content="Anthony Anusiem">
     <title>SmartPhone Reviewer | Review Form</title>
-    <link rel="stylesheet" href="form.css" type="text/css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS with media queries */
+        @media (max-width: 640px) {
+            .mobile-stack {
+                flex-direction: column;
+            }
+            .mobile-full {
+                width: 100%;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .tablet-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .desktop-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+        
+        /* Star rating styling */
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            cursor: pointer;
+            font-size: 2rem;
+            color: #d1d5db;
+            transition: color 0.2s;
+        }
+        
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #fbbf24;
+        }
+        
+        .star-rating input:checked + label {
+            color: #f59e0b;
+        }
+        
+        /* Checkbox and radio styling */
+        .custom-checkbox,
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s;
+        }
+        
+        .custom-checkbox:hover,
+        .custom-radio:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .custom-checkbox input,
+        .custom-radio input {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+        
+        /* Form validation */
+        .required-star {
+            color: #ef4444;
+        }
+        
+        input:invalid,
+        select:invalid,
+        textarea:invalid {
+            border-color: #ef4444;
+        }
+        
+        input:focus:invalid,
+        select:focus:invalid,
+        textarea:focus:invalid {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+    </style>
 </head>
-<body>
-
-    <div class="form-container">
-
-        <header class="form-header">
-            <h1>Smartphone Review</h1>
-            <p>Rate your smartphone experience</p>
+<body class="min-h-screen bg-gray-50">
+    <div class="form-container desktop-container min-h-screen flex flex-col">
+        <header class="form-header bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8 px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Smartphone Review</h1>
+            <p class="text-lg md:text-xl opacity-90">Rate your smartphone experience</p>
         </header>
 
-        <main class="review-form">
-
-            <form id="productReviewForm" method="get" action="review.html">
-
-                <div class="form-group">
-                    <label for="productNameSelect">
+        <main class="review-form flex-grow p-4 md:p-8">
+            <form id="productReviewForm" method="get" action="review.html" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <!-- Product Selection -->
+                <div class="form-group mb-6">
+                    <label for="productNameSelect" class="block text-gray-700 font-medium mb-2">
                         Product Name <span class="required-star">*</span>
                     </label>
-                    <select id="productNameSelect" name="productName" required>
+                    <select id="productNameSelect" name="productName" required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         <option value="" disabled selected>Select a Product...</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>
-                        Overall Rating
-                        <span class="required-star">*</span>
+                <!-- Overall Rating - Radio Inputs -->
+                <div class="form-group mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Overall Rating <span class="required-star">*</span>
                     </label>
-                    <div class="stars-container" id="starsRatingContainer"></div>
+                    <div class="star-rating flex gap-1" id="starsRatingContainer">
+                        <!-- Radio inputs will be generated here -->
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3" id="radioRatingContainer">
+                        <!-- Radio buttons will be generated here -->
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="installDate">
-                        Date of Installation
-                        <span class="required-star">*</span>
+                <!-- Date of Installation -->
+                <div class="form-group mb-6">
+                    <label for="installDate" class="block text-gray-700 font-medium mb-2">
+                        Date of Installation <span class="required-star">*</span>
                     </label>
-                    <input type="date" id="installDate" name="installDate" required>
+                    <input type="date" id="installDate" name="installDate" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                 </div>
 
-                <div class="form-group">
-                    <label>Useful Features</label>
-                    <div class="checkbox-group" id="featuresChecklist"></div>
+                <!-- Useful Features - Checkbox Inputs -->
+                <div class="form-group mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Useful Features</label>
+                    <div class="checkbox-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="featuresChecklist">
+                        <!-- Checkboxes will be generated here -->
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="writtenReview">Written Review</label>
-                    <textarea id="writtenReview" name="writtenReview" placeholder="Share your experience..."></textarea>
+                <!-- Additional Checkbox Section -->
+                <div class="form-group mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Additional Preferences</label>
+                    <div class="additional-checkboxes grid grid-cols-1 sm:grid-cols-2 gap-3" id="additionalCheckboxes">
+                        <!-- Additional checkboxes will be generated here -->
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="userName">Your Name</label>
-                    <input type="text" id="userName" name="userName" placeholder="Your name">
+                <!-- Written Review -->
+                <div class="form-group mb-6">
+                    <label for="writtenReview" class="block text-gray-700 font-medium mb-2">Written Review</label>
+                    <textarea id="writtenReview" name="writtenReview" placeholder="Share your experience..." rows="5"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition resize-y"></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">
+                <!-- User Name -->
+                <div class="form-group mb-8">
+                    <label for="userName" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                    <input type="text" id="userName" name="userName" placeholder="Your name"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition duration-300">
                     Submit Review
                 </button>
-
             </form>
-
         </main>
 
-        <footer class="footer-common">
-            © 2026 Anthony Anusiem
+        <footer class="footer-common bg-gray-800 text-white py-6 px-4 text-center">
+            <p>© 2026 Anthony Anusiem</p>
         </footer>
-
     </div>
 
-    <script src="form.js"></script>
+    <script>
+        // Data layer
+        const smartphoneProducts = [
+            { "id": "iphone15", "name": "iPhone 15 Pro", "brand": "Apple" },
+            { "id": "samsung23", "name": "Samsung Galaxy S23 Ultra", "brand": "Samsung" },
+            { "id": "pixel8", "name": "Google Pixel 8 Pro", "brand": "Google" },
+            { "id": "oneplus11", "name": "OnePlus 11", "brand": "OnePlus" },
+            { "id": "xiaomi13", "name": "Xiaomi 13 Pro", "brand": "Xiaomi" },
+            { "id": "nothing2", "name": "Nothing Phone (2)", "brand": "Nothing" },
+            { "id": "asusrog", "name": "ASUS ROG Phone 7", "brand": "ASUS" },
+            { "id": "motorola", "name": "Motorola Edge 40 Pro", "brand": "Motorola" }
+        ];
 
+        const ratingOptions = [
+            { "value": "1", "label": "1 Star - Poor", "description": "Very dissatisfied" },
+            { "value": "2", "label": "2 Stars - Fair", "description": "Below average" },
+            { "value": "3", "label": "3 Stars - Good", "description": "Average experience" },
+            { "value": "4", "label": "4 Stars - Very Good", "description": "Above average" },
+            { "value": "5", "label": "5 Stars - Excellent", "description": "Outstanding" }
+        ];
+
+        const usefulFeatures = [
+            { "id": "camera", "label": "Camera Quality", "checked": false },
+            { "id": "battery", "label": "Battery Life", "checked": false },
+            { "id": "display", "label": "Display Quality", "checked": false },
+            { "id": "performance", "label": "Performance", "checked": false },
+            { "id": "design", "label": "Design & Build", "checked": false },
+            { "id": "software", "label": "Software Experience", "checked": false },
+            { "id": "audio", "label": "Audio Quality", "checked": false },
+            { "id": "connectivity", "label": "Connectivity", "checked": false }
+        ];
+
+        const additionalPreferences = [
+            { "id": "recommend", "label": "Would recommend to others", "checked": false },
+            { "id": "repurchase", "label": "Would purchase again", "checked": false },
+            { "id": "value", "label": "Good value for money", "checked": false },
+            { "id": "durable", "label": "Durable and reliable", "checked": false }
+        ];
+
+        // Reusable render functions
+        function renderProductOptions(products) {
+            return products.map(product => 
+                `<option value="${product.id}">${product.name} (${product.brand})</option>`
+            ).join("");
+        }
+
+        function renderStarRating(ratingOptions) {
+            return ratingOptions.map((rating, index) => {
+                const stars = "★".repeat(parseInt(rating.value));
+                return `
+                    <div class="custom-radio">
+                        <input type="radio" id="rating${rating.value}" name="overallRating" value="${rating.value}" required>
+                        <label for="rating${rating.value}" class="flex flex-col">
+                            <span class="font-medium">${rating.label}</span>
+                            <span class="text-yellow-500 text-lg">${stars}</span>
+                            <span class="text-gray-500 text-sm">${rating.description}</span>
+                        </label>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function renderCheckboxItems(items, groupName) {
+            return items.map(item => `
+                <div class="custom-checkbox">
+                    <input type="checkbox" id="${item.id}" name="${groupName}" value="${item.id}" ${item.checked ? "checked" : ""}>
+                    <label for="${item.id}" class="cursor-pointer">${item.label}</label>
+                </div>
+            `).join("");
+        }
+
+        function renderStarIcons() {
+            return Array.from({length: 5}, (_, i) => {
+                const value = i + 1;
+                return `
+                    <input type="radio" id="star${value}" name="starRating" value="${value}">
+                    <label for="star${value}" class="text-3xl">★</label>
+                `;
+            }).join("");
+        }
+
+        // Initialize form elements
+        document.addEventListener("DOMContentLoaded", function() {
+            // Populate product select
+            const productSelect = document.getElementById("productNameSelect");
+            productSelect.innerHTML += renderProductOptions(smartphoneProducts);
+            
+            // Render star rating icons
+            const starsContainer = document.getElementById("starsRatingContainer");
+            starsContainer.className = "star-rating flex gap-1";
+            starsContainer.innerHTML = renderStarIcons();
+            
+            // Render radio rating options
+            const radioContainer = document.getElementById("radioRatingContainer");
+            radioContainer.innerHTML = renderStarRating(ratingOptions);
+            
+            // Render useful features checkboxes
+            const featuresContainer = document.getElementById("featuresChecklist");
+            featuresContainer.innerHTML = renderCheckboxItems(usefulFeatures, "usefulFeatures");
+            
+            // Render additional checkboxes
+            const additionalContainer = document.getElementById("additionalCheckboxes");
+            additionalContainer.innerHTML = renderCheckboxItems(additionalPreferences, "additionalPrefs");
+            
+            // Set min date to today for installation date
+            const today = new Date().toISOString().split("T")[0];
+            document.getElementById("installDate").min = today;
+            
+            // Form validation and submission
+            const form = document.getElementById("productReviewForm");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // Validate required fields
+                const requiredFields = form.querySelectorAll("[required]");
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add("border-red-500");
+                        isValid = false;
+                    } else {
+                        field.classList.remove("border-red-500");
+                    }
+                });
+                
+                if (isValid) {
+                    // Collect form data
+                    const formData = new FormData(form);
+                    const reviewData = Object.fromEntries(formData.entries());
+                    
+                    // Add timestamp
+                    reviewData.timestamp = new Date().toISOString();
+                    
+                    // Store in localStorage (simulating submission)
+                    localStorage.setItem("lastReview", JSON.stringify(reviewData));
+                    
+                    // Show success message
+                    alert("Thank you for your review! Your feedback has been submitted.");
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Navigate to review page (simulated)
+                    setTimeout(() => {
+                        window.location.href = "review.html";
+                    }, 1000);
+                } else {
+                    alert("Please fill in all required fields marked with *");
+                }
+            });
+            
+            // Star rating interaction
+            starsContainer.addEventListener("click", function(event) {
+                if (event.target.tagName === "LABEL") {
+                    const starId = event.target.getAttribute("for");
+                    const starValue = document.getElementById(starId).value;
+                    
+                    // Update corresponding radio button
+                    const radioBtn = document.querySelector(`input[name="overallRating"][value="${starValue}"]`);
+                    if (radioBtn) {
+                        radioBtn.checked = true;
+                    }
+                }
+            });
+            
+            // Radio button interaction
+            radioContainer.addEventListener("change", function(event) {
+                if (event.target.name === "overallRating") {
+                    const starValue = event.target.value;
+                    const starId = `star${starValue}`;
+                    const starInput = document.getElementById(starId);
+                    if (starInput) {
+                        starInput.checked = true;
+                    }
+                }
+            });
+            
+            // Prevent default anchor behavior
+            document.addEventListener("click", function(event) {
+                if (event.target.tagName === "A") {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
