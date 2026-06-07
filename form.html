@@ -130,13 +130,7 @@
       selectEl.appendChild(option);
     });
   }
-
-  // --------------------------------------------------------------
-  // 2. Overall Rating Radio (1 to 5 stars) with same name attribute "overallRating"
-  // Why same name? Because radio buttons with same name form a radio group,
-  // allowing only one selection at a time, ensuring one rating value is submitted.
-  // This is standard HTML behavior for mutual exclusivity.
-  function populateStarsRating() {
+ function populateStarsRating() {
     const container = document.getElementById('starsRatingContainer');
     if (!container) return;
     container.innerHTML = '';
@@ -149,11 +143,7 @@
       radio.name = ratingName;     // crucial: same name for all rating levels
       radio.value = i;
       radio.id = `rating_${i}`;
-      radio.required = true;       // at least one rating required
-      // star display: filled star for value, but for consistent look use star symbol ☆ / ★
-      // we use filled star for selected visual? but default star: we show both.
-      // Since we use custom design, we use unicode stars: ★ for visual appeal.
-      const starSpan = document.createElement('span');
+      radio.required = true;             const starSpan = document.createElement('span');
       // show stars as filled star icon ★ from i==1..5 with dynamic representation
       starSpan.textContent = '★'.repeat(i) + '☆'.repeat(5 - i);
       starSpan.style.color = '#F5B041';
@@ -163,17 +153,10 @@
       starWrapper.appendChild(radio);
       starWrapper.appendChild(starSpan);
       container.appendChild(starWrapper);
-      
-      // set first radio default? Not required to preselect, but it's nice to leave none selected.
-      // None selected, required validation will trigger on submit.
+     
     }
-    // Additionally, add hidden requirement: since radio group required attribute ensures at least one,
-    // we are safe
   }
 
-  // --------------------------------------------------------------
-  // 3. Useful Features Checkboxes: Durability, Ease of Use, Performance, Design
-  // Provided from design. We'll assign id, name, value for each.
   const featuresList = [
     { id: "featureDurability", name: "durability", label: "Durability", value: "Durability" },
     { id: "featureEase", name: "easeOfUse", label: "Ease of Use", value: "Ease of Use" },
@@ -201,24 +184,6 @@
     });
   }
 
-  // --------------------------------------------------------------
-  // 4. LocalStorage counter for tracking number of reviews completed.
-  // Increment counter each time review.html loads successfully after form submission.
-  // Since we are redirecting to review.html via GET, we cannot directly increment on form submit
-  // because page will redirect; but the requirement: "Each time the review.html page loads successfully after form submission,
-  // increment the counter by one." -> We must increment counter in review.html? Wait instructions: "Use localStorage to store and track
-  // the number of reviews completed. Each time the review.html page loads successfully after form submission, increment the counter by one."
-  // This suggests that review.html (the confirmation page) should read a flag or we must increment counter before leaving? But typical pattern
-  // is on form submission (before redirect) we increment, but that wouldn't be exactly on review.html load. But more robust: we set a session flag?
-  // Since review.html is separate static page we also control, but we only create form.html in this exercise, review.html is not fully built here? 
-  // In actual assignments, review.html exists but we are only building form.html. However we implement increment logic that triggers when user submits form
-  // AND then review.html loads. For seamless requirement without server, we can attach an event on form submit, increment localstorage counter and then redirect.
-  // However spec: "Each time the review.html page loads successfully after form submission" meaning we rely on review.html to detect submission? 
-  // Since we control entire environment, we implement as: When the form is submitted, before the actual navigation, we increment a 'reviewCounter' in localStorage.
-  // That meets the spirit: The submission triggers increment, and when review.html loads it could display new count. 
-  // However to be fully compliant we attach submit listener and increment. We'll also ensure that review.html can read the counter. We'll increment exactly once per valid submit.
-  // Additionally we prevent double counting if user goes back? but fine.
-  
   function incrementReviewCounter() {
     let currentCount = localStorage.getItem('pizzaReviewCount');
     if (currentCount === null) {
@@ -233,14 +198,6 @@
     console.log(`✅ Review counter incremented to ${currentCount}. Total reviews submitted.`);
   }
 
-  // Also we provide a function to optionally display count (not mandatory but to show in console)
-  // Additionally we add validation for required radio group because radio 'required' works only when at least one checked.
-  // The HTML5 validation will handle required, but we need to ensure product select is not placeholder.
-  // For extra robustness we add interactive listeners.
-  
-  // Ensure date input has max (optional) but not needed.
-  
-  // Form submission handler: increment counter ONLY after validation passes.
   const form = document.getElementById('productReviewForm');
   if (form) {
     form.addEventListener('submit', function(event) {
@@ -300,25 +257,8 @@
       dateInput.min = "2020-01-01";
     }
     
-    // Tab order naturally follows DOM structure; labels are properly associated
-    // Each input has its corresponding label via for/id or wrapper.
-    // Additional accessibility: all labels and inputs are correctly paired.
-    // Also for stars, we used label wrapping radio + span, thus click on star selects.
   });
   
-  // Extra: ensure that each checkbox has explicit id & name and value as required.
-  // Already done in populateCheckboxes
-  // Additionally style rating required attribute is effective because radio group required attribute will enforce user picks.
-  // For radio required: all radios have required attribute. But this will require at least one radio in the group,
-  // but to be safe we attached manual validation fallback as well.
-  // All good.
-  
-  // Ensure that user can see the required fields asterisk: star rating and product select and date fields.
-  // Yes, all labels indicate required.
-  
-  // Also answer question: "Why should each of the radio buttons that are part of this rating have the same name value?"
-  // To display in console? Actually we can briefly add a console reasoning message but not mandatory.
-  // For educational purpose we add note.
   console.log("✨ Form ready: All radio rating buttons share same name='overallRating' to enforce single selection and proper form data submission.");
 <script src="form.js"></script>
 </body>
