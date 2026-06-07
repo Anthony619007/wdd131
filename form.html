@@ -281,33 +281,15 @@
       </select>
     </div>
 
-    <!-- Overall Rating — 5 hardcoded radio inputs (FIX ✅) -->
+    <!-- Overall Rating (stars) -->
     <div class="form-group">
       <label>⭐ Overall Rating <span class="required-ast">*</span></label>
       <div class="rating-group">
-        <div class="star-rating" id="starRatingWidget">
- 
-          <input type="radio" id="star5" name="rating" value="5" required>
-          <label for="star5" title="5 stars">★</label>
- 
-          <input type="radio" id="star4" name="rating" value="4">
-          <label for="star4" title="4 stars">★</label>
- 
-          <input type="radio" id="star3" name="rating" value="3">
-          <label for="star3" title="3 stars">★</label>
- 
-          <input type="radio" id="star2" name="rating" value="2">
-          <label for="star2" title="2 stars">★</label>
- 
-          <input type="radio" id="star1" name="rating" value="1">
-          <label for="star1" title="1 star">★</label>
- 
-        </div>
+        <div class="star-rating" id="starRatingWidget"></div>
         <div class="rating-text">tap a star to rate (1–5)</div>
       </div>
       <small class="hint-text">Each radio button shares the same name to form a single selection group.</small>
     </div>
- 
 
     <!-- Date of Installation -->
     <div class="form-group">
@@ -347,7 +329,7 @@
   </footer>
 </div>
 
-<script>
+<script
  // ------------------------------------------------------------
   // 1. Data definitions
   // ------------------------------------------------------------
@@ -572,7 +554,6 @@
     setupFormValidationAndIncrement();  // attach validation + increment logic
     syncCountOnLoad();            // display current total reviews from localStorage
   });
-
-<script src="form.js" defer></script>
+<script src="form.js"></script>
 </body>
 </html>
