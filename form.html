@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-  
+
 <div class="form-container">
   <header>
   <div class="form-header">
@@ -97,22 +97,6 @@
 </div>
 
 <script>
-  // --------------------------------------------------------------
-  // 1. PRODUCT ARRAY (focus on PIZZA products)
-  // The requirement states: "make sure the product is on PIZZA"
-  // So we provide pizza products array with id and name.
-  // Value field = product name (string) as per spec: "value attribute that is the product name"
-  // But spec says normally id for value? Actually spec: "array's name field used for display, array's id used for value"
-  // However requirement: "Each option must have a value attribute that is the product name." Wait double-check:
-  // Provided guideline: "Product Array: Use JavaScript to populate options where the array's name field is used for select option display 
-  // and the array's id is used for the value field." but then line says: "Each option must have a value attribute that is the product name."
-  // For clarity and safest: Use product name as value for exact string submission to review.html (since server side not used, but GET param consistency).
-  // However we follow both: value = product name (exact matching) but display = product name too. But we also store ID? Actually no strong requirement conflict.
-  // To be correct with "value attribute that is the product name" we set value = product name (e.g., "Margherita Magic").
-  // But original product array example not given? I create explicit pizza-focused product array with id (numeric) and name(pizza name). 
-  // I will set value = product name as explicitly instructed second requirement. That's clear.
-  // BUT also they said "array's id used for value field" contradictory but later instruction: "Each option must have a value attribute that is the product name."
-  // I follow explicit: product name as value. So the select options value = product string name.
   const pizzaProducts = [
     { id: 101, name: "iPhone 15 Pro" },
     { id: 102, name: "Samsung Galaxy S24 Ultra" },
