@@ -2,309 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Share your smartphone experience with our detailed review form. Rate features, installation date, and write a review to help other users.">
+  <meta name="author" content="Anthony Anusiem">
   <title>Smartphone Review Form | Tech Insights</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: linear-gradient(145deg, #e9eff5 0%, #dce3ec 100%);
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      padding: 2rem 1.5rem;
-      color: #1a2c3e;
-    }
-
-    /* main container - clean card */
-    .review-container {
-      max-width: 880px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.02);
-      overflow: hidden;
-      transition: all 0.2s ease;
-    }
-
-    /* header area */
-    .form-header {
-      background: #0f2c3b;
-      padding: 1.8rem 2rem;
-      border-bottom: 4px solid #ffb347;
-    }
-
-    .form-header h1 {
-      font-size: 1.9rem;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-      color: #f9f7f3;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .form-header h1::before {
-      content: "📱";
-      font-size: 2rem;
-    }
-
-    .form-header p {
-      color: #cfdfe8;
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    /* form styling */
-    .smart-review-form {
-      padding: 2rem 2rem 1.8rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    label {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #1e3a4d;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    label i, .required-ast {
-      color: #c24b2a;
-      font-size: 0.9rem;
-    }
-
-    .optional-badge {
-      font-weight: normal;
-      font-size: 0.7rem;
-      background: #eef2f5;
-      padding: 0.2rem 0.6rem;
-      border-radius: 30px;
-      margin-left: 0.75rem;
-      color: #4a627a;
-    }
-
-    /* select, input, textarea base */
-    select, input[type="date"], input[type="text"], textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border: 1.5px solid #d4dee8;
-      border-radius: 20px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      background-color: #fefefe;
-      transition: all 0.2s;
-      outline: none;
-    }
-
-    select:focus, input:focus, textarea:focus {
-      border-color: #ffb347;
-      box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
-    }
-
-    /* star rating radio (custom stars) */
-    .rating-group {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1.5rem;
-      background: #f9fafc;
-      padding: 1rem 1.2rem;
-      border-radius: 48px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .star-rating {
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
-    }
-
-    .star-rating input {
-      display: none;
-    }
-
-    .star-rating label {
-      font-size: 2rem;
-      cursor: pointer;
-      color: #cbd5e1;
-      transition: transform 0.1s, color 0.2s;
-      font-weight: normal;
-      margin: 0;
-      padding: 0 2px;
-    }
-
-    .star-rating label:hover,
-    .star-rating label:hover ~ label,
-    .star-rating input:checked ~ label {
-      color: #ffb347;
-      text-shadow: 0 0 2px #ffc97a;
-    }
-
-    .star-rating input:checked + label {
-      color: #ffb347;
-    }
-
-    /* override sibling order for visual classic stars: we display label after input, but flex direction row reverse? easier: manually set star layout */
-    .star-rating {
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-    }
-
-    .star-rating label {
-      margin-right: 0.2rem;
-    }
-
-    .rating-text {
-      font-size: 0.85rem;
-      background: #ffffff;
-      padding: 0.4rem 0.9rem;
-      border-radius: 30px;
-      color: #2c5a74;
-      font-weight: 500;
-    }
-
-    /* checkboxes grid layout */
-    .checkbox-group {
-      background: #fefbf6;
-      border-radius: 1.2rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid #e9edf2;
-    }
-
-    .checkbox-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      width: 1.2rem;
-      height: 1.2rem;
-      accent-color: #ffb347;
-      margin: 0;
-    }
-
-    .checkbox-item label {
-      font-weight: 500;
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    /* action button */
-    .submit-area {
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .submit-btn {
-      background: #0f2c3b;
-      border: none;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 600;
-      padding: 0.9rem 2.2rem;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: all 0.2s;
-      width: 100%;
-      max-width: 280px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      letter-spacing: 0.3px;
-    }
-
-    .submit-btn:hover {
-      background: #ff8c42;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    /* footer (common) */
-    .assignment-footer {
-      background: #f0f3f7;
-      padding: 1rem 2rem;
-      border-top: 1px solid #dce3ec;
-      font-size: 0.75rem;
-      color: #4f6f8f;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-family: monospace;
-    }
-
-    .footer-left, .footer-right {
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    hr {
-      margin: 0;
-    }
-
-    /* responsiveness */
-    @media (max-width: 640px) {
-      body {
-        padding: 1rem;
-      }
-      .smart-review-form {
-        padding: 1.5rem;
-      }
-      .rating-group {
-        flex-direction: column;
-        align-items: flex-start;
-        border-radius: 24px;
-      }
-      .checkbox-list {
-        gap: 1rem;
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="form.css">
 </head>
 <body>
 
 <div class="review-container">
-  <div class="form-header">
+  <header>
     <h1>⚡ Smartphone Review</h1>
     <p>Share your real experience — help others choose the perfect device</p>
-  </div>
+  </header>
 
-  <form class="smart-review-form" method="get" action="review.html" id="phoneReviewForm">
+  <form class="smart-review-form" method="get" action="" id="phoneReviewForm">
     <!-- Product Name (dynamic select) -->
     <div class="form-group">
       <label for="productName">📱 Product Name <span class="required-ast">*</span></label>
       <select id="productName" name="productName" required>
-        <!-- placeholder option disabled & selected -->
         <option value="" disabled selected>Select a Product ...</option>
-        <!-- dynamic options will be injected via JS -->
+        <!-- options injected by JavaScript -->
       </select>
     </div>
 
-    <!-- Overall Rating: radio stars (5 levels) -->
+    <!-- Overall Rating: radio stars -->
     <div class="form-group">
       <label>⭐ Overall Rating <span class="required-ast">*</span></label>
       <div class="rating-group">
         <div class="star-rating" id="starRatingWidget">
-          <!-- radio values 1..5, same name = ratingValue -->
           <input type="radio" id="star5" name="ratingValue" value="5" required>
           <label for="star5" title="5 stars">★</label>
           
@@ -322,7 +48,7 @@
         </div>
         <div class="rating-text">tap a star to rate (1–5)</div>
       </div>
-      <small style="color:#507b9b;">Why same name? Each radio button shares the same `name` attribute to form a single selection group — only one rating value can be submitted.</small>
+      <small class="hint-text">Why same name? Each radio button shares the same `name` attribute to form a single selection group — only one rating value can be submitted.</small>
     </div>
 
     <!-- Date of Installation -->
@@ -331,18 +57,32 @@
       <input type="date" id="installDate" name="installDate" required>
     </div>
 
-    <!-- Useful Features (checkboxes) -->
+    <!-- Useful Features (static checkboxes - at least 4) -->
     <div class="form-group">
       <label>✅ Which features did you find useful?</label>
       <div class="checkbox-group">
-        <div class="checkbox-list" id="featuresChecklist">
-          <!-- dynamic generation from pre-defined feature list? but we have fixed array: Durability, Ease of Use, Performance, Design 
-          according to design consistency, but we will keep it explicit -->
+        <div class="checkbox-list">
+          <div class="checkbox-item">
+            <input type="checkbox" id="feat_dura" name="usefulFeatures" value="Durability">
+            <label for="feat_dura">Durability</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="feat_ease" name="usefulFeatures" value="Ease of Use">
+            <label for="feat_ease">Ease of Use</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="feat_perf" name="usefulFeatures" value="Performance">
+            <label for="feat_perf">Performance</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="feat_design" name="usefulFeatures" value="Design">
+            <label for="feat_design">Design</label>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Written Review (optional) textarea -->
+    <!-- Written Review (optional) -->
     <div class="form-group">
       <label for="writtenReview">✍️ Written Review <span class="optional-badge">Optional</span></label>
       <textarea id="writtenReview" name="writtenReview" rows="4" placeholder="Tell us more about your experience with this smartphone... (optional)"></textarea>
@@ -360,222 +100,12 @@
     </div>
   </form>
 
-  <!-- common footer content -->
-  <div class="assignment-footer">
+  <footer>
     <div class="footer-left">©2024 ⚠️ Rubia Magdelena Francesco · Madagascar</div>
-    <div class="footer-right">Last Modification: 02/26/2024 13:56:10 · Review Tracker Active</div>
-  </div>
+    <div class="footer-right">Last Modification: 02/26/2024 13:56:10 · <span id="reviewCountDisplay">Reviews: 0</span></div>
+  </footer>
 </div>
 
-<script>
-  // ---------- PRODUCT ARRAY (provided in spec) ----------
-  const productArray = [
-    { id: "ph_001", name: "Galaxy Nexus X" },
-    { id: "ph_002", name: "iPhone 15 Pro Max" },
-    { id: "ph_003", name: "Pixel 9 Ultra" },
-    { id: "ph_004", name: "OnePlus 12T" },
-    { id: "ph_005", name: "Xiaomi 14 Pro" },
-    { id: "ph_006", name: "Nothing Phone (3)" },
-    { id: "ph_007", name: "Sony Xperia 5 V" }
-  ];
-
-  // Features array (matching design: "Durability", "Ease of Use", "Performance", "Design")
-  const featuresList = [
-    { id: "feat_dura", name: "Durability", value: "Durability" },
-    { id: "feat_ease", name: "Ease of Use", value: "Ease of Use" },
-    { id: "feat_perf", name: "Performance", value: "Performance" },
-    { id: "feat_design", name: "Design", value: "Design" }
-  ];
-
-  // ----- 1. Populate Product Name select dynamically (using id as value, name as display)
-  function populateProductSelect() {
-    const selectEl = document.getElementById("productName");
-    if (!selectEl) return;
-    // keep the first disabled placeholder
-    // remove any existing dynamic options except placeholder (hard clear)
-    // we will remove all options after the first placeholder, but safer: clear and re-add placeholder and then append
-    const currentOptions = selectEl.querySelectorAll('option');
-    // we keep only first placeholder and remove others if needed.
-    for (let i = currentOptions.length - 1; i >= 0; i--) {
-      if (currentOptions[i].value !== "") {
-        currentOptions[i].remove();
-      }
-    }
-    // add dynamic options from productArray: name as text, id as value
-    productArray.forEach(product => {
-      const option = document.createElement("option");
-      option.value = product.id;    // value attribute set to product id (per requirement: product id for value field)
-      option.textContent = product.name; // display product name
-      selectEl.appendChild(option);
-    });
-  }
-
-  // ----- 2. Populate Checkboxes for Useful Features
-  function populateFeatures() {
-    const container = document.getElementById("featuresChecklist");
-    if (!container) return;
-    container.innerHTML = "";
-    featuresList.forEach(feature => {
-      const div = document.createElement("div");
-      div.className = "checkbox-item";
-      
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = feature.id;
-      checkbox.name = "usefulFeatures";
-      checkbox.value = feature.value;
-      
-      const label = document.createElement("label");
-      label.htmlFor = feature.id;
-      label.textContent = feature.name;
-      
-      div.appendChild(checkbox);
-      div.appendChild(label);
-      container.appendChild(div);
-    });
-  }
-
-  // 3. localStorage review counter logic: increments when review.html loads successfully
-  // Because the form uses GET to "review.html", on that page we will increment counter.
-  // According to spec: "Each time the review.html page loads successfully after form submission, increment the counter by one."
-  // It implies that we store count in localStorage, and on review.html we increment. To implement both parts, we need a mechanism:
-  // - On the main form page (this page) we don't increment on load, only when review.html loads after redirect.
-  // - In review.html, we detect if the page was reached via form submission? But spec says "after form submission, increment the counter one each time review.html loads successfully".
-  // Since review.html is a confirmation page we will create within the same deployment? For standalone completeness, we will implement that in review.html as separate.
-  // However to be fully functional in this single file exercise? the requirement asks to use localStorage to store and track number of reviews completed.
-  // I'll add logic to review.html handling: but for now, we also attach event listener to form to ensure that we don't increment before navigation.
-  // More elegantly: when form is submitted, we can set a flag "pendingReview=true" before leaving, but because it's GET, the review.html will be loaded.
-  // The best approach: create a companion script for review.html context. But this file is main review form. To satisfy the "use localStorage" requirement entirely:
-  // We can also implement a small check on review.html if we control it; but since I must produce ONLY this file (combined), I will additionally embed a mechanism to increment counter ONLY when review.html is loaded and the document.referrer or URL param includes the form data? safer:
-  // According to instructions: The review.html page loads successfully after form submission. Increment counter. I'll create a script inside this same file that detects if the current page is review.html, then increment counter.
-  // However, review.html is separate page; but I can embed inside this document an inline script that conditionally runs on "review.html"? No, because this is the main form-sm page. The assignment asks to create the form (this file) and action="review.html", but review.html is a separate file that should exist. However the problem expects we build everything as a complete solution. I need to ensure that upon landing on review.html the counter increments.
-  // Since the grading environment may host both pages, I will add code snippet for review.html logic? But to be safe, I’ll implement eventListener in current form that increments localStorage counter upon successful submission? But spec requires increment each time review.html loads successfully after form submission, not on submit event.
-  // To fully respect: I'll dynamically define a strategy that on page load, check if URL is review.html and increment counter. Additionally if there's no review.html provided, I can create a polyfill using session flag? I will implement a complete solution: add code that runs if the page is review.html, increments counter and displays message.
-  // But since I cannot serve two html files as single answer, I will also embed JavaScript that handles localStorage increment only when the form is submitted and redirected, but using beforeunload could be inconsistent.
-  // Better: we will implement cross-page solution: on review.html we read a token? Actually the clean approach: we define on review.html we increment, but it's missing. For full feature, I'll display on the console but also the counter is stored on the main page indicator showing total reviews count? The requirement says: "Use localStorage to store and track the number of reviews completed. Each time the review.html page loads successfully after form submission, increment the counter by one."
-  // I will create a smart approach: When the form is submitted, we attach an event to increment counter in localStorage if the destination is review.html via a synchronous redirect? The typical way: in review.html we increment. So to meet requirement, I'll also provide script that if the browser sees that the current URL includes "review.html" (simulate by optional parameter or just path detection). But since in this isolated HTML only form page is being rendered, I'll incorporate a dummy detection for review.html using window.location.pathname. For production, user will have review.html with same logic. But I'll implement generic: add an IIFE that checks if current file is named "review.html" or contains "review" in path, then increments and displays message in console and optional alert? But to not violate UX, I'll handle it correctly. I decide: On page load, if the current page filename ends with review.html (or path includes review.html) then increment reviews counter.
-  // Also inside review.html body we need same footer? But this file is form only. To fulfill best design, I will generate a hidden piece: in review page context, increment counter. Because the spec says we need to store and track number of reviews completed. It also expects the review page to exist. For the sake of testing, I add conditional that if the page is 'review.html' (or query param) increment, and also on the main form we show current review count in footer (nice usability).
-  
-  // I'll also add a display of total submitted reviews in footer (optional but shows tracking).
-  function initReviewCounterTracking() {
-    // Check if current page is review.html (by path)
-    const path = window.location.pathname;
-    const isReviewPage = path.endsWith("review.html") || path.includes("review.html");
-    if (isReviewPage) {
-      // increment reviews counter
-      let currentCount = localStorage.getItem("smartphoneReviewsCount");
-      let count = currentCount ? parseInt(currentCount, 10) : 0;
-      count += 1;
-      localStorage.setItem("smartphoneReviewsCount", count);
-      // optional message for user
-      console.log(`✅ Review recorded! Total submitted reviews: ${count}`);
-      // Optionally show a tiny banner
-      const banner = document.createElement('div');
-      banner.style.position = 'fixed';
-      banner.style.bottom = '20px';
-      banner.style.right = '20px';
-      banner.style.backgroundColor = '#0f2c3b';
-      banner.style.color = '#ffb347';
-      banner.style.padding = '8px 16px';
-      banner.style.borderRadius = '40px';
-      banner.style.fontWeight = 'bold';
-      banner.style.zIndex = '999';
-      banner.style.fontSize = '14px';
-      banner.innerHTML = `📱 Reviews completed: ${count}`;
-      document.body.appendChild(banner);
-      setTimeout(() => banner.style.opacity = '0.9', 100);
-    }
-  }
-  
-  // For main form page, we can also display current review count in footer area (repeat footer)
-  function displayCurrentReviewCountInFooter() {
-    const totalReviews = localStorage.getItem("smartphoneReviewsCount");
-    const countNumber = totalReviews ? parseInt(totalReviews,10) : 0;
-    const footerRight = document.querySelector('.assignment-footer .footer-right');
-    if (footerRight && !footerRight.innerHTML.includes('Total reviews')) {
-      const countSpan = document.createElement('span');
-      countSpan.style.marginLeft = '12px';
-      countSpan.style.background = '#1e3a4d';
-      countSpan.style.padding = '2px 8px';
-      countSpan.style.borderRadius = '30px';
-      countSpan.style.color = '#ffd966';
-      countSpan.style.fontWeight = 'bold';
-      countSpan.innerHTML = `📊 Total reviews: ${countNumber}`;
-      footerRight.appendChild(countSpan);
-    }
-  }
-
-  // Ensure required star radio works: "required" attribute for radio groups works only when at least one is selected. Browser handles naturally.
-  // But we must set required on each input? Only need to ensure one required? For consistency, set required on each but it's fine, but group requires only one.
-  // The star ratings are already required as group.
-  
-  // Also we set "required" validation for product, date, rating radio.
-  
-  // Ensuring date field default? add min max optionally but not required.
-  
-  // Set min date for Installation to not exceed future? UX improvement.
-  const dateInput = document.getElementById('installDate');
-  if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.max = today;
-  }
-  
-  // Additional tab index automatically works based on DOM order.
-  
-  // Run after DOM load
-  document.addEventListener('DOMContentLoaded', () => {
-    populateProductSelect();
-    populateFeatures();
-    initReviewCounterTracking();   // increments if review.html
-    displayCurrentReviewCountInFooter();
-    
-    // Optional: Dynamic update to ensure product name etc are required
-    const form = document.getElementById('phoneReviewForm');
-    // we also add listener to log review submission but not necessary for counter increment
-    // Counter increment only happens on review.html.
-    // Also before submission we could store something but not needed
-    // To assure localStorage tracking works also if user lands on review.html directly without form? But spec requires after form submission. The incremental occurs only on review.html. I'll add a safeguard: only increment if document.referrer contains form-sm or the parent page? optional - but good enough.
-    // Additionally set stars required custom message: group required
-    // Also add custom validation for star rating (better)
-    const starRadios = document.querySelectorAll('input[name="ratingValue"]');
-    const ratingGroup = document.querySelector('.rating-group');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        let ratingSelected = false;
-        for (let radio of starRadios) {
-          if (radio.checked) ratingSelected = true;
-        }
-        if (!ratingSelected) {
-          e.preventDefault();
-          alert('⭐ Please select an overall rating (1 to 5 stars) before submitting.');
-          return;
-        }
-        const productSelect = document.getElementById('productName');
-        if (!productSelect.value) {
-          e.preventDefault();
-          alert('Please select a smartphone product.');
-          return;
-        }
-        const installDateVal = document.getElementById('installDate').value;
-        if (!installDateVal) {
-          e.preventDefault();
-          alert('Please select the date of installation.');
-          return;
-        }
-        // If all valid, form will submit to review.html via GET
-        // Store optional flag that redirect will cause counter increment on review page
-        // All good, the counter will be incremented inside review.html logic which is triggered.
-        // So final requirement satisfied
-      });
-    }
-  });
-  
-  // ensure manual re-run counter if we ever manually update localStorage from footer display
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'smartphoneReviewsCount') {
-      displayCurrentReviewCountInFooter();
-    }
-  });
-</script>
+<script src="form.js"></script>
 </body>
 </html>
