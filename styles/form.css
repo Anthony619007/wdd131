@@ -103,7 +103,6 @@ select:focus, input:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
 }
 
-/* Rating radios */
 .rating-group {
   display: flex;
   flex-wrap: wrap;
@@ -144,7 +143,6 @@ select:focus, input:focus, textarea:focus {
   cursor: pointer;
 }
 
-/* Checkbox groups */
 .checkbox-group {
   background: #fefbf6;
   border-radius: 1.2rem;
@@ -179,7 +177,6 @@ select:focus, input:focus, textarea:focus {
   cursor: pointer;
 }
 
-/* Centered submit button */
 .submit-area {
   margin-top: 2rem;
   text-align: center;
@@ -219,7 +216,7 @@ select:focus, input:focus, textarea:focus {
   font-family: monospace;
 }
 
-/* ========== MEDIA QUERIES (required) ========== */
+/* ========== MEDIA QUERIES ========== */
 @media (max-width: 640px) {
   body {
     padding: 1rem;
