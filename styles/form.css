@@ -16,7 +16,7 @@ body {
   margin: 0 auto;
   background: #ffffff;
   border-radius: 2rem;
-  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -29,7 +29,6 @@ body {
 .form-header h1 {
   font-size: 1.9rem;
   font-weight: 600;
-  letter-spacing: -0.3px;
   color: #f9f7f3;
   display: flex;
   align-items: center;
@@ -69,7 +68,6 @@ label {
 
 .required-ast {
   color: #c24b2a;
-  font-size: 0.9rem;
 }
 
 .optional-badge {
@@ -105,88 +103,83 @@ select:focus, input:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.2);
 }
 
+/* Rating radios */
 .rating-group {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   background: #f9fafc;
   padding: 1rem 1.2rem;
   border-radius: 48px;
   border: 1px solid #e2e8f0;
 }
 
-.star-rating {
+.rating-option {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: 0.6rem;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.4rem 1rem;
+  border-radius: 40px;
+  border: 1px solid #e2e8f0;
 }
 
-.star-rating input {
-  display: none;
+.rating-option:hover {
+  background: #fff7ed;
+  border-color: #ffb347;
 }
 
-.star-rating label {
-  font-size: 2rem;
-  cursor: pointer;
-  color: #cbd5e1;
-  transition: transform 0.1s, color 0.2s;
-  font-weight: normal;
+.rating-option input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #ffb347;
   margin: 0;
-  padding: 0 2px;
+  cursor: pointer;
 }
 
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input:checked ~ label {
-  color: #ffb347;
-  text-shadow: 0 0 2px #ffc97a;
-}
-
-.rating-text {
-  font-size: 0.85rem;
-  background: #ffffff;
-  padding: 0.4rem 0.9rem;
-  border-radius: 30px;
-  color: #2c5a74;
+.rating-option label {
   font-weight: 500;
+  font-size: 0.9rem;
+  color: #2c5a74;
+  cursor: pointer;
 }
 
+/* Checkbox groups */
 .checkbox-group {
   background: #fefbf6;
   border-radius: 1.2rem;
   padding: 1rem 1.2rem;
   border: 1px solid #e9edf2;
-}
-
-.checkbox-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
 }
 
 .checkbox-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  background: white;
+  padding: 0.3rem 0.9rem;
+  border-radius: 40px;
+  border: 1px solid #e2e8f0;
 }
 
 .checkbox-item input[type="checkbox"] {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
   accent-color: #ffb347;
   margin: 0;
 }
 
 .checkbox-item label {
   font-weight: 500;
+  font-size: 0.9rem;
   margin: 0;
-  font-size: 0.95rem;
+  cursor: pointer;
 }
 
+/* Centered submit button */
 .submit-area {
   margin-top: 2rem;
   text-align: center;
@@ -202,8 +195,9 @@ select:focus, input:focus, textarea:focus {
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.2s;
-  width: 100%;
-  max-width: 280px;
+  width: auto;
+  min-width: 240px;
+  display: inline-block;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -224,29 +218,47 @@ select:focus, input:focus, textarea:focus {
   gap: 0.5rem;
   font-family: monospace;
 }
-/* ============================================
-   MEDIA QUERY — mobile layout  (FIX ✅)
-   ============================================ */
-@media (max-width: 600px) {
-  .smart-review-form  { padding: 1.5rem 1.2rem; }
-  .form-header        { padding: 1.5rem 1.2rem; }
-  .form-header h1     { font-size: 1.4rem; } 
-  {
+
+/* ========== MEDIA QUERIES (required) ========== */
+@media (max-width: 640px) {
+  body {
     padding: 1rem;
   }
   .smart-review-form {
     padding: 1.5rem;
   }
-  .rating-group {
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 24px;
-  }
-  .checkbox-list {
-    gap: 1rem;
-    flex-direction: column;
+  .form-header {
+    padding: 1.2rem;
   }
   .form-header h1 {
     font-size: 1.5rem;
+  }
+  .rating-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .checkbox-group {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .submit-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .review-container {
+    max-width: 95%;
+  }
+  .rating-group {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1025px) {
+  .review-container {
+    max-width: 960px;
   }
 }
