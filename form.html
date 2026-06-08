@@ -80,6 +80,7 @@
     .hint-text {
       color: #507b9b;
       font-size: 0.75rem;
+      margin-top: 0.25rem;
     }
     select, input[type="date"], input[type="text"], textarea {
       width: 100%;
@@ -89,8 +90,8 @@
       font-size: 0.95rem;
       font-family: inherit;
       background-color: #fefefe;
-      outline: none;
       transition: all 0.2s;
+      outline: none;
     }
     select:focus, input:focus, textarea:focus {
       border-color: #ffb347;
@@ -119,9 +120,9 @@
       border-color: #ffb347;
     }
     .rating-option input {
-      accent-color: #ffb347;
       width: 1.2rem;
       height: 1.2rem;
+      accent-color: #ffb347;
       margin: 0;
       cursor: pointer;
     }
@@ -150,9 +151,9 @@
       border: 1px solid #e2e8f0;
     }
     .checkbox-item input {
-      accent-color: #ffb347;
       width: 1.1rem;
       height: 1.1rem;
+      accent-color: #ffb347;
       margin: 0;
     }
     .checkbox-item label {
@@ -161,7 +162,6 @@
       margin: 0;
       cursor: pointer;
     }
-    /* Centered submit button */
     .submit-area {
       margin-top: 2rem;
       text-align: center;
@@ -194,9 +194,10 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      gap: 0.5rem;
       font-family: monospace;
     }
-    /* Media Queries */
+    /* ========== MEDIA QUERIES ========== */
     @media (max-width: 640px) {
       body { padding: 1rem; }
       .smart-review-form { padding: 1.5rem; }
@@ -230,7 +231,7 @@
       </select>
     </div>
 
-    <!-- Overall Rating - exactly 5 radio inputs -->
+    <!-- Overall Rating - 5 radio inputs (created by JS) -->
     <div class="form-group">
       <label>⭐ Overall Rating <span class="required-ast">*</span></label>
       <div class="rating-group" id="ratingGroup"></div>
@@ -267,7 +268,7 @@
       <input type="text" id="userName" name="userName" placeholder="e.g., Alex Johnson">
     </div>
 
-    <!-- Centered submit button -->
+    <!-- Centered Submit Button -->
     <div class="submit-area">
       <button type="submit" class="submit-btn">📲 Post Review & Continue</button>
     </div>
@@ -291,7 +292,6 @@
     { id: "ph_007", name: "Sony Xperia 5 V" }
   ];
 
-  // 8 useful features checkboxes
   const featuresList = [
     { id: "feat_cam", label: "Camera Quality" },
     { id: "feat_batt", label: "Battery Life" },
@@ -303,7 +303,6 @@
     { id: "feat_conn", label: "Connectivity" }
   ];
 
-  // 4 additional preferences checkboxes
   const additionalPrefs = [
     { id: "pref_recommend", label: "Would recommend to others" },
     { id: "pref_repurchase", label: "Would purchase again" },
@@ -311,11 +310,9 @@
     { id: "pref_durable", label: "Durable and reliable" }
   ];
 
-  // Populate product dropdown
   function populateProductSelect() {
     const selectEl = document.getElementById("productName");
     if (!selectEl) return;
-    // keep only the placeholder
     for (let i = selectEl.options.length - 1; i >= 0; i--) {
       if (selectEl.options[i].value !== "") selectEl.options[i].remove();
     }
@@ -327,7 +324,6 @@
     });
   }
 
-  // Create 5 radio inputs for rating
   function createRatingRadios() {
     const container = document.getElementById("ratingGroup");
     if (!container) return;
@@ -351,7 +347,6 @@
     }
   }
 
-  // Populate checkboxes
   function populateCheckboxes(containerId, items, nameAttr) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -373,7 +368,6 @@
     });
   }
 
-  // Set max date to today
   function setDateMax() {
     const dateInput = document.getElementById("installDate");
     if (dateInput) {
@@ -382,21 +376,21 @@
     }
   }
 
-  // LocalStorage review counter
   function getReviewCount() {
     const stored = localStorage.getItem("smartphoneReviewsCount");
     return stored ? parseInt(stored, 10) : 0;
   }
+
   function updateFooterCount() {
     const span = document.getElementById("reviewCountDisplay");
     if (span) span.textContent = `Reviews: ${getReviewCount()}`;
   }
+
   function incrementReviewCount() {
     localStorage.setItem("smartphoneReviewsCount", getReviewCount() + 1);
     updateFooterCount();
   }
 
-  // Form validation
   function setupValidation() {
     const form = document.getElementById("phoneReviewForm");
     if (!form) return;
@@ -419,17 +413,15 @@
         alert("Please select the date of installation.");
         return;
       }
-      incrementReviewCount();  // increment only if valid
-      // form submits to review.html
+      incrementReviewCount();
     });
   }
 
-  // Initialize everything
   document.addEventListener("DOMContentLoaded", () => {
     populateProductSelect();
-    createRatingRadios();          // 5 radios
-    populateCheckboxes("featuresChecklist", featuresList, "usefulFeatures");    // 8 checkboxes
-    populateCheckboxes("additionalChecklist", additionalPrefs, "additionalPrefs"); // 4 checkboxes
+    createRatingRadios();
+    populateCheckboxes("featuresChecklist", featuresList, "usefulFeatures");
+    populateCheckboxes("additionalChecklist", additionalPrefs, "additionalPrefs");
     setDateMax();
     updateFooterCount();
     setupValidation();
