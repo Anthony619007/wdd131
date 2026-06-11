@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact eWiseCircle to request e-waste pickup help, repair guidance, donation support, or a community collection event.">
+  <meta name="author" content="Anthony Anusiem">
+  <title>eWiseCircle | Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/ewise.css">
+  <script src="scripts/ewise.js" defer></script>
+</head>
+<body data-page="connect">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a class="brand-link" href="index.html" aria-label="eWiseCircle home">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span>
+          <span class="brand-name">eWiseCircle</span>
+          <span class="brand-tagline">repair. reuse. recycle.</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav-list" id="primary-navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guide.html">Action Guide</a></li>
+        <li><a href="connect.html">Connect</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="subhero">
+      <div class="content-wrap subhero-grid">
+        <div>
+          <p class="eyebrow">Community support</p>
+          <h1>Request help with devices that need a responsible home.</h1>
+          <p>Tell eWiseCircle what you have, what kind of help you need, and when you would like to be contacted.</p>
+        </div>
+        <img src="images/community-dropoff.jpg" width="720" height="480" alt="Illustration of a community e-waste drop-off table with labeled bins" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <section class="content-wrap form-layout">
+      <form class="contact-form" id="supportForm" method="get" action="connect.html">
+        <fieldset>
+          <legend>Contact information</legend>
+          <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+          <input id="fullName" name="fullName" type="text" autocomplete="name" required>
+
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="[0-9+() .-]{7,}">
+        </fieldset>
+
+        <fieldset>
+          <legend>Device request</legend>
+          <label for="requestType">How can we help? <span aria-hidden="true">*</span></label>
+          <select id="requestType" name="requestType" required>
+            <option value="">Choose one</option>
+            <option value="repair">Repair guidance</option>
+            <option value="donation">Donation match</option>
+            <option value="recycling">Certified recycling</option>
+            <option value="event">Community collection event</option>
+          </select>
+
+          <label for="deviceDetails">Device details <span aria-hidden="true">*</span></label>
+          <textarea id="deviceDetails" name="deviceDetails" rows="5" minlength="12" required placeholder="Example: two old laptops, one working phone, and several chargers"></textarea>
+
+          <label for="community">Community or city <span aria-hidden="true">*</span></label>
+          <input id="community" name="community" type="text" required>
+
+          <label for="preferredDate">Preferred contact date</label>
+          <input id="preferredDate" name="preferredDate" type="date">
+
+          <label class="checkbox-line" for="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            I agree to be contacted about this e-waste request.
+          </label>
+        </fieldset>
+
+        <button class="button button-primary" type="submit">Save request</button>
+      </form>
+
+      <aside class="request-summary" aria-live="polite">
+        <h2>Saved requests</h2>
+        <div id="requestList">
+          <p>No requests saved yet.</p>
+        </div>
+        <button class="button button-secondary" id="clearRequests" type="button">Clear saved requests</button>
+      </aside>
+    </section>
+
+    <section class="section-band">
+      <div class="content-wrap info-grid">
+        <article>
+          <h2>For households</h2>
+          <p>Get help sorting mixed electronics, preparing devices for drop-off, and finding the safest path for batteries, screens, and cables.</p>
+        </article>
+        <article>
+          <h2>For schools</h2>
+          <p>Coordinate donation matches for working equipment and plan clear collection days for devices that cannot be reused.</p>
+        </article>
+        <article>
+          <h2>For communities</h2>
+          <p>Use the request form to start a local e-waste drive with simple instructions, safety reminders, and accessible collection information.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="currentYear"></span> Anthony Anusiem | eWiseCircle</p>
+    <p id="lastModified"></p>
+  </footer>
+</body>
+</html>

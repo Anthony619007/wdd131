@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Use the eWiseCircle action guide to choose repair, donation, recycling, or safe handling for old electronics.">
+  <meta name="author" content="Anthony Anusiem">
+  <title>eWiseCircle | Action Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/ewise.css">
+  <script src="scripts/ewise.js" defer></script>
+</head>
+<body data-page="guide">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a class="brand-link" href="index.html" aria-label="eWiseCircle home">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span>
+          <span class="brand-name">eWiseCircle</span>
+          <span class="brand-tagline">repair. reuse. recycle.</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav-list" id="primary-navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guide.html">Action Guide</a></li>
+        <li><a href="connect.html">Connect</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="subhero">
+      <div class="content-wrap subhero-grid">
+        <div>
+          <p class="eyebrow">Action guide</p>
+          <h1>Choose the safest next step for each device.</h1>
+          <p>Answer two questions, compare sample local partners, and save the best option for later.</p>
+        </div>
+        <img src="images/recycle-sort.jpg" width="720" height="480" alt="Illustration of small electronics sorted into repair, donation, and recycling groups" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <section class="content-wrap two-column">
+      <div>
+        <p class="eyebrow">Decision assistant</p>
+        <h2>Repair, donate, recycle, or handle carefully?</h2>
+        <form class="calculator" id="decisionForm">
+          <label for="condition">Device condition</label>
+          <select id="condition" name="condition">
+            <option value="working">It still works</option>
+            <option value="repairable">It may be repairable</option>
+            <option value="broken">It is broken or obsolete</option>
+            <option value="battery">It has a swollen or damaged battery</option>
+          </select>
+
+          <label for="dataStatus">Personal data status</label>
+          <select id="dataStatus" name="dataStatus">
+            <option value="wiped">Data has been erased</option>
+            <option value="not-wiped">Data is still on the device</option>
+          </select>
+
+          <button class="button button-primary" type="submit">Get recommendation</button>
+        </form>
+      </div>
+      <aside class="result-panel" id="recommendationOutput">
+        <h3>Your recommendation</h3>
+        <p>Select the condition of your device to receive a responsible action plan.</p>
+      </aside>
+    </section>
+
+    <section class="section-band">
+      <div class="content-wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Partner finder</p>
+          <h2>Browse responsible e-waste options</h2>
+          <p>These sample partners show how the final eWiseCircle resource locator would sort services by region and device need.</p>
+        </div>
+
+        <div class="filter-bar" aria-label="Filter collection partners">
+          <label for="regionFilter">Region</label>
+          <select id="regionFilter">
+            <option value="all">All regions</option>
+            <option value="accra">Accra</option>
+            <option value="kumasi">Kumasi</option>
+            <option value="tema">Tema</option>
+          </select>
+
+          <label for="serviceFilter">Service</label>
+          <select id="serviceFilter">
+            <option value="all">All services</option>
+            <option value="repair">Repair</option>
+            <option value="donation">Donation</option>
+            <option value="recycling">Recycling</option>
+            <option value="battery">Battery safety</option>
+          </select>
+        </div>
+
+        <div class="partner-grid" id="centerList" aria-live="polite"></div>
+        <p class="saved-note" id="savedCenterNote">No partner saved yet.</p>
+      </div>
+    </section>
+
+    <section class="content-wrap story-grid reverse">
+      <img src="images/data-clean.jpg" width="720" height="480" alt="Illustration of a checklist beside a laptop prepared for secure data removal" loading="lazy" decoding="async">
+      <div>
+        <p class="eyebrow">Before you hand it off</p>
+        <h2>Protect data and people first.</h2>
+        <p>Every device deserves a short safety check before repair, donation, or recycling. This keeps your information private and helps collection workers handle risky parts correctly.</p>
+        <ul class="check-list">
+          <li>Back up files you still need.</li>
+          <li>Sign out of accounts and remove saved passwords.</li>
+          <li>Factory reset phones, tablets, and laptops.</li>
+          <li>Tape exposed battery terminals before transport.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="currentYear"></span> Anthony Anusiem | eWiseCircle</p>
+    <p id="lastModified"></p>
+  </footer>
+</body>
+</html>
