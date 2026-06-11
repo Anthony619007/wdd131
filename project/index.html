@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="eWiseCircle helps households repair, donate, and recycle electronics responsibly.">
+  <meta name="author" content="Anthony Anusiem">
+  <title>eWiseCircle | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/ewise.css">
+  <script src="scripts/ewise.js" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a class="brand-link" href="index.html" aria-label="eWiseCircle home">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span>
+          <span class="brand-name">eWiseCircle</span>
+          <span class="brand-tagline">repair. reuse. recycle.</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav-list" id="primary-navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guide.html">Action Guide</a></li>
+        <li><a href="connect.html">Connect</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero-section">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Household e-waste help for busy families</p>
+          <h1>Make smarter choices with every old device.</h1>
+          <p class="hero-text">eWiseCircle helps you decide whether to repair, donate, or recycle electronics before they become clutter or landfill waste.</p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="guide.html">Plan my device</a>
+            <a class="button button-secondary" href="connect.html">Schedule help</a>
+          </div>
+        </div>
+        <picture>
+          <source srcset="images/ewise-hero.jpg" media="(min-width: 720px)">
+          <img class="hero-image" src="images/ewise-hero.jpg" width="960" height="640" alt="Illustration of sorted phones, cords, and small electronics ready for repair or recycling" decoding="async" fetchpriority="high">
+        </picture>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="content-wrap">
+        <div class="section-heading">
+          <p class="eyebrow">What eWiseCircle does</p>
+          <h2>Three responsible paths for electronics</h2>
+          <p>Choose the action that gives a device its highest remaining value while keeping data, batteries, and metals out of unsafe disposal streams.</p>
+        </div>
+        <div class="path-grid" id="pathCards" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="content-wrap two-column">
+      <div>
+        <p class="eyebrow">Impact estimator</p>
+        <h2>Estimate the benefit of taking action</h2>
+        <p>Use the calculator to see how one small choice can recover materials and avoid emissions. Your last estimate is saved on this device.</p>
+        <form class="calculator" id="impactForm">
+          <label for="deviceType">Device type</label>
+          <select id="deviceType" name="deviceType">
+            <option value="phone">Smartphone</option>
+            <option value="laptop">Laptop</option>
+            <option value="tablet">Tablet</option>
+            <option value="monitor">Monitor</option>
+          </select>
+
+          <label for="deviceCount">Number of devices</label>
+          <input id="deviceCount" name="deviceCount" type="number" min="1" max="25" value="1">
+
+          <button class="button button-primary" type="submit">Calculate impact</button>
+        </form>
+      </div>
+      <aside class="result-panel" id="impactResult">
+        <h3>Saved estimate</h3>
+        <p>Choose a device and run the calculator to see your result.</p>
+      </aside>
+    </section>
+
+    <section class="section-band">
+      <div class="content-wrap story-grid">
+        <img src="images/repair-bench.jpg" width="720" height="480" alt="Illustration of a tidy repair bench with tools and a phone being inspected" loading="lazy" decoding="async">
+        <div>
+          <p class="eyebrow">Why it matters</p>
+          <h2>Most devices deserve a second look.</h2>
+          <p>Phones, laptops, tablets, and monitors contain metals, batteries, glass, and plastic that require careful handling. eWiseCircle guides households toward repair first, donation when a device still works, and certified recycling when it has reached the end of its life.</p>
+          <ul class="check-list">
+            <li>Protect personal data before handoff.</li>
+            <li>Find the safest action for batteries and damaged screens.</li>
+            <li>Support local schools, refurbishers, and collection events.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="currentYear"></span> Anthony Anusiem | eWiseCircle</p>
+    <p id="lastModified"></p>
+  </footer>
+</body>
+</html>
